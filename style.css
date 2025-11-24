@@ -1,0 +1,507 @@
+/* Minimalist Biriyani Shop Theme */
+:root {
+    /* Palette */
+    --bg-cream: #fdfbf7;
+    --primary-saffron: #e67e22;
+    --secondary-spice: #8d6e63;
+    --text-charcoal: #2c3e50;
+    --text-muted: #7f8c8d;
+    --border-light: rgba(141, 110, 99, 0.2);
+
+    /* Typography */
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'Inter', sans-serif;
+
+    /* Spacing */
+    --spacing-unit: 2rem;
+    --grid-gap: 4rem;
+}
+
+/* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: none;
+    /* Custom cursor handling */
+}
+
+body {
+    background-color: var(--bg-cream);
+    color: var(--text-charcoal);
+    font-family: var(--font-body);
+    line-height: 1.8;
+    overflow-x: hidden;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* Custom Cursor */
+.cursor-dot,
+.cursor-outline {
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.cursor-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--primary-saffron);
+}
+
+.cursor-outline {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--primary-saffron);
+    transition: width 0.2s, height 0.2s, background-color 0.2s;
+}
+
+body:hover .cursor-outline {
+    opacity: 1;
+}
+
+/* Hover state for cursor */
+body.hovering .cursor-outline {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(230, 126, 34, 0.1);
+    border-color: transparent;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--text-charcoal);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease;
+}
+
+/* Loading Screen */
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-cream);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    flex-direction: column;
+}
+
+.loader-text {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--primary-saffron);
+    margin-top: 1rem;
+    animation: pulse 1.5s infinite;
+}
+
+/* Main Layout - 2x2 Grid Concept */
+.main-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 100vh auto;
+    /* Hero takes full height */
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+/* Hero Section (Top Left & Right) */
+.hero-section {
+    grid-column: 1 / -1;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: var(--spacing-unit);
+    position: relative;
+}
+
+.hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem;
+    border-right: 1px solid var(--border-light);
+    position: relative;
+    z-index: 2;
+}
+
+.hero-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem;
+    background-color: rgba(230, 126, 34, 0.03);
+    position: relative;
+    overflow: hidden;
+    /* For floating particles */
+}
+
+.brand-name {
+    font-size: 4rem;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+}
+
+.brand-subtitle {
+    font-size: 1.2rem;
+    color: var(--secondary-spice);
+    font-style: italic;
+    margin-bottom: 3rem;
+}
+
+.menu-btn {
+    display: inline-block;
+    padding: 1rem 3rem;
+    border: 1px solid var(--text-charcoal);
+    border-radius: 50px;
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+    align-self: flex-start;
+}
+
+.menu-btn:hover {
+    background-color: var(--text-charcoal);
+    color: var(--bg-cream);
+    transform: translateY(-2px);
+}
+
+/* Biriyani Pot Art */
+.biriyani-pot-container {
+    position: absolute;
+    bottom: -50px;
+    right: -50px;
+    opacity: 0.1;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.pot-body {
+    width: 300px;
+    height: 200px;
+    background: var(--secondary-spice);
+    border-radius: 0 0 150px 150px;
+    position: relative;
+}
+
+.pot-rim {
+    width: 320px;
+    height: 40px;
+    background: #795548;
+    border-radius: 20px;
+    position: absolute;
+    top: -20px;
+    left: -10px;
+}
+
+.pot-lid {
+    width: 300px;
+    height: 80px;
+    background: #8d6e63;
+    border-radius: 150px 150px 0 0;
+    position: absolute;
+    top: -90px;
+    left: 0;
+    transform-origin: bottom right;
+    animation: lid-wobble 4s ease-in-out infinite;
+}
+
+.steam {
+    position: absolute;
+    top: -150px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 20px;
+}
+
+.steam-line {
+    width: 10px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 10px;
+    filter: blur(8px);
+    animation: steam-rise 2s infinite;
+}
+
+.steam-line:nth-child(2) {
+    animation-delay: 0.5s;
+    height: 100px;
+}
+
+.steam-line:nth-child(3) {
+    animation-delay: 1s;
+}
+
+@keyframes lid-wobble {
+
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(-2deg);
+    }
+
+    75% {
+        transform: rotate(2deg);
+    }
+}
+
+@keyframes steam-rise {
+    0% {
+        transform: translateY(0) scaleY(1);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(-50px) scaleY(1.5);
+        opacity: 0;
+    }
+}
+
+/* Floating Spices */
+.spice-particle {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0.6;
+    animation: float-spice 15s linear infinite;
+    color: var(--secondary-spice);
+    font-size: 1.5rem;
+}
+
+@keyframes float-spice {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.8;
+    }
+
+    90% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Content Grid (Below Hero) */
+.content-grid {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-top: 1px solid var(--border-light);
+}
+
+.grid-item {
+    padding: 6rem 4rem;
+    border-bottom: 1px solid var(--border-light);
+    transition: background-color 0.3s ease;
+}
+
+.grid-item:nth-child(odd) {
+    border-right: 1px solid var(--border-light);
+}
+
+.grid-item:hover {
+    background-color: rgba(230, 126, 34, 0.02);
+}
+
+.section-header {
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.section-number {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--primary-saffron);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+/* Project Cards (Minimal) */
+.project-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.project-item {
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border-light);
+    transition: transform 0.3s ease;
+}
+
+.project-item:hover {
+    transform: translateX(10px);
+    /* "Spicing up" hover effect */
+}
+
+.project-item:last-child {
+    border-bottom: none;
+}
+
+.project-title {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.project-year {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.project-desc {
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+.tech-stack {
+    font-size: 0.85rem;
+    color: var(--secondary-spice);
+    font-style: italic;
+}
+
+/* GitHub Stats */
+.github-container {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: white;
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    position: relative;
+    z-index: 2;
+}
+
+/* Contact Form (Minimal) */
+.minimal-form .form-group {
+    margin-bottom: 2rem;
+}
+
+.minimal-form label {
+    display: block;
+    font-family: var(--font-display);
+    margin-bottom: 0.5rem;
+    color: var(--secondary-spice);
+}
+
+.minimal-input {
+    width: 100%;
+    padding: 1rem 0;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--border-light);
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    color: var(--text-charcoal);
+    transition: border-color 0.3s ease;
+}
+
+.minimal-input:focus {
+    outline: none;
+    border-bottom-color: var(--primary-saffron);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .hero-section {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+
+    .hero-left,
+    .hero-right {
+        padding: 4rem 2rem;
+        border-right: none;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .grid-item:nth-child(odd) {
+        border-right: none;
+    }
+
+    .biriyani-pot-container {
+        display: none;
+        /* Hide on mobile to avoid clutter */
+    }
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.5;
+    }
+}
+
+/* Audio Control */
+.audio-control {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 100;
+    background: transparent;
+    border: none;
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+}
+
+.audio-control:hover {
+    opacity: 1;
+}
