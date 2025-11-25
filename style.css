@@ -1,4 +1,4 @@
-/* Minimalist Biriyani Shop Theme */
+/* Minimalist Biriyani Shop Theme - FIXED VERSION */
 :root {
     /* Palette */
     --bg-cream: #fdfbf7;
@@ -23,7 +23,6 @@
     padding: 0;
     box-sizing: border-box;
     cursor: none;
-    /* Custom cursor handling */
 }
 
 body {
@@ -65,7 +64,6 @@ body:hover .cursor-outline {
     opacity: 1;
 }
 
-/* Hover state for cursor */
 body.hovering .cursor-outline {
     width: 60px;
     height: 60px;
@@ -117,7 +115,6 @@ a {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 100vh auto;
-    /* Hero takes full height */
     max-width: 1600px;
     margin: 0 auto;
 }
@@ -151,7 +148,6 @@ a {
     background-color: rgba(230, 126, 34, 0.03);
     position: relative;
     overflow: hidden;
-    /* For floating particles */
 }
 
 .brand-name {
@@ -186,22 +182,23 @@ a {
     transform: translateY(-2px);
 }
 
-/* Biriyani Pot Art */
-.biriyani-pot-container {
-    position: absolute;
-    bottom: -50px;
-    right: -50px;
-    opacity: 0.1;
-    pointer-events: none;
-    z-index: 1;
-}
-
 /* Profile picture and name wrapper */
 .profile-name-wrapper {
     display: flex;
     align-items: center;
     gap: 2rem;
     margin-bottom: 2rem;
+}
+
+/* Contact form submit button */
+.contact-submit-btn {
+    background: transparent;
+}
+
+.contact-submit-btn:hover {
+    background-color: var(--primary-saffron);
+    color: #ffffff;
+    border-color: var(--primary-saffron);
 }
 
 .profile-pic {
@@ -230,66 +227,300 @@ a {
     flex: 1;
 }
 
-.pot-body {
-    width: 300px;
-    height: 200px;
-    background: linear-gradient(180deg, #ff8c42 0%, #d2691e 50%, #a0522d 100%);
-    border-radius: 0 0 150px 150px;
-    position: relative;
-    box-shadow: inset 0 -20px 40px rgba(139, 69, 19, 0.4);
-}
-
-.pot-rim {
-    width: 320px;
-    height: 40px;
-    background: linear-gradient(180deg, #d2691e 0%, #a0522d 100%);
-    border-radius: 20px;
+/* Enhanced Biriyani Pot Art - CENTERED BACKGROUND */
+.biriyani-pot-container {
     position: absolute;
-    top: -20px;
-    left: -10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    bottom: -40px;
+    /* slightly below center so it sits low */
+    left: 50%;
+    /* center horizontally */
+    transform: translateX(-50%);
+    width: 380px;
+    height: 420px;
+    opacity: 0.14;
+    /* soft background */
+    pointer-events: none;
+    z-index: 1;
+    /* behind text (hero-left has z-index:2) */
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.08));
 }
 
-.pot-lid {
-    width: 300px;
-    height: 80px;
-    background: linear-gradient(180deg, #cd853f 0%, #a0522d 100%);
-    border-radius: 150px 150px 0 0;
-    position: absolute;
-    top: -90px;
-    left: 0;
-    transform-origin: bottom right;
-    animation: lid-wobble 4s ease-in-out infinite;
-    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
-}
 
+/* Steam with multiple wisps */
 .steam {
     position: absolute;
-    top: -150px;
+    top: -120px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 20px;
+    gap: 15px;
+    z-index: 10;
 }
 
 .steam-line {
-    width: 12px;
-    height: 80px;
-    background: linear-gradient(to top, rgba(255, 200, 100, 0.7), rgba(255, 255, 255, 0.3));
-    border-radius: 10px;
-    filter: blur(10px);
-    animation: steam-rise 2.5s infinite;
+    width: 8px;
+    height: 90px;
+    background: linear-gradient(to top,
+            rgba(255, 200, 100, 0.8) 0%,
+            rgba(255, 220, 150, 0.6) 30%,
+            rgba(255, 255, 255, 0.4) 60%,
+            transparent 100%);
+    border-radius: 20px;
+    filter: blur(8px);
+    animation: steam-rise 3s ease-in-out infinite;
+}
+
+.steam-line:nth-child(1) {
+    animation-delay: 0s;
+    height: 85px;
 }
 
 .steam-line:nth-child(2) {
-    animation-delay: 0.5s;
+    animation-delay: 0.6s;
     height: 100px;
 }
 
 .steam-line:nth-child(3) {
-    animation-delay: 1s;
+    animation-delay: 1.2s;
+    height: 90px;
 }
 
+.steam-line:nth-child(4) {
+    animation-delay: 1.8s;
+    height: 95px;
+}
+
+/* Pot Lid with handle */
+.pot-lid {
+    width: 310px;
+    height: 85px;
+    background: linear-gradient(180deg,
+            #e8b67f 0%,
+            #d9a166 20%,
+            #c78d52 50%,
+            #b07840 80%,
+            #9a6535 100%);
+    border-radius: 155px 155px 0 0;
+    position: absolute;
+    top: 50px;
+    left: 20px;
+    transform-origin: 85% center;
+    animation: lid-wobble 4s ease-in-out infinite;
+    box-shadow:
+        0 -3px 15px rgba(0, 0, 0, 0.2),
+        inset 0 -10px 20px rgba(0, 0, 0, 0.15),
+        inset 0 5px 10px rgba(255, 255, 255, 0.2);
+    z-index: 5;
+}
+
+/* Lid handle */
+.lid-handle {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 35px;
+    background: linear-gradient(180deg, #d9a166 0%, #b07840 100%);
+    border-radius: 25px 25px 5px 5px;
+    box-shadow:
+        0 -2px 8px rgba(0, 0, 0, 0.2),
+        inset 0 2px 5px rgba(255, 255, 255, 0.3);
+}
+
+.lid-handle::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 20px;
+    background: transparent;
+    border: 4px solid #8d6339;
+    border-bottom: none;
+    border-radius: 15px 15px 0 0;
+}
+
+/* Decorative lid pattern */
+.lid-pattern {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 250px;
+    height: 40px;
+    background: repeating-linear-gradient(90deg,
+            transparent,
+            transparent 8px,
+            rgba(139, 90, 50, 0.2) 8px,
+            rgba(139, 90, 50, 0.2) 10px);
+    border-radius: 50%;
+    opacity: 0.6;
+}
+
+/* Pot rim with better depth */
+.pot-rim {
+    width: 340px;
+    height: 45px;
+    background: linear-gradient(180deg,
+            #d2691e 0%,
+            #b85913 40%,
+            #9d4a10 60%,
+            #7d3a0c 100%);
+    border-radius: 25px;
+    position: absolute;
+    top: 130px;
+    left: 5px;
+    box-shadow:
+        0 6px 12px rgba(0, 0, 0, 0.3),
+        inset 0 3px 8px rgba(255, 255, 255, 0.15),
+        inset 0 -3px 8px rgba(0, 0, 0, 0.3);
+    z-index: 4;
+}
+
+/* Rim shine */
+.rim-shine {
+    position: absolute;
+    top: 8px;
+    left: 10%;
+    width: 80%;
+    height: 8px;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.3) 50%,
+            transparent 100%);
+    border-radius: 50%;
+    filter: blur(2px);
+}
+
+/* Pot body with rice texture */
+.pot-body {
+    width: 310px;
+    height: 220px;
+    background: linear-gradient(180deg,
+            #ff8c42 0%,
+            #f07a2e 15%,
+            #e06820 35%,
+            #d25818 55%,
+            #c04a12 75%,
+            #a83e0f 90%,
+            #8d340c 100%);
+    border-radius: 0 0 155px 155px;
+    position: absolute;
+    top: 155px;
+    left: 20px;
+    box-shadow:
+        inset 0 -30px 50px rgba(100, 40, 10, 0.5),
+        inset 0 10px 30px rgba(255, 140, 80, 0.2),
+        0 15px 30px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    z-index: 3;
+}
+
+/* Body highlights */
+.pot-highlight {
+    position: absolute;
+    top: 20px;
+    left: -20px;
+    width: 120px;
+    height: 180px;
+    background: linear-gradient(135deg,
+            rgba(255, 200, 150, 0.4) 0%,
+            rgba(255, 180, 120, 0.2) 50%,
+            transparent 100%);
+    border-radius: 50%;
+    filter: blur(15px);
+}
+
+/* Rice grains visible through pot */
+.rice-grain {
+    position: absolute;
+    width: 4px;
+    height: 8px;
+    background: rgba(255, 245, 220, 0.3);
+    border-radius: 2px;
+    transform: rotate(var(--rotation));
+}
+
+/* Handles on pot sides */
+.pot-handle {
+    position: absolute;
+    width: 35px;
+    height: 70px;
+    background: linear-gradient(90deg,
+            #9d4a10 0%,
+            #b85913 50%,
+            #9d4a10 100%);
+    border-radius: 20px;
+    top: 180px;
+    box-shadow:
+        inset 0 2px 8px rgba(0, 0, 0, 0.4),
+        0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+}
+
+.pot-handle.left {
+    left: -15px;
+    border-radius: 0 20px 20px 0;
+}
+
+.pot-handle.right {
+    right: -15px;
+    border-radius: 20px 0 0 20px;
+}
+
+.handle-grip {
+    position: absolute;
+    width: 100%;
+    height: 6px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+}
+
+.handle-grip:nth-child(1) {
+    top: 15px;
+}
+
+.handle-grip:nth-child(2) {
+    top: 32px;
+}
+
+.handle-grip:nth-child(3) {
+    top: 49px;
+}
+
+/* Saffron strands floating */
+.saffron-strand {
+    position: absolute;
+    width: 2px;
+    height: 15px;
+    background: linear-gradient(to bottom,
+            rgba(230, 126, 34, 0.8),
+            rgba(230, 126, 34, 0) 100%);
+    animation: float-saffron 4s ease-in-out infinite;
+    transform-origin: top;
+}
+
+.saffron-strand:nth-child(1) {
+    top: -30px;
+    left: 100px;
+    animation-delay: 0s;
+}
+
+.saffron-strand:nth-child(2) {
+    top: -25px;
+    left: 250px;
+    animation-delay: 1.3s;
+}
+
+.saffron-strand:nth-child(3) {
+    top: -35px;
+    left: 180px;
+    animation-delay: 2.6s;
+}
+
+/* Animations */
 @keyframes lid-wobble {
 
     0%,
@@ -298,27 +529,49 @@ a {
     }
 
     25% {
-        transform: rotate(-2deg);
+        transform: rotate(-1.5deg);
+    }
+
+    50% {
+        transform: rotate(0deg);
     }
 
     75% {
-        transform: rotate(2deg);
+        transform: rotate(1.5deg);
     }
 }
 
 @keyframes steam-rise {
     0% {
-        transform: translateY(0) scaleY(1);
+        transform: translateY(0) scaleY(0.8) scaleX(1);
         opacity: 0;
     }
 
-    50% {
+    20% {
         opacity: 0.8;
     }
 
+    70% {
+        opacity: 0.6;
+    }
+
     100% {
-        transform: translateY(-50px) scaleY(1.5);
+        transform: translateY(-60px) scaleY(1.5) scaleX(0.6);
         opacity: 0;
+    }
+}
+
+@keyframes float-saffron {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(-10deg);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: translateY(-20px) rotate(10deg);
+        opacity: 0.9;
     }
 }
 
@@ -409,7 +662,6 @@ a {
 
 .project-item:hover {
     transform: translateX(10px);
-    /* "Spicing up" hover effect */
 }
 
 .project-item:last-child {
@@ -505,7 +757,6 @@ a {
 
     .biriyani-pot-container {
         display: none;
-        /* Hide on mobile to avoid clutter */
     }
 }
 
@@ -541,4 +792,76 @@ a {
 
 .audio-control:hover {
     opacity: 1;
+}
+
+/* Toast Notifications */
+.toast-container {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 11000;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: center;
+    pointer-events: none;
+}
+
+.toast {
+    min-width: 260px;
+    max-width: 340px;
+    background: #ffffff;
+    border-radius: 999px;
+    padding: 0.75rem 1.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    border: 1px solid var(--border-light);
+    opacity: 0;
+    transform: translateY(10px);
+    animation: toast-in 0.25s ease-out forwards;
+    pointer-events: all;
+}
+
+.toast-icon {
+    font-size: 1rem;
+}
+
+.toast--success {
+    border-color: rgba(46, 204, 113, 0.35);
+}
+
+.toast--error {
+    border-color: rgba(231, 76, 60, 0.4);
+}
+
+.toast--hide {
+    animation: toast-out 0.25s ease-in forwards;
+}
+
+@keyframes toast-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes toast-out {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(10px);
+    }
 }

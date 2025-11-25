@@ -35,28 +35,20 @@
     <div class="main-container">
         <!-- Hero Section -->
         <section class="hero-section">
+            <!-- LEFT SIDE -->
             <div class="hero-left">
                 <div class="profile-name-wrapper">
                     <img src="profile.jpg" alt="Rafeed Mohammad Sultan" class="profile-pic">
                     <div class="name-section">
                         <h1 class="brand-name">Rafeed<br>Mohammad<br>Sultan</h1>
-                        <p class="brand-subtitle">AI Researcher & Software Chef</p>
+                        <p class="brand-subtitle">AI Researcher &amp; Software Chef</p>
                     </div>
                 </div>
-                <a href="#contact" class="menu-btn">Order Now</a>
 
-                <!-- Biriyani Pot Art -->
-                <div class="biriyani-pot-container">
-                    <div class="steam">
-                        <div class="steam-line"></div>
-                        <div class="steam-line"></div>
-                        <div class="steam-line"></div>
-                    </div>
-                    <div class="pot-lid"></div>
-                    <div class="pot-rim"></div>
-                    <div class="pot-body"></div>
-                </div>
+                <a href="#contact" class="menu-btn">Order Now</a>
             </div>
+
+            <!-- RIGHT SIDE -->
             <div class="hero-right">
                 <div style="text-align: center; max-width: 400px;">
                     <p style="font-size: 1.5rem; font-family: var(--font-display); margin-bottom: 2rem;">
@@ -71,11 +63,64 @@
                     </div>
                     <div style="margin-top: 2rem;">
                         <a href="rafeed_sultan_academic_CV.pdf" download class="menu-btn"
-                            style="font-size: 0.9rem; padding: 0.8rem 2rem;">Download Menu (CV)</a>
+                            style="font-size: 0.9rem; padding: 0.8rem 2rem;">
+                            Download Menu (CV)
+                        </a>
                     </div>
                 </div>
             </div>
+
+            <!-- BIRIYANI POT AS BACKGROUND, CENTER-BOTTOM -->
+            <div class="biriyani-pot-container">
+                <!-- Saffron strands -->
+                <div class="saffron-strand"></div>
+                <div class="saffron-strand"></div>
+                <div class="saffron-strand"></div>
+
+                <!-- Steam -->
+                <div class="steam">
+                    <div class="steam-line"></div>
+                    <div class="steam-line"></div>
+                    <div class="steam-line"></div>
+                    <div class="steam-line"></div>
+                </div>
+
+                <!-- Pot Lid -->
+                <div class="pot-lid">
+                    <div class="lid-handle"></div>
+                    <div class="lid-pattern"></div>
+                </div>
+
+                <!-- Pot Rim -->
+                <div class="pot-rim">
+                    <div class="rim-shine"></div>
+                </div>
+
+                <!-- Pot Body -->
+                <div class="pot-body">
+                    <div class="pot-highlight"></div>
+                    <!-- Decorative rice grains -->
+                    <div class="rice-grain" style="--rotation: 25deg; top: 40%; left: 20%; opacity: 0.4;"></div>
+                    <div class="rice-grain" style="--rotation: -15deg; top: 55%; left: 35%; opacity: 0.3;"></div>
+                    <div class="rice-grain" style="--rotation: 45deg; top: 50%; left: 60%; opacity: 0.5;"></div>
+                    <div class="rice-grain" style="--rotation: -30deg; top: 65%; left: 45%; opacity: 0.4;"></div>
+                    <div class="rice-grain" style="--rotation: 10deg; top: 70%; left: 70%; opacity: 0.3;"></div>
+                </div>
+
+                <!-- Pot Handles -->
+                <div class="pot-handle left">
+                    <div class="handle-grip"></div>
+                    <div class="handle-grip"></div>
+                    <div class="handle-grip"></div>
+                </div>
+                <div class="pot-handle right">
+                    <div class="handle-grip"></div>
+                    <div class="handle-grip"></div>
+                    <div class="handle-grip"></div>
+                </div>
+            </div>
         </section>
+
 
         <!-- Content Grid -->
         <div class="content-grid">
@@ -397,7 +442,7 @@
                         <label for="message">Message</label>
                         <input type="text" id="message" name="message" class="minimal-input" required>
                     </div>
-                    <button type="submit" class="menu-btn" style="background: transparent; margin-top: 1rem;">
+                    <button type="submit" class="menu-btn contact-submit-btn" style="margin-top: 1rem;">
                         Send Request
                     </button>
                 </form>
@@ -412,7 +457,7 @@
             </div>
         </div>
     </div>
-
+    <div id="toast-container" class="toast-container"></div>
     <script src="script.js"></script>
 </body>
 
