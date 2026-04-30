@@ -1,133 +1,189 @@
-# Rafeed Mohammad Sultan
+<div align="center">
 
-> A spicy personal portfolio served with AI research, software craftsmanship, and a biriyani-inspired visual flavor.
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:FF6B35,40:E67E22,100:2C3E50&height=220&section=header&text=Rafeed%20Mohammad%20Sultan&fontSize=42&fontColor=FFFBF5&animation=fadeIn&fontAlignY=42&desc=🌶️%20AI%20Researcher%20%7C%20Software%20Chef%20%7C%20Code%20Connoisseur&descAlignY=62&descSize=17&descColor=FFE0B2" width="100%"/>
 
-## 🌶️ What this site is all about
+<br/>
 
-This portfolio is not just a page — it is a small experience.
-It blends:
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=20&duration=2800&pause=1000&color=E67E22&center=true&vCenter=true&multiline=true&width=650&height=90&lines=Cooking+up+AI+research+🍳;Serving+fresh+algorithms+one+epoch+at+a+time+🌶️;Building+spicy+software+since+2020+👨‍💻)](https://git.io/typing-svg)
 
-- **AI research stories** and recent papers
-- **Software projects** from Python, Java, Django, React, and more
-- **Professional journey** with real work, internship, and academic history
-- **Interactive design** with sound, animations, and a playful cursor
+<br/>
 
-Expect bold colors, smooth interactions, and a storytelling layout that feels warm, dynamic, and memorable.
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Rafeed%20Sultan-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/rafeed-sultan/)
+[![GitHub](https://img.shields.io/badge/GitHub-sultanrafeed-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/sultanrafeed)
+[![Email](https://img.shields.io/badge/Email-sultanrafeed@gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:sultanrafeed@gmail.com)
 
-## 🎨 Theme & style
-
-This project is wrapped in a **biriyani-themed design** with:
-
-- warm saffron and spice hues
-- a custom animated cursor and hover effects
-- subtle sound feedback when interacting with the page
-- an illustrated pot-of-biriyani hero section
-- a mock GitHub contributions heatmap with a flavor of progress
-
-It is designed to feel like a modern chef’s menu for code, research, and digital creativity.
-
-## 🚀 Why this portfolio stands out
-
-- **Creative identity**: AI researcher + software chef.
-- **Personality first**: friendly, fun, and memorable.
-- **Interactive UX**: audio cues, click sounds, hover glow, loading animation.
-- **Research-forward**: highlights recent papers, publications, and ethics-centered work.
-- **Project showcase**: real repos, apps, and engineering experiments.
-
-## 🧩 Built with HTML, CSS, JS + Bootstrap-friendly structure
-
-This site is handcrafted with clean HTML and CSS, and it follows a page structure that is easy to enhance with Bootstrap if you want a faster responsive version.
-
-### Example HTML structure
-
-```html
-<section class="hero-section">
-  <div class="hero-left">
-    <img src="profile.jpg" alt="Rafeed Mohammad Sultan" class="profile-pic">
-    <h1>Rafeed Mohammad Sultan</h1>
-    <p>AI Researcher & Software Chef</p>
-    <a href="#contact" class="menu-btn">Order Now</a>
-  </div>
-  <div class="hero-right">
-    <p>Serving fresh code and spicy algorithms since 2020.</p>
-  </div>
-</section>
-```
-
-### Example CSS styling
-
-```css
-.hero-section {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  padding: 3rem;
-  background: linear-gradient(135deg, #fff7eb, #ffeecc);
-}
-
-.menu-btn {
-  padding: 1rem 2rem;
-  border-radius: 999px;
-  border: 2px solid #2c3e50;
-  background: transparent;
-  transition: all 0.25s ease;
-}
-
-.menu-btn:hover {
-  background: #e67e22;
-  color: #fff;
-}
-```
-
-### Bootstrap-friendly layout sample
-
-If you want to layer Bootstrap on top, the section can be converted into a responsive grid using classes like `container`, `row`, and `col-md-6`.
-
-```html
-<div class="container py-5">
-  <div class="row align-items-center">
-    <div class="col-md-6">
-      <!-- hero content -->
-    </div>
-    <div class="col-md-6">
-      <!-- hero visual -->
-    </div>
-  </div>
 </div>
+
+---
+
+## 🍛 Welcome to the Kitchen
+
+> **This isn't just a portfolio. It's a full-course meal.**
+
+I'm Rafeed — an AI researcher who also happens to code like a chef seasons biriyani: with intention, heat, and a lot of love. Every project is a dish, every commit is a spice, and this portfolio is the restaurant menu.
+
+Expect bold ideas, warm design, and software that actually *does* something.
+
+<br/>
+
+---
+
+## 🌶️ The Menu — What I Bring to the Table
+
+<div align="center">
+
+| 🧠 AI & Research | 🛠️ Engineering | 🎨 Creative |
+|:---:|:---:|:---:|
+| Deep Learning | Full-Stack Dev | Interactive UI/UX |
+| NLP & LLMs | REST APIs | Motion & Animation |
+| Ethics in AI | System Design | Storytelling through Design |
+| Paper writing | Dev tooling | Visual Identity |
+
+</div>
+
+<br/>
+
+---
+
+## 🔧 Tech Stack — The Spice Rack
+
+<div align="center">
+
+**Languages**
+
+[![Python](https://skillicons.dev/icons?i=python)](https://python.org)
+[![Java](https://skillicons.dev/icons?i=java)](https://java.com)
+[![JavaScript](https://skillicons.dev/icons?i=js)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![HTML](https://skillicons.dev/icons?i=html)](https://developer.mozilla.org/en-US/docs/Web/HTML)
+[![CSS](https://skillicons.dev/icons?i=css)](https://developer.mozilla.org/en-US/docs/Web/CSS)
+
+**Frameworks & Tools**
+
+[![Django](https://skillicons.dev/icons?i=django)](https://djangoproject.com)
+[![React](https://skillicons.dev/icons?i=react)](https://reactjs.org)
+[![TensorFlow](https://skillicons.dev/icons?i=tensorflow)](https://tensorflow.org)
+[![PyTorch](https://skillicons.dev/icons?i=pytorch)](https://pytorch.org)
+[![Git](https://skillicons.dev/icons?i=git)](https://git-scm.com)
+[![VS Code](https://skillicons.dev/icons?i=vscode)](https://code.visualstudio.com)
+
+</div>
+
+<br/>
+
+---
+
+## 🍽️ What's on the Plate
+
+<details>
+<summary><b>🔬 AI Research</b> — click to peek inside</summary>
+<br/>
+
+Focused on **NLP, LLMs, and ethics-driven AI** — the kind of research that asks *"should we?"* before *"can we?"*
+
+- Recent publications and paper work in AI ethics and language models
+- Experiments with prompt engineering, fine-tuning, and evaluation benchmarks
+- Bridging the gap between research papers and real-world applications
+
+</details>
+
+<details>
+<summary><b>💻 Software Projects</b> — click to peek inside</summary>
+<br/>
+
+From backend APIs to interactive frontends — built with care and deployed with confidence.
+
+- Web apps in **Django + React**
+- Data pipelines and ML experiments in **Python**
+- CLI tools, automation scripts, and academic software
+
+</details>
+
+<details>
+<summary><b>🎨 This Portfolio Itself</b> — click to peek inside</summary>
+<br/>
+
+A handcrafted **biriyani-themed** personal site featuring:
+
+- 🌶️ Warm saffron and spice hues
+- ✨ Custom animated cursor and hover glow effects
+- 🔊 Subtle sound feedback on interactions
+- 🍲 Illustrated biriyani pot hero section
+- 📊 Mock GitHub contribution heatmap
+
+</details>
+
+<br/>
+
+---
+
+## 📁 What's in this Repo
+
+```
+📦 github-portfolio/
+├── 🌐 index.html                    — the full portfolio experience
+├── 🎨 style.css                     — the spicy visual theme
+├── ⚡ script.js                     — cursor magic, sounds, animations
+├── 🖼️  profile.jpg                   — the chef himself
+└── 📄 rafeed_sultan_academic_CV.pdf  — the full menu (resume)
 ```
 
-This README now shows the real HTML/CSS foundation, and gives people a clear peek into how the page is built.
+<br/>
 
-## 📁 Files in this project
+---
 
-- `index.html` — the full portfolio experience
-- `style.css` — the spicy visual theme and page styling
-- `script.js` — interaction magic, cursor, sound, badges, and form behavior
-- `profile.jpg` — personal portrait shown in the hero section
-- `rafeed_sultan_academic_CV.pdf` — downloadable resume if you want the full menu
+## 🚀 Run it Yourself
 
-## 🧪 How to explore it locally
+```bash
+# 1. Clone the repo
+git clone https://github.com/sultanrafeed/github-portfolio.git
 
-1. Clone or download the repository.
-2. Open `index.html` in your browser.
-3. For the contact form and best behavior, use a local server or GitHub Pages.
+# 2. Open in browser
+open index.html
 
-> The form is designed for hosted pages, so local `file://` opening may disable FormSubmit.
+# 3. For full experience (contact form), use a local server
+npx serve .
+# or
+python -m http.server 8000
+```
 
-## 🌐 Best places to publish it
+> **Note:** The contact form uses FormSubmit and works best on a hosted page (GitHub Pages, Netlify, Vercel).
 
-- GitHub Pages
-- Netlify
-- Vercel
+<br/>
 
-## 🔗 Connect with Rafeed
+---
 
-- **Email:** sultanrafeed@gmail.com
-- **LinkedIn:** https://www.linkedin.com/in/rafeed-sultan/
-- **GitHub:** https://github.com/sultanrafeed
+## 📊 GitHub Stats
 
-## ✨ Fun note
+<div align="center">
 
-This portfolio is built like a chef’s kitchen: every section is a dish, every animation is a spice, and every interaction should feel like a well-seasoned experience.
+<img src="https://github-readme-stats.vercel.app/api?username=sultanrafeed&show_icons=true&theme=radical&title_color=E67E22&icon_color=E67E22&text_color=2C3E50&bg_color=FFFBF5&border_color=E67E22&border_radius=12" height="165"/>
+&nbsp;&nbsp;
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=sultanrafeed&layout=compact&theme=radical&title_color=E67E22&text_color=2C3E50&bg_color=FFFBF5&border_color=E67E22&border_radius=12" height="165"/>
 
-Welcome to the kitchen of code, research, and design.
+</div>
+
+<br/>
+
+---
+
+## 🔗 Let's Connect
+
+<div align="center">
+
+Got a project idea? A research collab? Just want to talk biriyani?
+
+<br/>
+
+[![LinkedIn](https://img.shields.io/badge/-Connect%20on%20LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/rafeed-sultan/)
+[![Gmail](https://img.shields.io/badge/-Send%20an%20Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:sultanrafeed@gmail.com)
+[![GitHub](https://img.shields.io/badge/-Follow%20on%20GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/sultanrafeed)
+
+<br/>
+
+*"The kitchen is always open."* 🍲
+
+</div>
+
+<br/>
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:2C3E50,60:E67E22,100:FF6B35&height=120&section=footer" width="100%"/>
