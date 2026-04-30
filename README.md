@@ -4,7 +4,7 @@
 
 <br/>
 
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=20&duration=2800&pause=1000&color=E67E22&center=true&vCenter=true&multiline=true&width=650&height=90&lines=Cooking+up+AI+research+🍳;Serving+fresh+algorithms+one+epoch+at+a+time+🌶️;Building+spicy+software+since+2020+👨‍💻)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=20&duration=2800&pause=1000&color=E67E22&center=true&vCenter=true&width=650&height=60&lines=Cooking+up+AI+research...;Serving+fresh+algorithms+one+epoch+at+a+time;Building+spicy+software+since+2020)](https://git.io/typing-svg)
 
 <br/>
 
