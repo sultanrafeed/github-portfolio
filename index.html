@@ -4,460 +4,839 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rafeed Mohammad Sultan | Biriyani Shop</title>
-    <meta name="description" content="Portfolio of Rafeed Mohammad Sultan - AI Researcher & Software Engineer.">
+    <title>Rafeed Mohammad Sultan — Software Engineer & AI Researcher</title>
+    <meta name="description"
+        content="Rafeed Mohammad Sultan — Software Engineer at SELISE Digital Platforms and AI Researcher working on LLM alignment, RAG systems, and agentic AI.">
+    <meta name="theme-color" content="#0a0807">
 
-    <!-- Google Fonts -->
+    <!-- Open Graph -->
+    <meta property="og:title" content="Rafeed Mohammad Sultan — Software Engineer & AI Researcher">
+    <meta property="og:description"
+        content="Building agentic AI systems and researching trustworthy LLMs.">
+    <meta property="og:type" content="website">
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap"
         rel="stylesheet">
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
+    <!-- Icons -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+    <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
-    <!-- Loading Screen -->
-    <div class="loader">
-        <i class="fas fa-utensils fa-3x" style="color: var(--primary-saffron);"></i>
-        <div class="loader-text">Cooking Your Biriyani...</div>
-    </div>
-
-    <!-- Audio Control -->
-    <button id="audioControl" class="audio-control">SOUND: ON</button>
-
-    <div class="main-container">
-        <!-- Hero Section -->
-        <section class="hero-section">
-            <!-- LEFT SIDE -->
-            <div class="hero-left">
-                <div class="profile-name-wrapper">
-                    <img src="profile.jpg" alt="Rafeed Mohammad Sultan" class="profile-pic">
-                    <div class="name-section">
-                        <h1 class="brand-name">Rafeed<br>Mohammad<br>Sultan</h1>
-                        <p class="brand-subtitle">AI Researcher &amp; Software Chef</p>
-                    </div>
-                </div>
-
-                <a href="#contact" class="menu-btn">Order Now</a>
+    <!-- Boot screen -->
+    <div class="boot-screen" aria-hidden="true">
+        <div class="boot-inner">
+            <div class="boot-logo">
+                <span class="boot-mark">RS</span>
+                <div class="boot-ring"></div>
             </div>
-
-            <!-- RIGHT SIDE -->
-            <div class="hero-right">
-                <div style="text-align: center; max-width: 400px;">
-                    <p style="font-size: 1.5rem; font-family: var(--font-display); margin-bottom: 2rem;">
-                        "Serving fresh code and spicy algorithms since 2020."
-                    </p>
-                    <div class="github-container">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
-                            <span style="font-weight: bold;">GitHub Contributions</span>
-                            <span style="color: var(--primary-saffron);">247 commits</span>
-                        </div>
-                        <div id="github-graph"></div>
-                    </div>
-                    <div style="margin-top: 2rem;">
-                        <a href="rafeed_sultan_academic_CV.pdf" download class="menu-btn"
-                            style="font-size: 0.9rem; padding: 0.8rem 2rem;">
-                            Download Menu (CV)
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- BIRIYANI POT AS BACKGROUND, CENTER-BOTTOM -->
-            <div class="biriyani-pot-container">
-                <!-- Saffron strands -->
-                <div class="saffron-strand"></div>
-                <div class="saffron-strand"></div>
-                <div class="saffron-strand"></div>
-
-                <!-- Steam -->
-                <div class="steam">
-                    <div class="steam-line"></div>
-                    <div class="steam-line"></div>
-                    <div class="steam-line"></div>
-                    <div class="steam-line"></div>
-                </div>
-
-                <!-- Pot Lid -->
-                <div class="pot-lid">
-                    <div class="lid-handle"></div>
-                    <div class="lid-pattern"></div>
-                </div>
-
-                <!-- Pot Rim -->
-                <div class="pot-rim">
-                    <div class="rim-shine"></div>
-                </div>
-
-                <!-- Pot Body -->
-                <div class="pot-body">
-                    <div class="pot-highlight"></div>
-                    <!-- Decorative rice grains -->
-                    <div class="rice-grain" style="--rotation: 25deg; top: 40%; left: 20%; opacity: 0.4;"></div>
-                    <div class="rice-grain" style="--rotation: -15deg; top: 55%; left: 35%; opacity: 0.3;"></div>
-                    <div class="rice-grain" style="--rotation: 45deg; top: 50%; left: 60%; opacity: 0.5;"></div>
-                    <div class="rice-grain" style="--rotation: -30deg; top: 65%; left: 45%; opacity: 0.4;"></div>
-                    <div class="rice-grain" style="--rotation: 10deg; top: 70%; left: 70%; opacity: 0.3;"></div>
-                </div>
-
-                <!-- Pot Handles -->
-                <div class="pot-handle left">
-                    <div class="handle-grip"></div>
-                    <div class="handle-grip"></div>
-                    <div class="handle-grip"></div>
-                </div>
-                <div class="pot-handle right">
-                    <div class="handle-grip"></div>
-                    <div class="handle-grip"></div>
-                    <div class="handle-grip"></div>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- Content Grid -->
-        <div class="content-grid">
-            <!-- 01 Research -->
-            <div class="grid-item">
-                <div class="section-header">
-                    <span class="section-number">01</span>
-                    <h2>Research Specials</h2>
-                </div>
-                <div class="project-list">
-                    <div class="project-item">
-                        <div class="project-title">
-                            <a href="https://arxiv.org/abs/2408.11879" target="_blank">
-                                Beyond Labels: Aligning LLMs with Human-like Reasoning
-                            </a>
-                            <span class="project-year">2024</span>
-                        </div>
-                        <p class="project-desc">
-                            International Conference on Pattern Recognition (ICPR 2024) – addressing ethical concerns in
-                            LLMs using the DFAR dataset.
-                        </p>
-                        <span class="tech-stack">NLP, Ethics, LLMs, DFAR</span>
-                    </div>
-                    <div class="project-item">
-                        <div class="project-title">
-                            <a href="https://arxiv.org/abs/2411.10878" target="_blank">
-                                Empowering Meta-Analysis
-                            </a>
-                            <span class="project-year">2024</span>
-                        </div>
-                        <p class="project-desc">
-                            Leveraging Large Language Models for Scientific Synthesis. (IEEE International Conference on
-                            Big Data 2024)
-                        </p>
-                        <span class="tech-stack">RAG, Scientific Synthesis, LLMs</span>
-                    </div>
-                    <div class="project-item">
-                        <div class="project-title">
-                            <a href="https://www.sciencedirect.com/science/article/pii/S2666521224000437"
-                                target="_blank">
-                                Efficient Skin Cancer Detection
-                            </a>
-                            <span class="project-year">2024</span>
-                        </div>
-                        <p class="project-desc">
-                            Lightweight Model Souping and Ensembling Knowledge Distillation for Memory-Constrained
-                            Devices. (Q1 Journal: Intelligence-Based Medicine)
-                        </p>
-                        <span class="tech-stack">Medical AI, Computer Vision, Knowledge Distillation</span>
-                    </div>
-                    <div class="project-item">
-                        <div class="project-title">
-                            <a href="https://arxiv.org/abs/2504.16121" target="_blank">
-                                LegalRAG
-                            </a>
-                            <span class="project-year">2025</span>
-                        </div>
-                        <p class="project-desc">
-                            A Hybrid RAG System for Multilingual Legal Information Retrieval. (IJCNN 2025: International
-                            Joint Conference on Neural Networks)
-                        </p>
-                        <span class="tech-stack">NLP, Legal Tech, RAG, Multilingual</span>
-                    </div>
-                    <div class="project-item">
-                        <div class="project-title">
-                            <a href="https://github.com/sultanrafeed/Predictive-Modeling-and-Explainable-AI-Analysis.git"
-                                target="_blank">
-                                Predictive Modeling for White Spot Disease
-                            </a>
-                            <span class="project-year">Research</span>
-                        </div>
-                        <p class="project-desc">
-                            Explainable AI analysis of farm features and practices impacting White Spot Disease
-                            prevalence in farmed shrimps in Bangladesh. Achieved 72.67% accuracy with SHAP-based
-                            interpretability.
-                        </p>
-                        <span class="tech-stack">Machine Learning, SHAP, Explainable AI</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 02 Projects -->
-            <div class="grid-item">
-                <div class="section-header">
-                    <span class="section-number">02</span>
-                    <h2>Code Platters</h2>
-                </div>
-                <div class="project-list">
-                    <div class="project-item">
-                        <div class="project-title">
-                            <a href="https://github.com/SumitKar01/rokkha.git" target="_blank">Rokkha (Android App)</a>
-                            <span class="project-year">Kotlin</span>
-                        </div>
-                        <p class="project-desc">
-                            Safety app alerting guardians with user location at button press. Periodic location alerts
-                            to specified contacts.
-                        </p>
-                        <span class="tech-stack">Kotlin, Firebase, SQLite</span>
-                    </div>
-                    <div class="project-item">
-                        <div class="project-title">
-                            <a href="https://github.com/sultanrafeed/roomafy" target="_blank">Roomafy (Web App)</a>
-                            <span class="project-year">Django/React</span>
-                        </div>
-                        <p class="project-desc">
-                            Collaborative music-playing app integrated with Spotify API. (Ongoing)
-                        </p>
-                        <span class="tech-stack">Django, React, HTML+CSS, Bootstrap, Spotify API</span>
-                    </div>
-                    <div class="project-item">
-                        <div class="project-title">
-                            <a href="https://github.com/sultanrafeed/phonebook.git" target="_blank">Phonebook</a>
-                            <span class="project-year">Java</span>
-                        </div>
-                        <p class="project-desc">
-                            Mini project for storing and managing contacts with a GUI interface.
-                        </p>
-                        <span class="tech-stack">Java Swing, SQLite</span>
-                    </div>
-                    <div class="project-item">
-                        <div class="project-title">
-                            <a href="https://github.com/sultanrafeed/librarymanagementsystem.git" target="_blank">
-                                Library Management System
-                            </a>
-                            <span class="project-year">PHP/MySQL</span>
-                        </div>
-                        <p class="project-desc">
-                            Online platform for storing PDF books and managing library resources.
-                        </p>
-                        <span class="tech-stack">HTML+CSS, MySQL, PHP, Bootstrap</span>
-                    </div>
-                    <div class="project-item">
-                        <div class="project-title">
-                            <a href="https://github.com/sultanrafeed/Software-Testing-For-GigaTech.git" target="_blank">
-                                Automation with Selenium
-                            </a>
-                            <span class="project-year">Python</span>
-                        </div>
-                        <p class="project-desc">
-                            Automated website testing for GigaTech, generating test cases and ensuring efficient
-                            testing.
-                        </p>
-                        <span class="tech-stack">Python, Selenium</span>
-                    </div>
-                    <div class="project-item">
-                        <div class="project-title">
-                            <a href="https://github.com/sultanrafeed/Cross-Model-Evaluation-Judging-AI-Ethics-and-Alignment-Responses-with-Language-Models.git"
-                                target="_blank">
-                                Cross-Model Evaluation
-                            </a>
-                            <span class="project-year">Python</span>
-                        </div>
-                        <p class="project-desc">
-                            Judging AI ethics and alignment responses with language models using the DFAR dataset.
-                        </p>
-                        <span class="tech-stack">Python, LLMs, Ethics, DFAR</span>
-                    </div>
-                    <div class="project-item">
-                        <div class="project-title">
-                            <a href="https://github.com/sultanrafeed/Optimizer-Perfomance-Evaluation" target="_blank">
-                                Optimizer Performance Evaluation
-                            </a>
-                            <span class="project-year">Python</span>
-                        </div>
-                        <p class="project-desc">
-                            Investigating the impact of different optimizers and batch sizes on CNN performance with VGG
-                            blocks.
-                        </p>
-                        <span class="tech-stack">Python, Deep Learning, CNN, VGG</span>
-                    </div>
-                    <div class="project-item">
-                        <div class="project-title">
-                            <a href="https://github.com/sultanrafeed/Efficiency-Comparison-Of-PL-in-Algorithm-Development.git"
-                                target="_blank">
-                                Programming Language Efficiency Comparison
-                            </a>
-                            <span class="project-year">Multi-language</span>
-                        </div>
-                        <p class="project-desc">
-                            Determining runtime efficiency, memory consumption, and CPU utilization across different
-                            programming languages.
-                        </p>
-                        <span class="tech-stack">Python, Java, C, C++, Algorithms</span>
-                    </div>
-                    <div class="project-item">
-                        <div class="project-title">
-                            <a href="https://github.com/sultanrafeed/Predictive-Modeling-and-Explainable-AI-Analysis.git"
-                                target="_blank">
-                                Predictive Modeling & Explainable AI (WSD)
-                            </a>
-                            <span class="project-year">Python/ML</span>
-                        </div>
-                        <p class="project-desc">
-                            Predictive modeling of White Spot Disease prevalence in shrimp farms with SHAP-based
-                            explainability of farm practices and features.
-                        </p>
-                        <span class="tech-stack">Python, Machine Learning, SHAP, Explainable AI</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 03 Experience & Education -->
-            <div class="grid-item">
-                <div class="section-header">
-                    <span class="section-number">03</span>
-                    <h2>Chef's Journey</h2>
-                </div>
-                <div class="project-list">
-                    <div class="project-item">
-                        <div class="project-title">
-                            <span>SELISE Digital Platforms - Associate Software Engineer</span>
-                            <span class="project-year">Jan 2025 - Present</span>
-                        </div>
-                        <p class="project-desc">
-                            Building real-time WebSocket chat streams, voice agents with ElevenLabs TTS, MCP servers,
-                            React–Flask pipelines, and energy market PnL modules (DAM/RTM). Implemented GitHub webhook
-                            integration and prompt engineering with guardrails.
-                        </p>
-                        <span class="tech-stack">React, Flask, NestJS, MongoDB, Azure PostgreSQL, WebSocket, ElevenLabs,
-                            MCP</span>
-                    </div>
-                    <div class="project-item">
-                        <div class="project-title">
-                            <span>SELISE Digital Platforms - Intern Software Developer</span>
-                            <span class="project-year">Oct 2024 - Jan 2025</span>
-                        </div>
-                        <p class="project-desc">
-                            Worked with the Global Finance & Head department, automating financial transactions,
-                            procurement processes, and business development workflows.
-                        </p>
-                        <span class="tech-stack">Finance Automation, Procurement Systems</span>
-                    </div>
-                    <div class="project-item">
-                        <div class="project-title">
-                            <span>GameRiv - Part-time Content Writer</span>
-                            <span class="project-year">Sep 2023 - Nov 2023</span>
-                        </div>
-                        <p class="project-desc">
-                            Authored technical articles and game reviews. Acquired SEO principles and WordPress
-                            proficiency while managing multiple projects simultaneously.
-                        </p>
-                        <span class="tech-stack">SEO, WordPress, Content Writing</span>
-                    </div>
-                    <div class="project-item">
-                        <div class="project-title">
-                            <span>Signature Minds Institute - Graphics Designer</span>
-                            <span class="project-year">Jan 2020 - Jun 2020</span>
-                        </div>
-                        <p class="project-desc">
-                            Collaborated with clients, delivering visually appealing designs within deadlines using
-                            Canva.
-                        </p>
-                        <span class="tech-stack">Canva, Graphic Design</span>
-                    </div>
-                    <div class="project-item">
-                        <div class="project-title">
-                            <span>Study Town - Teaching Assistant</span>
-                            <span class="project-year">Nov 2019 - Jun 2020</span>
-                        </div>
-                        <p class="project-desc">
-                            Assisted in evaluating A-level Biology and Chemistry papers, reviewed copies, and tutored
-                            students.
-                        </p>
-                        <span class="tech-stack">Teaching, Biology, Chemistry</span>
-                    </div>
-                    <div class="project-item">
-                        <div class="project-title">
-                            <span>North South University - BSc in Computer Science Engineering</span>
-                            <span class="project-year">2020 - 2024</span>
-                        </div>
-                        <p class="project-desc">
-                            CGPA: 3.38/4.00. Focused on Web Development, Machine Learning, and Software Quality
-                            Assurance.
-                        </p>
-                        <span class="tech-stack">CS Engineering, ML, Web Dev, SQA</span>
-                    </div>
-                    <div class="project-item">
-                        <div class="project-title">
-                            <span>Edexcel A Levels</span>
-                            <span class="project-year">2019</span>
-                        </div>
-                        <p class="project-desc">
-                            Mathematics, Physics, Chemistry.
-                        </p>
-                    </div>
-                    <div class="project-item">
-                        <div class="project-title">
-                            <span>Edexcel O Levels - Daily Star Award Winner</span>
-                            <span class="project-year">2017</span>
-                        </div>
-                        <p class="project-desc">
-                            Science & Mathematics stream. Daily Star Award for outstanding O Levels results.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 04 Contact -->
-            <div class="grid-item" id="contact">
-                <div class="section-header">
-                    <span class="section-number">04</span>
-                    <h2>Reserve a Table</h2>
-                </div>
-                <form class="minimal-form" action="https://formsubmit.co/sultanrafeed@gmail.com" method="POST">
-                    <!-- FormSubmit Configuration -->
-                    <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" name="_next" value="https://sultanrafeed.github.io/github-portfolio/">
-                    <input type="hidden" name="_subject" value="New Reservation (Contact Form)">
-
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name" class="minimal-input" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" class="minimal-input" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <input type="text" id="message" name="message" class="minimal-input" required>
-                    </div>
-                    <button type="submit" class="menu-btn contact-submit-btn" style="margin-top: 1rem;">
-                        Send Request
-                    </button>
-                </form>
-                <div style="margin-top: 3rem; display: flex; gap: 2rem;">
-                    <a href="mailto:sultanrafeed@gmail.com"
-                        style="border-bottom: 1px solid var(--text-charcoal);">Email</a>
-                    <a href="https://www.linkedin.com/in/rafeed-sultan/" target="_blank"
-                        style="border-bottom: 1px solid var(--text-charcoal);">LinkedIn</a>
-                    <a href="https://github.com/sultanrafeed" target="_blank"
-                        style="border-bottom: 1px solid var(--text-charcoal);">GitHub</a>
-                </div>
+            <div class="boot-text">
+                <span class="boot-label">Initializing</span>
+                <span class="boot-dots"><span></span><span></span><span></span></span>
             </div>
         </div>
     </div>
-    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Atmospheric background -->
+    <div class="atmosphere" aria-hidden="true">
+        <div class="grid-overlay"></div>
+        <div class="aurora aurora-1"></div>
+        <div class="aurora aurora-2"></div>
+        <div class="aurora aurora-3"></div>
+        <div class="noise"></div>
+    </div>
+
+    <!-- Custom cursor -->
+    <div class="cursor-ring" aria-hidden="true"></div>
+    <div class="cursor-dot" aria-hidden="true"></div>
+
+    <!-- Floating Nav -->
+    <nav class="nav" id="nav">
+        <a href="#top" class="nav-mark" aria-label="Home">
+            <span class="nav-mark-text">RS</span>
+            <span class="nav-mark-dot"></span>
+        </a>
+        <ul class="nav-links" role="menubar">
+            <li><a href="#about" data-nav>About</a></li>
+            <li><a href="#experience" data-nav>Work</a></li>
+            <li><a href="#research" data-nav>Research</a></li>
+            <li><a href="#projects" data-nav>Projects</a></li>
+            <li><a href="#contact" data-nav>Contact</a></li>
+        </ul>
+        <button class="nav-toggle" id="themeToggle" aria-label="Toggle theme">
+    <i class="fa-solid fa-moon"></i>
+</button>
+<button class="nav-toggle" id="soundToggle" aria-label="Toggle sounds" aria-pressed="false">
+    <i class="fa-solid fa-volume-xmark"></i>
+</button>
+        <a href="rafeed_sultan_academic_CV.pdf" download class="nav-cta" data-magnetic>
+            <span>CV</span>
+            <i class="fa-solid fa-arrow-down"></i>
+        </a>
+        <button class="nav-burger" id="navBurger" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span>
+        </button>
+    </nav>
+
+    <!-- ============== HERO ============== -->
+    <section class="hero" id="top">
+        <div class="container hero-grid">
+
+            <div class="hero-content">
+                <div class="hero-status reveal">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Available for research collaborations</span>
+                </div>
+
+                <h1 class="hero-name reveal">
+<span class="line" data-boop>Rafeed</span>
+<span class="line" data-boop><em>Mohammad</em></span>
+<span class="line" data-boop>Sultan<span class="period">.</span></span>
+                </h1>
+
+                <div class="hero-roles reveal">
+                    <span class="role-prefix">I am a</span>
+                    <span class="role-rotator" aria-live="polite">
+                        <span class="role-track">
+                            <span class="role">Software Engineer</span>
+                            <span class="role">AI Researcher</span>
+                            <span class="role">LLM Tinkerer</span>
+                            <span class="role">Systems Builder</span>
+                            <span class="role">Software Engineer</span>
+                        </span>
+                    </span>
+                </div>
+
+                <p class="hero-blurb reveal">
+                    Building agentic AI at <a href="https://selisegroup.com" target="_blank" rel="noopener">SELISE
+                        Digital Platforms</a> — voice agents, MCP tool servers, and real-time chat platforms. Researching
+                    trustworthy LLMs, retrieval-augmented generation, and alignment.
+                </p>
+
+                <div class="hero-actions reveal">
+                    <a href="#contact" class="btn btn-primary" data-magnetic>
+                        <span>Get in touch</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    <a href="rafeed_sultan_academic_CV.pdf" download class="btn btn-ghost" data-magnetic>
+                        <i class="fa-solid fa-file-arrow-down"></i>
+                        <span>Download CV</span>
+                    </a>
+                </div>
+
+                <div class="hero-meta reveal">
+                    <span><i class="fa-solid fa-location-dot"></i> Dhaka, Bangladesh</span>
+                    <span><i class="fa-regular fa-envelope"></i> sultanrafeed@gmail.com</span>
+                </div>
+            </div>
+
+            <aside class="hero-side">
+                <div class="profile-card reveal" data-tilt data-spotlight>
+                    <div class="profile-card-glow"></div>
+                    <div class="profile-pic-wrap">
+                        <img src="profile.jpg" alt="Rafeed Mohammad Sultan"
+                            onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                        <div class="profile-fallback" style="display:none;">RS</div>
+                    </div>
+                    <div class="profile-card-body">
+                        <div class="profile-tag">
+                            <span class="tag-dot"></span>
+                            <span>Currently shipping</span>
+                        </div>
+                        <p class="profile-quote">
+                            <span class="qmark">“</span>Serving fresh code &amp; spicy
+                            algorithms.<span class="qmark">”</span>
+                        </p>
+                        <div class="profile-stats">
+                            <div class="stat">
+                                <span class="stat-num">4</span>
+                                <span class="stat-label">Publications</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-num">4+</span>
+                                <span class="stat-label">Years coding</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-num">∞</span>
+                                <span class="stat-label">Curiosity</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="github-card reveal" data-spotlight>
+                    <div class="github-head">
+                        <span class="github-label">
+                            <i class="fa-brands fa-github"></i>
+                            Contributions
+                        </span>
+                        <span class="github-count" id="ghCount">— commits</span>
+                    </div>
+                    <div class="github-graph" id="githubGraph"></div>
+                    <div class="github-foot">
+                        <span>Less</span>
+                        <div class="legend">
+                            <span class="lvl lvl-0"></span>
+                            <span class="lvl lvl-1"></span>
+                            <span class="lvl lvl-2"></span>
+                            <span class="lvl lvl-3"></span>
+                            <span class="lvl lvl-4"></span>
+                        </div>
+                        <span>More</span>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <a href="#about" class="scroll-cue" aria-label="Scroll down">
+            <span class="scroll-line"></span>
+            <span class="scroll-text">Scroll</span>
+        </a>
+    </section>
+
+    <!-- ============== ABOUT ============== -->
+    <section class="section" id="about">
+        <div class="container">
+            <header class="section-head reveal">
+                <span class="section-num">01 — About</span>
+                <h2 class="section-title">A <em>builder</em> with a researcher's instincts.</h2>
+            </header>
+
+            <div class="about-grid">
+                <div class="about-text reveal">
+                    <p>
+                        I'm a Software Engineer at <strong>SELISE Digital Platforms</strong>, where I lead
+                        development of <strong>OpenClaw</strong> and expand MCP server tooling — driving
+                        architecture decisions across agentic AI and enterprise automation workstreams.
+                    </p>
+                    <p>
+                        On the research side, I work on advancing NLP — particularly <strong>trustworthy and
+                            responsible AI</strong>, LLM alignment and evaluation, prompt optimization for robust
+                        instruction-following, and retrieval-augmented generation in multilingual and low-resource
+                        settings. I'm also drawn to medical AI applications of NLP — clinical text and decision
+                        support — with the broader goal of building transparent, fair language technologies.
+                    </p>
+                    <p>
+                        I hold a BSc in Computer Science Engineering from <strong>North South University</strong>
+                        and have published at <strong>ICPR 2024</strong>, <strong>IEEE Big Data 2024</strong>,
+                        <strong>IJCNN 2025</strong>, and the Q1 journal <em>Intelligence-Based Medicine</em>.
+                    </p>
+                </div>
+
+                <div class="about-side">
+                    <div class="info-card reveal" data-spotlight>
+                        <div class="info-label">Currently</div>
+                        <div class="info-title">Software Engineer</div>
+                        <div class="info-sub">SELISE Digital Platforms · Dhaka</div>
+                        <ul class="info-list">
+                            <li><i class="fa-solid fa-circle-nodes"></i> Leading OpenClaw development</li>
+                            <li><i class="fa-solid fa-server"></i> Expanding MCP server tooling</li>
+                            <li><i class="fa-solid fa-microchip"></i> Agentic AI &amp; enterprise automation</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-card reveal" data-spotlight>
+                        <div class="info-label">Research focus</div>
+                        <div class="info-title">Trustworthy NLP</div>
+                        <ul class="info-tags">
+                            <li>LLM Alignment</li>
+                            <li>RAG</li>
+                            <li>Prompt Optimization</li>
+                            <li>Multilingual</li>
+                            <li>Medical AI</li>
+                            <li>Evaluation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============== EXPERIENCE ============== -->
+    <section class="section" id="experience">
+        <div class="container">
+            <header class="section-head reveal">
+                <span class="section-num">02 — Experience</span>
+                <h2 class="section-title">Where I've <em>shipped</em> things.</h2>
+            </header>
+
+            <div class="timeline">
+                <div class="timeline-item current reveal" data-spotlight>
+                    <div class="timeline-marker">
+                        <span class="marker-pulse"></span>
+                    </div>
+                    <div class="timeline-card">
+                        <div class="timeline-meta">
+                            <span class="t-role">Software Engineer</span>
+                            <span class="t-period">Apr 2026 — Present</span>
+                        </div>
+                        <div class="t-org">SELISE Digital Platforms · Dhaka</div>
+                        <p class="t-desc">
+                            Leading development of <strong>OpenClaw</strong> and expanding MCP server tooling.
+                            Driving architecture decisions across agentic AI and enterprise automation workstreams.
+                        </p>
+                        <div class="t-tags">
+                            <span>Agentic AI</span><span>MCP</span><span>Architecture</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal" data-spotlight>
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-meta">
+                            <span class="t-role">Associate Software Engineer</span>
+                            <span class="t-period">Jan 2025 — Mar 2026</span>
+                        </div>
+                        <div class="t-org">SELISE Digital Platforms · Dhaka</div>
+                        <ul class="t-bullets">
+                            <li>Built a <strong>voice agent</strong> with ElevenLabs TTS, prompt-engineered guardrails,
+                                an MCP tool server, and NestJS + MongoDB services. Automated GitHub issue creation via
+                                signed webhooks.</li>
+                            <li>Led an <strong>agentic chat platform</strong> — real-time WebSocket streaming, Markdown
+                                rendering, and a React–Flask ingestion pipeline for PDF/image context into Azure
+                                PostgreSQL.</li>
+                            <li>Developed <strong>energy-trading analytics (PCAT)</strong> — DAM/RTM PnL and PTP/AS
+                                exposure with pandas/SQLAlchemy and PostgreSQL ETL.</li>
+                            <li>Authored technical docs and evaluation protocols; shipped automated NPS workflows.</li>
+                        </ul>
+                        <div class="t-tags">
+                            <span>React</span><span>Flask</span><span>NestJS</span><span>MongoDB</span>
+                            <span>Azure PG</span><span>WebSocket</span><span>ElevenLabs</span><span>MCP</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal" data-spotlight>
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-meta">
+                            <span class="t-role">Intern Software Developer</span>
+                            <span class="t-period">Oct 2024 — Jan 2025</span>
+                        </div>
+                        <div class="t-org">SELISE Digital Platforms · Dhaka</div>
+                        <p class="t-desc">
+                            Supported finance/procurement automation and ops tooling — improving cycle time and data
+                            quality for the Global Finance &amp; Head department.
+                        </p>
+                        <div class="t-tags">
+                            <span>Finance Automation</span><span>Procurement</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal" data-spotlight>
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-meta">
+                            <span class="t-role">Part-time Content Writer</span>
+                            <span class="t-period">Sep 2023 — Nov 2023</span>
+                        </div>
+                        <div class="t-org">GameRiv · Remote</div>
+                        <p class="t-desc">
+                            Produced SEO-aware articles on deadline; maintained publication quality in WordPress.
+                        </p>
+                        <div class="t-tags">
+                            <span>SEO</span><span>WordPress</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal" data-spotlight>
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-meta">
+                            <span class="t-role">Graphics Designer</span>
+                            <span class="t-period">Jan 2020 — Jun 2020</span>
+                        </div>
+                        <div class="t-org">Signature Minds Institute · Remote</div>
+                        <p class="t-desc">
+                            Delivered client assets on schedule; collaborated on visual branding using Canva.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal" data-spotlight>
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-meta">
+                            <span class="t-role">Teacher's Assistant</span>
+                            <span class="t-period">Nov 2019 — Jun 2020</span>
+                        </div>
+                        <div class="t-org">Study Town · Lalmatia, Dhaka</div>
+                        <p class="t-desc">
+                            Graded A-level Biology/Chemistry papers and tutored students in core topics.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============== RESEARCH ============== -->
+    <section class="section" id="research">
+        <div class="container">
+            <header class="section-head reveal">
+                <span class="section-num">03 — Research</span>
+                <h2 class="section-title">Published <em>papers</em> &amp; ongoing work.</h2>
+            </header>
+
+            <div class="paper-grid">
+                <a href="https://arxiv.org/abs/2408.11879" target="_blank" rel="noopener"
+                    class="paper-card reveal" data-spotlight data-tilt>
+                    <div class="paper-venue">
+                        <span class="venue-tag">ICPR 2024</span>
+                        <span class="venue-status">Accepted</span>
+                    </div>
+                    <h3 class="paper-title">Beyond Labels: Aligning LLMs with Human-like Reasoning</h3>
+                    <p class="paper-desc">
+                        Addressing ethical concerns in large language models using the DFAR (Dataset for Aligning
+                        Reasons) — enhancing the ETHICS dataset with detailed annotations.
+                    </p>
+                    <div class="paper-tags">
+                        <span>NLP</span><span>Alignment</span><span>Ethics</span><span>LLMs</span>
+                    </div>
+                    <div class="paper-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                </a>
+
+                <a href="https://arxiv.org/abs/2411.10878" target="_blank" rel="noopener"
+                    class="paper-card reveal" data-spotlight data-tilt>
+                    <div class="paper-venue">
+                        <span class="venue-tag">IEEE Big Data 2024</span>
+                        <span class="venue-status">Accepted</span>
+                    </div>
+                    <h3 class="paper-title">Empowering Meta-Analysis: LLMs for Scientific Synthesis</h3>
+                    <p class="paper-desc">
+                        Leveraging large language models for automated scientific synthesis and meta-analysis across
+                        research literature.
+                    </p>
+                    <div class="paper-tags">
+                        <span>RAG</span><span>Synthesis</span><span>LLMs</span>
+                    </div>
+                    <div class="paper-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                </a>
+
+                <a href="https://www.sciencedirect.com/science/article/pii/S2666521224000437" target="_blank"
+                    rel="noopener" class="paper-card reveal" data-spotlight data-tilt>
+                    <div class="paper-venue">
+                        <span class="venue-tag">Intelligence-Based Medicine</span>
+                        <span class="venue-status venue-q1">Q1 Journal</span>
+                    </div>
+                    <h3 class="paper-title">Efficient Skin Cancer Detection</h3>
+                    <p class="paper-desc">
+                        Lightweight model souping and ensembling knowledge distillation for skin cancer detection on
+                        memory-constrained devices.
+                    </p>
+                    <div class="paper-tags">
+                        <span>Medical AI</span><span>Vision</span><span>Distillation</span>
+                    </div>
+                    <div class="paper-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                </a>
+
+                <a href="https://arxiv.org/abs/2504.16121" target="_blank" rel="noopener"
+                    class="paper-card reveal" data-spotlight data-tilt>
+                    <div class="paper-venue">
+                        <span class="venue-tag">IJCNN 2025</span>
+                        <span class="venue-status">Accepted</span>
+                    </div>
+                    <h3 class="paper-title">LegalRAG: Hybrid RAG for Multilingual Legal IR</h3>
+                    <p class="paper-desc">
+                        A hybrid retrieval-augmented generation system for multilingual legal information retrieval —
+                        combining dense and sparse retrieval.
+                    </p>
+                    <div class="paper-tags">
+                        <span>RAG</span><span>Legal Tech</span><span>Multilingual</span>
+                    </div>
+                    <div class="paper-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                </a>
+
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ============== PROJECTS ============== -->
+    <section class="section" id="projects">
+        <div class="container">
+            <header class="section-head reveal">
+                <span class="section-num">04 — Projects</span>
+                <h2 class="section-title">Things I've <em>built</em>.</h2>
+            </header>
+
+            <div class="project-grid">
+                <a href="https://github.com/SumitKar01/rokkha.git" target="_blank" rel="noopener"
+                    class="project-card reveal" data-spotlight>
+                    <div class="project-num">01</div>
+                    <div class="project-body">
+                        <h3>Rokkha</h3>
+                        <p class="project-tagline">Personal-safety Android app</p>
+                        <p class="project-desc">
+                            Alerts guardians with the user's location at the press of a button. Periodic location
+                            broadcasts to specified contacts.
+                        </p>
+                        <div class="project-stack">
+                            <code>Kotlin</code><code>Firebase</code><code>SQLite</code>
+                        </div>
+                    </div>
+                    <div class="project-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                </a>
+
+                <a href="https://github.com/sultanrafeed/roomafy" target="_blank" rel="noopener"
+                    class="project-card reveal" data-spotlight>
+                    <div class="project-num">02</div>
+                    <div class="project-body">
+                        <h3>Roomafy <span class="ongoing">ongoing</span></h3>
+                        <p class="project-tagline">Collaborative listening rooms</p>
+                        <p class="project-desc">
+                            A web app for synchronized music sessions with friends, integrated with the Spotify API.
+                        </p>
+                        <div class="project-stack">
+                            <code>Django</code><code>React</code><code>Spotify API</code>
+                        </div>
+                    </div>
+                    <div class="project-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                </a>
+
+                <a href="https://github.com/sultanrafeed/Cross-Model-Evaluation-Judging-AI-Ethics-and-Alignment-Responses-with-Language-Models.git"
+                    target="_blank" rel="noopener" class="project-card reveal" data-spotlight>
+                    <div class="project-num">03</div>
+                    <div class="project-body">
+                        <h3>Cross-Model Evaluation</h3>
+                        <p class="project-tagline">Judging AI ethics with LLMs</p>
+                        <p class="project-desc">
+                            Used LLMs to assess ethicality on the DFAR dataset, automating evaluations with strong
+                            alignment to human judgments.
+                        </p>
+                        <div class="project-stack">
+                            <code>Python</code><code>LLMs</code><code>DFAR</code>
+                        </div>
+                    </div>
+                    <div class="project-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                </a>
+
+                <a href="https://github.com/sultanrafeed/Predictive-Modeling-and-Explainable-AI-Analysis.git"
+                    target="_blank" rel="noopener" class="project-card reveal" data-spotlight>
+                    <div class="project-num">04</div>
+                    <div class="project-body">
+                        <h3>White Spot Disease — XAI</h3>
+                        <p class="project-tagline">Predictive modeling for shrimp farms</p>
+                        <p class="project-desc">
+                            72.67% accuracy ML model for White Spot Disease prevalence with SHAP-based interpretability
+                            of farm features &amp; practices.
+                        </p>
+                        <div class="project-stack">
+                            <code>Python</code><code>SHAP</code><code>scikit-learn</code>
+                        </div>
+                    </div>
+                    <div class="project-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                </a>
+
+                <a href="https://github.com/sultanrafeed/Optimizer-Perfomance-Evaluation" target="_blank"
+                    rel="noopener" class="project-card reveal" data-spotlight>
+                    <div class="project-num">05</div>
+                    <div class="project-body">
+                        <h3>Optimizer Benchmarks</h3>
+                        <p class="project-tagline">Optimizers × batch size × VGG</p>
+                        <p class="project-desc">
+                            Investigating the impact of different optimizers and batch sizes on a custom CNN built with
+                            VGG blocks.
+                        </p>
+                        <div class="project-stack">
+                            <code>PyTorch</code><code>CNN</code><code>VGG</code>
+                        </div>
+                    </div>
+                    <div class="project-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                </a>
+
+                <a href="https://github.com/sultanrafeed/Efficiency-Comparison-Of-PL-in-Algorithm-Development.git"
+                    target="_blank" rel="noopener" class="project-card reveal" data-spotlight>
+                    <div class="project-num">06</div>
+                    <div class="project-body">
+                        <h3>Language Efficiency Study</h3>
+                        <p class="project-tagline">Runtime · memory · CPU</p>
+                        <p class="project-desc">
+                            Comparing programming-language efficiency across algorithms with varying time complexity.
+                        </p>
+                        <div class="project-stack">
+                            <code>Python</code><code>Java</code><code>C/C++</code>
+                        </div>
+                    </div>
+                    <div class="project-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                </a>
+
+                <a href="https://github.com/sultanrafeed/librarymanagementsystem.git" target="_blank"
+                    rel="noopener" class="project-card reveal" data-spotlight>
+                    <div class="project-num">07</div>
+                    <div class="project-body">
+                        <h3>Library Management</h3>
+                        <p class="project-tagline">Online platform for PDF books</p>
+                        <p class="project-desc">
+                            Managing library resources online — uploads, search, and user accounts.
+                        </p>
+                        <div class="project-stack">
+                            <code>PHP</code><code>MySQL</code><code>Bootstrap</code>
+                        </div>
+                    </div>
+                    <div class="project-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                </a>
+
+                <a href="https://github.com/sultanrafeed/Software-Testing-For-GigaTech.git" target="_blank"
+                    rel="noopener" class="project-card reveal" data-spotlight>
+                    <div class="project-num">08</div>
+                    <div class="project-body">
+                        <h3>Selenium Automation</h3>
+                        <p class="project-tagline">QA suite for GigaTech</p>
+                        <p class="project-desc">
+                            Automated website testing — generating test cases and ensuring efficient regression
+                            coverage.
+                        </p>
+                        <div class="project-stack">
+                            <code>Python</code><code>Selenium</code>
+                        </div>
+                    </div>
+                    <div class="project-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                </a>
+
+                <a href="https://github.com/sultanrafeed/phonebook.git" target="_blank" rel="noopener"
+                    class="project-card reveal" data-spotlight>
+                    <div class="project-num">09</div>
+                    <div class="project-body">
+                        <h3>Phonebook</h3>
+                        <p class="project-tagline">Java Swing GUI</p>
+                        <p class="project-desc">
+                            Mini project for storing and managing contacts with a desktop GUI interface.
+                        </p>
+                        <div class="project-stack">
+                            <code>Java Swing</code><code>SQLite</code>
+                        </div>
+                    </div>
+                    <div class="project-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============== STACK ============== -->
+    <section class="section section-tight" id="stack">
+        <div class="container">
+            <header class="section-head reveal">
+                <span class="section-num">05 — Stack</span>
+                <h2 class="section-title">Tools I <em>reach for</em>.</h2>
+            </header>
+
+            <div class="marquee reveal" aria-hidden="true">
+                <div class="marquee-track">
+                    <!-- duplicated in JS for seamless loop -->
+                    <span>Python</span><span class="dot">·</span>
+                    <span>TypeScript</span><span class="dot">·</span>
+                    <span>PyTorch</span><span class="dot">·</span>
+                    <span>Hugging Face</span><span class="dot">·</span>
+                    <span>NestJS</span><span class="dot">·</span>
+                    <span>React</span><span class="dot">·</span>
+                    <span>Flask</span><span class="dot">·</span>
+                    <span>PostgreSQL</span><span class="dot">·</span>
+                    <span>MongoDB</span><span class="dot">·</span>
+                    <span>FAISS</span><span class="dot">·</span>
+                    <span>LangChain</span><span class="dot">·</span>
+                    <span>MCP</span><span class="dot">·</span>
+                    <span>ElevenLabs</span><span class="dot">·</span>
+                    <span>Azure</span><span class="dot">·</span>
+                    <span>Firebase</span><span class="dot">·</span>
+                    <span>WebSocket</span><span class="dot">·</span>
+                    <span>SQLAlchemy</span><span class="dot">·</span>
+                    <span>scikit-learn</span><span class="dot">·</span>
+                </div>
+            </div>
+
+            <div class="stack-grid">
+                <div class="stack-card reveal" data-spotlight>
+                    <div class="stack-head"><i class="fa-solid fa-code"></i> Languages</div>
+                    <ul>
+                        <li>Python</li><li>TypeScript</li><li>JavaScript</li>
+                        <li>Java</li><li>C++</li><li>C</li>
+                    </ul>
+                </div>
+                <div class="stack-card reveal" data-spotlight>
+                    <div class="stack-head"><i class="fa-solid fa-brain"></i> AI / ML</div>
+                    <ul>
+                        <li>PyTorch</li><li>HF Transformers</li><li>PEFT</li>
+                        <li>scikit-learn</li><li>FAISS</li><li>pandas / NumPy</li>
+                    </ul>
+                </div>
+                <div class="stack-card reveal" data-spotlight>
+                    <div class="stack-head"><i class="fa-solid fa-message"></i> NLP</div>
+                    <ul>
+                        <li>LLM Fine-tuning</li><li>RAG (dense + sparse)</li>
+                        <li>Prompt Engineering</li><li>Alignment &amp; Evaluation</li>
+                    </ul>
+                </div>
+                <div class="stack-card reveal" data-spotlight>
+                    <div class="stack-head"><i class="fa-solid fa-server"></i> Backend</div>
+                    <ul>
+                        <li>NestJS</li><li>Flask</li><li>Django</li>
+                        <li>PostgreSQL</li><li>MongoDB</li><li>SQLAlchemy</li>
+                    </ul>
+                </div>
+                <div class="stack-card reveal" data-spotlight>
+                    <div class="stack-head"><i class="fa-solid fa-window-maximize"></i> Frontend</div>
+                    <ul>
+                        <li>React</li><li>HTML &amp; CSS</li><li>WebSocket</li>
+                    </ul>
+                </div>
+                <div class="stack-card reveal" data-spotlight>
+                    <div class="stack-head"><i class="fa-solid fa-robot"></i> Agentic / LLM</div>
+                    <ul>
+                        <li>Model Context Protocol</li><li>ElevenLabs</li>
+                        <li>LangChain</li><li>OpenAI API</li>
+                    </ul>
+                </div>
+                <div class="stack-card reveal" data-spotlight>
+                    <div class="stack-head"><i class="fa-solid fa-cloud"></i> Cloud / DevOps</div>
+                    <ul>
+                        <li>Azure (PG, Blob)</li><li>Firebase</li>
+                        <li>Git / GitHub</li><li>Postman</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============== EDUCATION ============== -->
+    <section class="section" id="education">
+        <div class="container">
+            <header class="section-head reveal">
+                <span class="section-num">06 — Education &amp; Awards</span>
+                <h2 class="section-title">Where I <em>learned</em>.</h2>
+            </header>
+
+            <div class="edu-grid">
+                <div class="edu-card reveal" data-spotlight>
+                    <div class="edu-period">2020 — 2024</div>
+                    <div class="edu-degree">BSc in Computer Science Engineering</div>
+                    <div class="edu-place">North South University · Dhaka</div>
+                    <div class="edu-detail">CGPA: 3.38 / 4.00 · Web Dev, ML, SQA</div>
+                </div>
+                <div class="edu-card reveal" data-spotlight>
+                    <div class="edu-period">2019</div>
+                    <div class="edu-degree">Edexcel A Levels</div>
+                    <div class="edu-place">Cephalon International School · Dhaka</div>
+                    <div class="edu-detail">Physics · Chemistry · Biology · Mathematics</div>
+                </div>
+                <div class="edu-card reveal edu-award" data-spotlight>
+                    <div class="edu-period">2017</div>
+                    <div class="edu-degree">Edexcel O Levels
+                        <span class="award-pill"><i class="fa-solid fa-star"></i> Daily Star Award</span>
+                    </div>
+                    <div class="edu-place">Academia · Dhaka</div>
+                    <div class="edu-detail">Outstanding O-Levels results · Science &amp; Math stream</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============== CONTACT ============== -->
+    <section class="section section-contact" id="contact">
+        <div class="container">
+            <div class="contact-wrap">
+                <header class="section-head reveal contact-head">
+                    <span class="section-num">07 — Contact</span>
+                    <h2 class="section-title">Let's build <em>something</em>.</h2>
+                    <p class="contact-lead">
+                        Open to research collaborations, engineering roles, and interesting conversations.
+                        The fastest way to reach me is the form below — or just send an email.
+                    </p>
+                </header>
+
+                <form class="contact-form reveal" id="contactForm"
+                    action="https://formsubmit.co/sultanrafeed@gmail.com" method="POST">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_subject" value="New message from portfolio">
+
+                    <div class="field">
+                        <label for="name">Your name</label>
+                        <input type="text" id="name" name="name" required autocomplete="name">
+                    </div>
+                    <div class="field">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required autocomplete="email">
+                    </div>
+                    <div class="field">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full" data-magnetic>
+                        <span>Send message</span>
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </form>
+
+                <aside class="contact-side reveal">
+                    <a href="mailto:sultanrafeed@gmail.com" class="contact-link" data-spotlight data-copy = "sultanrafeed@gmail.com">
+                        <span class="contact-link-label">Email</span>
+                        <span class="contact-link-value">sultanrafeed@gmail.com</span>
+                        
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/rafeed-sultan/" target="_blank" rel="noopener"
+                        class="contact-link" data-spotlight>
+                        <span class="contact-link-label">LinkedIn</span>
+                        <span class="contact-link-value">/in/rafeed-sultan</span>
+                        <i class="fa-brands fa-linkedin"></i>
+                    </a>
+                    <a href="https://github.com/sultanrafeed" target="_blank" rel="noopener"
+                        class="contact-link" data-spotlight>
+                        <span class="contact-link-label">GitHub</span>
+                        <span class="contact-link-value">@sultanrafeed</span>
+                        <i class="fa-brands fa-github"></i>
+                    </a>
+                    <a href="tel:+8801732073478" class="contact-link" data-spotlight data-copy = "+8801732073478">
+                        <span class="contact-link-label">Phone</span>
+                        <span class="contact-link-value">+880 1732-073478</span>
+                        <i class="fa-solid fa-phone"></i>
+                    </a>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============== FOOTER ============== -->
+    <footer class="footer">
+        <div class="container footer-inner">
+            <div class="footer-mark">
+                <span class="footer-rs">RS</span>
+                <span>© <span id="year">2026</span> Rafeed Mohammad Sultan</span>
+            </div>
+            <div class="footer-meta">
+                <span>Built with care in Dhaka</span>
+                <span class="dot">·</span>
+                <a href="#top">Back to top ↑</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast container -->
+    <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+    <!-- <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+    <i class="fa-solid fa-moon"></i>
+</button>
+    <button class="sound-toggle" id="soundToggle" aria-label="Toggle sounds" aria-pressed="false">
+    <i class="fa-solid fa-volume-xmark"></i>
+</button> -->
+
+<div class="visitor-dot" id="visitorDot" aria-hidden="true">
+    <span class="vd-pulse"></span>
+    <span class="vd-text">You're here · session active</span>
+</div>
+
     <script src="script.js"></script>
 </body>
 
