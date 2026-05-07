@@ -30,7 +30,10 @@ document.querySelectorAll('[data-boop]').forEach(el => {
             el.style.transform = '';
             setTimeout(() => { el.style.transition = ''; booping = false; }, 250);
         }, 180);
+
+
     });
+
 });
 
 /* ========== CLICK SPARKS ========== */
@@ -450,8 +453,8 @@ document.querySelectorAll('.marquee-track').forEach(track => {
         const lerp = (a, b, n) => a + (b - a) * n;
 
         const tick = () => {
-            currentY = lerp(currentY, targetY, 0.08);
-            if (Math.abs(targetY - currentY) < 0.5) {
+            currentY = lerp(currentY, targetY, 0.18);
+            if (Math.abs(targetY - currentY) < 1) {
                 window.scrollTo(0, targetY);
                 smoothing = false;
                 return;
@@ -537,5 +540,54 @@ document.querySelectorAll('.marquee-track').forEach(track => {
         // Reveal after a moment, hide on first scroll past hero
         setTimeout(() => visitorDot.classList.add('visible'), 2500);
     }
+
+   /* ========== 18. CERT ISSUER SCRAMBLE ========== */
+/* ========== 18. SCRAMBLE (cert cards + contact links) ========== */
+document.querySelectorAll('.cert-card, .contact-link').forEach(card => {
+    const scrambleEl = card.querySelector('.js-scramble');
+    if (!scrambleEl) return;
+    const original = scrambleEl.getAttribute('data-text');
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#@!';
+    let frame = null;
+    let iteration = 0;
+    const scramble = () => {
+        iteration++;
+        scrambleEl.textContent = original.split('').map((letter, i) => {
+            if (i < Math.floor(iteration / 2)) return original[i];
+            if (letter === ' ' || letter === '@' || letter === '.' || letter === '-' || letter === '+') return letter;
+            return chars[Math.floor(Math.random() * chars.length)];
+        }).join('');
+        if (iteration < original.length * 2) {
+            frame = requestAnimationFrame(scramble);
+        } else {
+            scrambleEl.textContent = original;
+        }
+    };
+    card.addEventListener('mouseenter', () => {
+        iteration = 0;
+        cancelAnimationFrame(frame);
+        scramble();
+    });
+});
+
+/* ========== 19. CERT ACCORDION ========== */
+document.querySelectorAll('[data-cert-toggle]').forEach(toggle => {
+    const card = toggle.closest('.cert-accordion');
+    if (!card) return;
+
+    // Open the first card by default
+    if (card === document.querySelector('.cert-accordion')) {
+        card.classList.add('open');
+    }
+
+    toggle.addEventListener('click', () => {
+        const isOpen = card.classList.contains('open');
+        // Close all
+        document.querySelectorAll('.cert-accordion.open').forEach(c => c.classList.remove('open'));
+        // Open clicked unless it was already open
+        if (!isOpen) card.classList.add('open');
+        if (window.sound) window.sound.click();
+    });
+});
 
 });
