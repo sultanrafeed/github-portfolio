@@ -2528,4 +2528,342 @@ body.konami-active { animation: konami-flash 1.5s ease-out; }
     .nav-toggle { width: 30px; height: 30px; }
     .nav-toggle i { font-size: 0.78rem; }
 }
+
+/* ============================================================
+   ADD TO :root
+   ============================================================ */
+/*
+    --spotlight-glow: rgba(251, 191, 36, 0.10);
+    --tag-bg:         rgba(251, 191, 36, 0.08);
+    --tag-border:     rgba(251, 191, 36, 0.20);
+*/
+
+/* ============================================================
+   CERTIFICATIONS
+   ============================================================ */
+.cert-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.25rem;
+}
+
+.cert-card {
+    position: relative;
+    padding: 1.75rem;
+    background: var(--surface);
+    border: 1px solid var(--border-bright);
+    border-radius: 1rem;
+    backdrop-filter: blur(10px);
+    transition: border-color 0.3s ease, transform 0.3s var(--ease-out);
+    overflow: hidden;
+}
+
+.cert-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(350px circle at var(--mx, 50%) var(--my, 50%),
+            rgba(251, 191, 36, 0.08), transparent 40%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.cert-card:hover::before { opacity: 1; }
+.cert-card:hover {
+    border-color: rgba(251, 191, 36, 0.35);
+    transform: translateY(-3px);
+}
+
+.cert-issuer {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.cert-issuer i {
+    color: var(--amber);
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.cert-issuer-name {
+    flex: 1;
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    color: var(--text);
+    line-height: 1.2;
+}
+
+.cert-platform {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-subtle);
+    margin-top: 0.1rem;
+}
+
+.cert-year {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--amber);
+    padding: 0.2rem 0.6rem;
+    background: rgba(251, 191, 36, 0.08);
+    border: 1px solid rgba(251, 191, 36, 0.18);
+    border-radius: 999px;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.cert-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.cert-list li {
+    list-style: none;
+}
+
+/* Every course row */
+.cert-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 0.65rem;
+    border-radius: 0.5rem;
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    transition: background-color 0.2s ease, color 0.2s ease;
+    line-height: 1.35;
+}
+
+/* Clickable variant */
+a.cert-row {
+    text-decoration: none;
+}
+
+a.cert-row:hover {
+    background: rgba(251, 191, 36, 0.07);
+    color: var(--text);
+}
+
+a.cert-row .cert-row-arrow {
+    margin-left: auto;
+    color: var(--amber);
+    font-size: 0.58rem;
+    opacity: 0;
+    transform: translate(-3px, 3px);
+    transition: opacity 0.2s ease, transform 0.2s var(--ease-out);
+    flex-shrink: 0;
+}
+
+a.cert-row:hover .cert-row-arrow {
+    opacity: 1;
+    transform: translate(0, 0);
+}
+
+/* Plain (no link) */
+span.cert-row {
+    opacity: 0.85;
+}
+
+.cert-row::before {
+    content: '';
+    width: 4px;
+    height: 4px;
+    background: var(--amber);
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 1px;
+    opacity: 0.6;
+}
+
+.cert-honor {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.1rem 0.4rem;
+    background: rgba(251, 191, 36, 0.1);
+    color: var(--amber-bright);
+    border: 1px solid rgba(251, 191, 36, 0.25);
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    flex-shrink: 0;
+}
+
+.cert-by {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--text-subtle);
+    margin-top: 0.1rem;
+    padding-left: 0.8rem;
+}
+
+
+/* ============================================================
+   REFERENCES
+   ============================================================ */
+.ref-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.ref-card {
+    position: relative;
+    padding: 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border-bright);
+    border-radius: 1rem;
+    backdrop-filter: blur(10px);
+    transition: border-color 0.3s ease, transform 0.3s var(--ease-out);
+    overflow: hidden;
+}
+
+.ref-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(300px circle at var(--mx, 50%) var(--my, 50%),
+            rgba(251, 191, 36, 0.07), transparent 40%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.ref-card:hover::before { opacity: 1; }
+.ref-card:hover {
+    border-color: rgba(251, 191, 36, 0.35);
+    transform: translateY(-3px);
+}
+
+/* Purely decorative large quote — CSS only, no DOM text */
+.ref-card::after {
+    content: '\201C';
+    position: absolute;
+    top: -0.4rem;
+    right: 1rem;
+    font-family: var(--font-display);
+    font-size: 6rem;
+    color: var(--amber);
+    opacity: 0.07;
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+}
+
+/* Context badge */
+.ref-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 0.18rem 0.55rem;
+    border-radius: 999px;
+    margin-bottom: 0.9rem;
+}
+
+.ref-badge--academic {
+    background: rgba(139, 92, 246, 0.1);
+    color: #a78bfa;
+    border: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.ref-badge--industry {
+    background: rgba(251, 191, 36, 0.08);
+    color: var(--amber-bright);
+    border: 1px solid rgba(251, 191, 36, 0.2);
+}
+
+.ref-name {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    line-height: 1.2;
+    color: var(--text);
+    margin-bottom: 0.3rem;
+}
+
+.ref-suffix {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--amber);
+    letter-spacing: 0.02em;
+}
+
+.ref-role {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--amber-bright);
+    margin-bottom: 0.2rem;
+}
+
+.ref-org {
+    font-size: 0.84rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.ref-contact {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-top: 0.85rem;
+    border-top: 1px solid var(--border);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    word-break: break-all;
+    transition: color 0.25s ease;
+    text-decoration: none;
+}
+
+.ref-contact:hover { color: var(--amber-bright); }
+
+.ref-contact i {
+    color: var(--amber);
+    font-size: 0.8rem;
+    flex-shrink: 0;
+}
+
+.ref-note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-subtle);
+    text-align: center;
+    letter-spacing: 0.03em;
+    padding: 1.25rem 1rem;
+    border-top: 1px dashed var(--border);
+}
+
+.ref-note i { color: var(--amber); }
+
+@media (max-width: 768px) {
+    .ref-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cert-grid {
+        grid-template-columns: 1fr;
+    }
+}
 }
