@@ -2144,7 +2144,7 @@ body.hovering .cursor-ring {
    ============================================================ */
 .footer {
     border-top: 1px solid var(--border);
-    padding: 2.5rem 0 0;
+    padding: 2.5rem 0 180px;
     position: relative;
     overflow: visible;
     z-index: 2;
