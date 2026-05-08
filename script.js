@@ -16,41 +16,7 @@ if (themeBtn) {
     const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
     const initial = saved || (prefersLight ? 'light' : 'dark');
     document.documentElement.setAttribute('data-theme', initial);
-/* ========== BOOP (Josh Comeau style wiggle on hover) ========== */
-document.querySelectorAll('[data-boop]').forEach(el => {
-    let booping = false;
-    el.addEventListener('mouseenter', () => {
-        if (booping) return;
-        booping = true;
-        const rotate = (Math.random() * 8 - 4).toFixed(1); // -4 to 4 deg
-        el.style.transition = 'transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1)';
-        el.style.transform = `scale(1.05) rotate(${rotate}deg)`;
-        if (window.sound) window.sound.boop();
-        setTimeout(() => {
-            el.style.transform = '';
-            setTimeout(() => { el.style.transition = ''; booping = false; }, 250);
-        }, 180);
 
-
-    });
-
-});
-
-/* ========== CLICK SPARKS ========== */
-document.addEventListener('click', (e) => {
-    if (!e.target.closest('button, a, [data-magnetic]')) return;
-    if (e.target.closest('.theme-toggle, .sound-toggle')) return; // skip the toggles, they have their own feel
-    const SPARKS = 8;
-    for (let i = 0; i < SPARKS; i++) {
-        const spark = document.createElement('div');
-        spark.className = 'click-spark';
-        spark.style.left = `${e.clientX - 2}px`;
-        spark.style.top  = `${e.clientY - 2}px`;
-        spark.style.setProperty('--angle', `${(360 / SPARKS) * i + (Math.random() * 20 - 10)}deg`);
-        document.body.appendChild(spark);
-        setTimeout(() => spark.remove(), 600);
-    }
-});
     const updateIcon = (theme) => {
         const icon = themeBtn.querySelector('i');
         icon.className = theme === 'dark' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
@@ -67,8 +33,40 @@ document.addEventListener('click', (e) => {
         setTimeout(() => themeBtn.classList.remove('spin'), 500);
         if (window.sound) window.sound.theme();
     });
-
 }
+
+/* ========== BOOP (Josh Comeau style wiggle on hover) ========== */
+document.querySelectorAll('[data-boop]').forEach(el => {
+    let booping = false;
+    el.addEventListener('mouseenter', () => {
+        if (booping) return;
+        booping = true;
+        const rotate = (Math.random() * 8 - 4).toFixed(1);
+        el.style.transition = 'transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1)';
+        el.style.transform = `scale(1.05) rotate(${rotate}deg)`;
+        if (window.sound) window.sound.boop();
+        setTimeout(() => {
+            el.style.transform = '';
+            setTimeout(() => { el.style.transition = ''; booping = false; }, 250);
+        }, 180);
+    });
+});
+
+/* ========== CLICK SPARKS ========== */
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('button, a, [data-magnetic]')) return;
+    if (e.target.closest('#themeToggle, #soundToggle')) return;
+    const SPARKS = 8;
+    for (let i = 0; i < SPARKS; i++) {
+        const spark = document.createElement('div');
+        spark.className = 'click-spark';
+        spark.style.left = `${e.clientX - 2}px`;
+        spark.style.top  = `${e.clientY - 2}px`;
+        spark.style.setProperty('--angle', `${(360 / SPARKS) * i + (Math.random() * 20 - 10)}deg`);
+        document.body.appendChild(spark);
+        setTimeout(() => spark.remove(), 600);
+    }
+});
 
     /* ========== 1. BOOT SCREEN ========== */
     const bootScreen = document.querySelector('.boot-screen');
@@ -142,7 +140,6 @@ return {
         soundBtn.addEventListener('click', () => {
             sound.toggle(!sound.isEnabled());
             updateBtn();
-            sound.click();
         });
     }
     window.sound = sound;
@@ -165,15 +162,21 @@ return {
         };
         requestAnimationFrame(tick);
 
-        // Single delegated listener for hover state + sound
+        // Delegated hover — track element so sound fires once per entry, not per child
+        let hoveringTarget = null;
+        const HOVER_SEL = 'a, button, input, textarea, [data-magnetic], [data-spotlight]';
         document.addEventListener('mouseover', (e) => {
-            if (e.target.closest('a, button, input, textarea, [data-magnetic], [data-spotlight]')) {
+            const target = e.target.closest(HOVER_SEL);
+            if (target && target !== hoveringTarget) {
+                hoveringTarget = target;
                 document.body.classList.add('hovering');
                 sound.hover();
             }
         });
         document.addEventListener('mouseout', (e) => {
-            if (e.target.closest('a, button, input, textarea, [data-magnetic], [data-spotlight]')) {
+            const target = e.target.closest(HOVER_SEL);
+            if (target && !target.contains(e.relatedTarget)) {
+                hoveringTarget = null;
                 document.body.classList.remove('hovering');
             }
         });
@@ -591,7 +594,8 @@ document.querySelectorAll('[data-cert-toggle]').forEach(toggle => {
 });
 /* ========== 23. FOOTER CAT ========== */
 const footerCat = document.querySelector('.footer-cat');
-if (footerCat) {
+const footerEl  = document.querySelector('.footer');
+if (footerCat && footerEl) {
     const catObs = new IntersectionObserver((entries) => {
         entries.forEach(e => {
             if (e.isIntersecting) {
@@ -600,7 +604,7 @@ if (footerCat) {
             }
         });
     }, { threshold: 0.2 });
-    catObs.observe(document.querySelector('.footer'));
+    catObs.observe(footerEl);
 }
 
 });

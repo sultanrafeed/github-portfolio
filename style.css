@@ -3088,7 +3088,6 @@ span.cert-row {
     pointer-events: none;
     user-select: none;
     opacity: 0;
-    transform: translateY(8px);
     transition: opacity 0.6s ease, transform 0.6s var(--ease-out);
 }
 
