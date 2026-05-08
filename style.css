@@ -2486,7 +2486,9 @@ body.hovering .cursor-ring {
         flex-direction: column;
         align-items: flex-start;
     }
-    /* ============================================================
+}
+
+/* ============================================================
    ADD-ONS — scroll bar · sound toggle · visitor dot · konami
    ============================================================ */
 .scroll-progress {
@@ -2616,10 +2618,23 @@ body.konami-active { animation: konami-flash 1.5s ease-out; }
 /* ============================================================
    CERTIFICATIONS
    ============================================================ */
+#certifications .section-title {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+}
+
+#certifications .section-title em {
+    font-style: normal;
+    font-weight: 800;
+}
+
 .cert-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     gap: 1.25rem;
+    max-width: 680px;
+    margin: 0 auto;
 }
 
 .cert-card {
@@ -2646,6 +2661,36 @@ body.konami-active { animation: konami-flash 1.5s ease-out; }
     opacity: 0;
     transition: opacity 0.4s ease;
     pointer-events: none;
+}
+
+.cert-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(251, 191, 36, 0.5) 30%,
+        rgba(251, 191, 36, 0.85) 50%,
+        rgba(251, 191, 36, 0.5) 70%,
+        transparent 100%);
+    background-size: 200% 100%;
+    animation: cert-shimmer 2.8s linear infinite;
+    border-radius: 0 0 1rem 1rem;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+}
+
+.cert-accordion.open::after {
+    opacity: 0;
+    animation: none;
+}
+
+@keyframes cert-shimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
 }
 
 .cert-card:hover::before { opacity: 1; }
@@ -2883,12 +2928,15 @@ span.cert-row {
 .cert-body .cert-list {
     min-height: 0;
     overflow: hidden;
+    padding: 0 1.25rem;
+    transition: padding 0.4s var(--ease-out);
+}
+
+.cert-accordion.open .cert-body .cert-list {
     padding: 1rem 1.25rem 1.25rem;
 }
 
-/* .cert-issuer {
-    cursor: pointer;    /* add to existing .cert-issuer rule */
-} */
+/* .cert-issuer { cursor: pointer; } */
 
 .cert-issuer:hover .cert-chevron {
     color: var(--amber-bright);
@@ -3062,10 +3110,6 @@ span.cert-row {
 
 @media (max-width: 768px) {
     .ref-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .cert-grid {
         grid-template-columns: 1fr;
     }
 }
