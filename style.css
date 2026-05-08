@@ -2144,8 +2144,9 @@ body.hovering .cursor-ring {
    ============================================================ */
 .footer {
     border-top: 1px solid var(--border);
-    padding: 2.5rem 0;
+    padding: 2.5rem 0 0;
     position: relative;
+    overflow: visible;
     z-index: 2;
 }
 
@@ -3040,6 +3041,25 @@ span.cert-row {
 
 .ref-note i { color: var(--amber); }
 
+.footer-cat {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    width: 200px;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+    user-select: none;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.6s ease, transform 0.6s var(--ease-out);
+}
+
+.footer-cat.visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
 @media (max-width: 768px) {
     .ref-grid {
         grid-template-columns: 1fr;
@@ -3048,5 +3068,4 @@ span.cert-row {
     .cert-grid {
         grid-template-columns: 1fr;
     }
-}
 }

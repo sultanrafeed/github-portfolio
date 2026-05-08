@@ -589,5 +589,18 @@ document.querySelectorAll('[data-cert-toggle]').forEach(toggle => {
         if (window.sound) window.sound.click();
     });
 });
+/* ========== 23. FOOTER CAT ========== */
+const footerCat = document.querySelector('.footer-cat');
+if (footerCat) {
+    const catObs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                setTimeout(() => footerCat.classList.add('visible'), 300);
+                catObs.disconnect();
+            }
+        });
+    }, { threshold: 0.2 });
+    catObs.observe(document.querySelector('.footer'));
+}
 
 });
