@@ -2618,17 +2618,6 @@ body.konami-active { animation: konami-flash 1.5s ease-out; }
 /* ============================================================
    CERTIFICATIONS
    ============================================================ */
-#certifications .section-title {
-    font-family: var(--font-sans);
-    font-weight: 700;
-    letter-spacing: -0.03em;
-}
-
-#certifications .section-title em {
-    font-style: normal;
-    font-weight: 800;
-}
-
 .cert-grid {
     display: grid;
     grid-template-columns: 1fr;
