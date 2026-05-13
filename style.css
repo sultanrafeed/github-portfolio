@@ -941,6 +941,31 @@ body.hovering .cursor-ring {
         0 8px 24px rgba(0, 0, 0, 0.5);
 }
 
+/* Pixel art avatar canvas */
+#pixelAvatar {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    border: 2px solid var(--amber);
+    box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.1), 0 8px 24px rgba(0, 0, 0, 0.5);
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    display: block;
+    background: var(--bg-3);
+    animation: pixelFloat 2.8s ease-in-out infinite;
+}
+
+/* widen the wrap to match the bigger canvas */
+.profile-pic-wrap:has(#pixelAvatar) {
+    width: 110px;
+    height: 110px;
+}
+
+@keyframes pixelFloat {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-5px); }
+}
+
 .profile-tag {
     display: inline-flex;
     align-items: center;

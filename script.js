@@ -592,6 +592,85 @@ document.querySelectorAll('[data-cert-toggle]').forEach(toggle => {
         if (window.sound) window.sound.click();
     });
 });
+/* ========== 22. PIXEL AVATAR ========== */
+(() => {
+    const canvas = document.getElementById('pixelAvatar');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const P = 5; // 5px per character pixel → 20×20 grid = 100×100 canvas
+
+    /* ── palette matched to portrait ──────────────────────────────────
+       S = bright warm skin (user requested lighter),  G = glasses frame
+       ────────────────────────────────────────────────────────────────── */
+    const _ = null;
+    const H = '#0e0602', S = '#e8a878', D = '#9a5c38', B = '#1c0c04',
+          E = '#1a1020', G = '#1e1e2c', N = '#b07040', M = '#8c3a28',
+          K = '#06060c', C = '#f5ede0', T = '#d8c895';
+
+    /* ── 20×20 portrait ────────────────────────────────────────────────
+       rows  0-3  : hair (4 rows, tapers top → wide sideburns)
+       rows  4-6  : forehead / brow
+       rows  7-10 : glasses + eyes (two 3-wide lenses, bridge centre)
+       rows 11-12 : nose + wide smile
+       rows 13-14 : beard / jaw
+       row  15    : neck
+       rows 16-19 : shirt collar, tie, black suit jacket
+       ─────────────────────────────────────────────────────────────── */
+    const OPEN = [
+      // 0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19
+        [_,  _,  _,  _,  _,  H,  H,  H,  H,  H,  H,  H,  H,  H,  H,  _,  _,  _,  _,  _],  //  0
+        [_,  _,  _,  _,  H,  H,  H,  H,  H,  H,  H,  H,  H,  H,  H,  H,  _,  _,  _,  _],  //  1
+        [_,  _,  _,  H,  H,  H,  H,  H,  H,  H,  H,  H,  H,  H,  H,  H,  H,  _,  _,  _],  //  2
+        [_,  _,  H,  H,  H,  H,  H,  H,  H,  H,  H,  H,  H,  H,  H,  H,  H,  H,  _,  _],  //  3
+        [_,  _,  H,  H,  H,  S,  S,  S,  S,  S,  S,  S,  S,  S,  S,  H,  H,  H,  _,  _],  //  4
+        [_,  _,  H,  H,  S,  S,  S,  S,  S,  S,  S,  S,  S,  S,  S,  S,  H,  H,  _,  _],  //  5
+        [_,  _,  H,  S,  S,  S,  S,  S,  S,  S,  S,  S,  S,  S,  S,  S,  S,  H,  _,  _],  //  6
+        [_,  _,  H,  S,  G,  G,  G,  G,  G,  S,  S,  G,  G,  G,  G,  G,  S,  H,  _,  _],  //  7 glasses top
+        [_,  _,  H,  S,  G,  E,  E,  E,  G,  S,  S,  G,  E,  E,  E,  G,  S,  H,  _,  _],  //  8 eyes
+        [_,  _,  H,  S,  G,  E,  E,  E,  G,  S,  S,  G,  E,  E,  E,  G,  S,  H,  _,  _],  //  9 eyes
+        [_,  _,  H,  S,  G,  G,  G,  G,  G,  S,  S,  G,  G,  G,  G,  G,  S,  H,  _,  _],  // 10 glasses bottom
+        [_,  _,  H,  S,  S,  S,  S,  N,  S,  S,  S,  S,  N,  S,  S,  S,  S,  H,  _,  _],  // 11 nose
+        [_,  _,  H,  S,  S,  M,  M,  M,  M,  M,  M,  M,  M,  M,  M,  S,  S,  H,  _,  _],  // 12 smile
+        [_,  _,  H,  D,  D,  B,  B,  B,  B,  B,  B,  B,  B,  B,  D,  D,  D,  H,  _,  _],  // 13 beard
+        [_,  _,  H,  H,  D,  D,  D,  D,  D,  D,  D,  D,  D,  D,  D,  D,  H,  H,  _,  _],  // 14 jaw
+        [_,  _,  _,  H,  H,  S,  S,  S,  S,  S,  S,  S,  S,  S,  S,  H,  H,  _,  _,  _],  // 15 neck
+        [_,  _,  _,  _,  C,  C,  K,  K,  T,  T,  T,  T,  K,  K,  C,  C,  _,  _,  _,  _],  // 16 collar + tie
+        [_,  _,  _,  K,  K,  K,  K,  T,  T,  T,  T,  T,  K,  K,  K,  K,  _,  _,  _,  _],  // 17 suit + tie
+        [_,  _,  K,  K,  K,  K,  K,  K,  T,  T,  T,  K,  K,  K,  K,  K,  K,  _,  _,  _],  // 18 suit lower
+        [_,  K,  K,  K,  K,  K,  K,  K,  K,  K,  K,  K,  K,  K,  K,  K,  K,  K,  _,  _],  // 19 suit bottom
+    ];
+
+    /* blink — lids close over lenses, frames stay visible */
+    const BLINK = OPEN.map((row, r) => {
+        if (r === 8) return [_,_,H,S,G,S,S,S,G,S,S,G,S,S,S,G,S,H,_,_]; // upper lid
+        if (r === 9) return [_,_,H,S,G,D,D,D,G,S,S,G,D,D,D,G,S,H,_,_]; // lash line
+        return row;
+    });
+
+    function draw(frame) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        frame.forEach((row, y) => {
+            row.forEach((color, x) => {
+                if (color) { ctx.fillStyle = color; ctx.fillRect(x * P, y * P, P, P); }
+            });
+        });
+    }
+
+    let nextBlink = performance.now() + 3000 + Math.random() * 2000;
+    let blinkEnd  = 0;
+    let blinking  = false;
+
+    function tick(now) {
+        if (!blinking && now >= nextBlink) { blinking = true; blinkEnd = now + 140; }
+        if ( blinking && now >= blinkEnd)  { blinking = false; nextBlink = now + 3000 + Math.random() * 3000; }
+        draw(blinking ? BLINK : OPEN);
+        requestAnimationFrame(tick);
+    }
+
+    draw(OPEN);
+    requestAnimationFrame(tick);
+})();
+
 /* ========== 23. FOOTER CAT ========== */
 const footerCat = document.querySelector('.footer-cat');
 const footerEl  = document.querySelector('.footer');
