@@ -524,6 +524,7 @@ document.querySelectorAll('.marquee-track').forEach(track => {
             if (kIdx === konami.length) {
                 kIdx = 0;
                 document.body.classList.add('konami-active');
+                document.dispatchEvent(new CustomEvent('konami'));
                 showToast('🎉 Konami unlocked. You\'re a real one.', 'success', 3000);
                 sound.success();
                 setTimeout(() => document.body.classList.remove('konami-active'), 1500);
@@ -685,5 +686,490 @@ if (footerCat && footerEl) {
     }, { threshold: 0.2 });
     catObs.observe(footerEl);
 }
+
+/* ========== WHIMSICAL LAYER ========== */
+
+/* --- Floating doodles with mouse parallax --- */
+(function initDoodles() {
+    if (reduceMotion) return;
+    const field = document.createElement('div');
+    field.className = 'doodle-field';
+    field.setAttribute('aria-hidden', 'true');
+    const atmo = document.querySelector('.atmosphere');
+    if (atmo) atmo.after(field);
+    else document.body.prepend(field);
+
+    const shapes = ['✦', '✧', '★', '⋆', '◆', '◇', '●', '○', '✿', '❋', '⚡', '♥', '◎', '✱', '❀', '⊹'];
+    const colors = ['var(--amber)', 'var(--coral)', 'var(--lilac)', 'var(--sky)', 'var(--mint)', 'var(--amber-soft)'];
+    const count  = window.innerWidth < 768 ? 0 : 14;
+    const doodleEls = [];
+
+    for (let i = 0; i < count; i++) {
+        const d = document.createElement('span');
+        d.className = 'doodle';
+        d.textContent = shapes[Math.floor(Math.random() * shapes.length)];
+        const sz    = (0.7 + Math.random() * 1.1).toFixed(2);
+        const dur   = (8 + Math.random() * 8).toFixed(1);
+        const delay = (-Math.random() * parseFloat(dur)).toFixed(1);
+        const amp   = -(10 + Math.random() * 18).toFixed(0);
+        const r0    = (Math.random() * 14 - 7).toFixed(1);
+        const r1    = (Math.random() * 24 - 12).toFixed(1);
+        const r2    = (Math.random() * 14 - 7).toFixed(1);
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        const opac  = (0.12 + Math.random() * 0.18).toFixed(2);
+        const depth = (0.2 + Math.random() * 0.8).toFixed(2); // parallax depth
+        const baseX = parseFloat((Math.random() * 100).toFixed(1));
+        const baseY = parseFloat((Math.random() * 100).toFixed(1));
+        d.style.cssText = [
+            `left:${baseX}%`, `top:${baseY}%`,
+            `--sz:${sz}rem`, `--dur:${dur}s`, `--delay:${delay}s`,
+            `--amp:${amp}px`, `--rot0:${r0}deg`, `--rot1:${r1}deg`,
+            `--rot2:${r2}deg`, `--dc:${color}`, `--opac:${opac}`,
+        ].join(';');
+        field.appendChild(d);
+        doodleEls.push({ el: d, depth: parseFloat(depth) });
+    }
+
+    // Mouse parallax — GPU-friendly transform offset
+    if (!isFinePointer) return;
+    let mx = 0, my = 0, rafId;
+    document.addEventListener('mousemove', (e) => {
+        mx = (e.clientX / window.innerWidth  - 0.5) * 2;
+        my = (e.clientY / window.innerHeight - 0.5) * 2;
+        if (!rafId) rafId = requestAnimationFrame(applyParallax);
+    }, { passive: true });
+
+    function applyParallax() {
+        doodleEls.forEach(({ el, depth }) => {
+            const px = mx * depth * 18;
+            const py = my * depth * 18;
+            el.style.transform = `translate(${px.toFixed(1)}px, ${py.toFixed(1)}px)`;
+        });
+        rafId = null;
+    }
+})();
+
+/* --- Mascot with click counter rainbow mode --- */
+(function initMascot() {
+    const mascot = document.createElement('div');
+    mascot.className = 'mascot';
+    mascot.setAttribute('aria-hidden', 'true');
+    mascot.setAttribute('title', 'Click me!');
+
+    const bubble = document.createElement('div');
+    bubble.className = 'mascot-bubble';
+
+    const img = document.createElement('img');
+    img.src = 'DAS.gif';
+    img.alt = '';
+    img.className = 'mascot-img';
+
+    mascot.appendChild(bubble);
+    mascot.appendChild(img);
+    document.body.appendChild(mascot);
+
+    // Time-aware greeting
+    const hour = new Date().getHours();
+    const timeGreet =
+        hour < 6  ? 'still up? 🌙 respect.' :
+        hour < 12 ? 'good morning! ☀️' :
+        hour < 17 ? 'afternoon vibes ✦' :
+        hour < 21 ? 'evening, friend 🌆' :
+                    'late night scroll? 🌙';
+
+    const sayings = [
+        timeGreet,
+        '(ฅ^•ﻌ•^ฅ) meow!',
+        'click 5× for a surprise',
+        'try the Konami code 🎮',
+        'built with ☕ & curiosity',
+        'spicy algorithms inside 🌶️',
+        'catch the ★ stars falling!',
+        'AI & cats — the future 🐱',
+        '∞ curiosity, finite bugs',
+        'psst... hover everything ✦',
+        'you found the cat. nice.',
+        'check the browser console 👀',
+    ];
+
+    let bubbleTimer = null;
+    let isShowing   = false;
+    let clickCount  = 0;
+
+    function showSaying(text) {
+        clearTimeout(bubbleTimer);
+        bubble.textContent = text || sayings[Math.floor(Math.random() * sayings.length)];
+        bubble.classList.add('show');
+        isShowing = true;
+        if (window.sound) window.sound.boop();
+        bubbleTimer = setTimeout(() => {
+            bubble.classList.remove('show');
+            isShowing = false;
+        }, 3800);
+    }
+
+    mascot.addEventListener('click', () => {
+        clickCount++;
+        if (clickCount === 5) {
+            // Rainbow mode
+            document.body.classList.add('rainbow-mode');
+            setTimeout(() => document.body.classList.remove('rainbow-mode'), 1600);
+            if (window.confettiBurst) window.confettiBurst(window.innerWidth / 2, window.innerHeight / 2, 80);
+            showSaying('✨ rainbow mode unlocked!');
+            clickCount = 0;
+        } else if (isShowing) {
+            bubble.classList.remove('show');
+            isShowing = false;
+            clearTimeout(bubbleTimer);
+        } else {
+            showSaying();
+        }
+    });
+
+    // Auto-greet with time-aware message
+    setTimeout(() => { if (!isShowing) showSaying(timeGreet); }, 5500);
+})();
+
+/* --- Canvas-based cursor trail (no DOM spam) --- */
+(function initCursorTrail() {
+    if (!isFinePointer || reduceMotion) return;
+    const canvas = document.createElement('canvas');
+    canvas.id = 'cursorTrailCanvas';
+    canvas.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(canvas);
+    const ctx = canvas.getContext('2d');
+
+    let W = canvas.width  = window.innerWidth;
+    let H = canvas.height = window.innerHeight;
+    window.addEventListener('resize', () => {
+        W = canvas.width  = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+    }, { passive: true });
+
+    const TRAIL_COLS = ['#f59e0b','#fbbf24','#fb7185','#a78bfa','#60a5fa','#4ade80'];
+    const dots = [];
+    let mx = -999, my = -999;
+
+    document.addEventListener('mousemove', (e) => { mx = e.clientX; my = e.clientY; }, { passive: true });
+
+    let lastDot = 0;
+    function tick() {
+        const now = performance.now();
+        if (now - lastDot > 50 && mx > 0) {
+            lastDot = now;
+            dots.push({
+                x: mx, y: my,
+                r: 2 + Math.random() * 3,
+                color: TRAIL_COLS[Math.floor(Math.random() * TRAIL_COLS.length)],
+                alpha: 0.7,
+                vy: -0.5 - Math.random() * 0.8,
+            });
+        }
+        ctx.clearRect(0, 0, W, H);
+        for (let i = dots.length - 1; i >= 0; i--) {
+            const d = dots[i];
+            d.alpha -= 0.03;
+            d.y += d.vy;
+            if (d.alpha <= 0) { dots.splice(i, 1); continue; }
+            ctx.globalAlpha = d.alpha;
+            ctx.fillStyle   = d.color;
+            ctx.beginPath();
+            ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+            ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+        requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+})();
+
+/* --- Confetti System --- */
+(function initConfetti() {
+    const canvas = document.createElement('canvas');
+    canvas.id = 'confettiCanvas';
+    canvas.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(canvas);
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let running = false;
+
+    function resize() {
+        canvas.width  = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
+
+    const COLORS = ['#f59e0b','#fb7185','#a78bfa','#60a5fa','#4ade80','#fcd34d','#f97316','#34d399'];
+
+    function makeParticle(x, y) {
+        return {
+            x, y,
+            vx: (Math.random() - 0.5) * 9,
+            vy: -(Math.random() * 10 + 4),
+            rot: Math.random() * 360,
+            rotV: (Math.random() - 0.5) * 14,
+            size: 4 + Math.random() * 8,
+            color: COLORS[Math.floor(Math.random() * COLORS.length)],
+            round: Math.random() > 0.5,
+            gravity: 0.32 + Math.random() * 0.22,
+            alpha: 1,
+            decay: 0.013 + Math.random() * 0.01,
+        };
+    }
+
+    function burst(x, y, n) {
+        if (reduceMotion) return;
+        resize();
+        const add = Math.min(n || 40, 80);
+        for (let i = 0; i < add; i++) particles.push(makeParticle(x, y));
+        if (particles.length > 200) particles = particles.slice(-200); // cap
+        if (!running) { running = true; loop(); }
+    }
+
+    function loop() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles = particles.filter(p => p.alpha > 0.02);
+        if (!particles.length) { running = false; return; }
+        particles.forEach(p => {
+            p.x += p.vx; p.y += p.vy; p.vy += p.gravity;
+            p.vx *= 0.99; p.rot += p.rotV; p.alpha -= p.decay;
+            ctx.save();
+            ctx.globalAlpha = Math.max(0, p.alpha);
+            ctx.fillStyle = p.color;
+            ctx.translate(p.x, p.y);
+            ctx.rotate(p.rot * Math.PI / 180);
+            if (p.round) { ctx.beginPath(); ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2); ctx.fill(); }
+            else ctx.fillRect(-p.size / 2, -p.size / 4, p.size, p.size / 2);
+            ctx.restore();
+        });
+        requestAnimationFrame(loop);
+    }
+
+    window.confettiBurst = burst;
+})();
+
+/* --- Falling stars mini-game --- */
+(function initFallingStars() {
+    if (reduceMotion || window.innerWidth < 768) return;
+
+    const canvas = document.createElement('canvas');
+    canvas.id = 'starCanvas';
+    canvas.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(canvas);
+    const ctx = canvas.getContext('2d');
+
+    // Counter UI
+    const counter = document.createElement('div');
+    counter.className = 'star-counter';
+    counter.innerHTML = '★ <span class="star-counter-num" id="starNum">0</span> caught';
+    document.body.appendChild(counter);
+
+    let W = canvas.width  = window.innerWidth;
+    let H = canvas.height = window.innerHeight;
+    window.addEventListener('resize', () => {
+        W = canvas.width  = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+    }, { passive: true });
+
+    let caught = 0;
+    let mx = -999, my = -999;
+    document.addEventListener('mousemove', (e) => { mx = e.clientX; my = e.clientY; }, { passive: true });
+
+    const stars = [];
+    const STAR_COLS = ['#fbbf24','#fb7185','#a78bfa','#60a5fa','#4ade80'];
+
+    function spawnStar() {
+        stars.push({
+            x: 40 + Math.random() * (W - 80),
+            y: -20,
+            vy: 0.6 + Math.random() * 0.9,
+            vx: (Math.random() - 0.5) * 0.4,
+            r: 5 + Math.random() * 5,
+            color: STAR_COLS[Math.floor(Math.random() * STAR_COLS.length)],
+            alpha: 0.8 + Math.random() * 0.2,
+            caught: false,
+            popAlpha: 0,
+        });
+    }
+
+    let spawnTimer = 0;
+    function tick(now) {
+        if (now - spawnTimer > 3500) { spawnStar(); spawnTimer = now; }
+
+        ctx.clearRect(0, 0, W, H);
+        for (let i = stars.length - 1; i >= 0; i--) {
+            const s = stars[i];
+            if (s.caught) {
+                s.popAlpha -= 0.06;
+                s.r += 0.8;
+                if (s.popAlpha <= 0) { stars.splice(i, 1); continue; }
+                ctx.globalAlpha = s.popAlpha;
+                ctx.strokeStyle = s.color;
+                ctx.lineWidth   = 1.5;
+                ctx.beginPath();
+                ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+                ctx.stroke();
+                ctx.globalAlpha = 1;
+                continue;
+            }
+            s.x += s.vx; s.y += s.vy;
+
+            // Catch check
+            const dx = s.x - mx, dy = s.y - my;
+            if (Math.sqrt(dx*dx + dy*dy) < 38) {
+                s.caught    = true;
+                s.popAlpha  = 0.9;
+                caught++;
+                const numEl = document.getElementById('starNum');
+                if (numEl) {
+                    numEl.textContent = caught;
+                    numEl.classList.add('pop');
+                    setTimeout(() => numEl.classList.remove('pop'), 250);
+                }
+                counter.classList.add('show');
+                if (window.sound) window.sound.success();
+                continue;
+            }
+
+            if (s.y > H + 30) { stars.splice(i, 1); continue; }
+
+            // Draw star glyph
+            ctx.globalAlpha = s.alpha;
+            ctx.fillStyle   = s.color;
+            ctx.font        = `${s.r * 2}px serif`;
+            ctx.textAlign   = 'center';
+            ctx.textBaseline= 'middle';
+            ctx.fillText('★', s.x, s.y);
+            ctx.globalAlpha = 1;
+        }
+        requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+})();
+
+/* --- Star burst on click (canvas-friendly, capped) --- */
+(function initStarBurst() {
+    if (reduceMotion) return;
+    const STARS = ['✦', '★', '✧', '⋆', '✱'];
+    const COLS  = ['#f59e0b','#fb7185','#a78bfa','#60a5fa','#4ade80'];
+    document.addEventListener('click', (e) => {
+        // Skip nav/button UI to avoid spam
+        if (e.target.closest('nav, .btn, button, a')) return;
+        for (let i = 0; i < 3; i++) {
+            const el = document.createElement('span');
+            el.className = 'star-burst';
+            el.textContent = STARS[Math.floor(Math.random() * STARS.length)];
+            el.style.cssText = `left:${e.clientX+(Math.random()*36-18)}px;top:${e.clientY+(Math.random()*36-18)}px;color:${COLS[Math.floor(Math.random()*COLS.length)]};`;
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), 850);
+        }
+    });
+})();
+
+/* --- Confetti on primary btn --- */
+document.querySelectorAll('.btn-primary').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        if (window.confettiBurst) window.confettiBurst(e.clientX, e.clientY, 30);
+    });
+});
+
+/* --- Stickers on hero-side --- */
+(function addStickers() {
+    const heroSide = document.querySelector('.hero-side');
+    if (!heroSide) return;
+    const data = [
+        { cls: 'sticker-ai',    text: '✦ AI Researcher' },
+        { cls: 'sticker-cool',  text: '◆ Builder'       },
+        { cls: 'sticker-spicy', text: '★ Open to collab' },
+    ];
+    data.forEach(({ cls, text }) => {
+        const s = document.createElement('div');
+        s.className = `sticker ${cls}`;
+        s.setAttribute('aria-hidden', 'true');
+        s.textContent = text;
+        heroSide.appendChild(s);
+    });
+})();
+
+/* --- Ripple burst on profile card click --- */
+const profileCard = document.querySelector('.profile-card');
+if (profileCard) {
+    profileCard.addEventListener('click', (e) => {
+        const rect = profileCard.getBoundingClientRect();
+        const r = document.createElement('div');
+        r.className = 'ripple-burst';
+        r.style.cssText = `left:${e.clientX - rect.left}px;top:${e.clientY - rect.top}px;`;
+        profileCard.appendChild(r);
+        setTimeout(() => r.remove(), 800);
+        if (window.confettiBurst) window.confettiBurst(e.clientX, e.clientY, 18);
+    });
+}
+
+/* --- Section doodle watermarks --- */
+const sectionDoodles = {
+    '#about':        '◎',
+    '#experience':   '✦',
+    '#research':     '★',
+    '#projects':     '◆',
+    '#stack':        '⚡',
+    '#education':    '✿',
+    '#certifications':'◇',
+    '#contact':      '♥',
+};
+Object.entries(sectionDoodles).forEach(([id, glyph]) => {
+    const sec = document.querySelector(id);
+    if (!sec) return;
+    if (getComputedStyle(sec).position === 'static') sec.style.position = 'relative';
+    const bg = document.createElement('span');
+    bg.className = 'section-doodle-bg';
+    bg.setAttribute('aria-hidden', 'true');
+    bg.textContent = glyph;
+    sec.querySelector('.container')?.prepend(bg) || sec.prepend(bg);
+});
+
+/* --- Card wiggle pop on click --- */
+document.querySelectorAll('[data-tilt]').forEach(el => {
+    el.addEventListener('click', () => {
+        el.style.animation = 'none';
+        void el.offsetHeight;
+        el.style.animation = 'wigglePop 0.55s var(--ease-spring)';
+        setTimeout(() => el.style.animation = '', 600);
+    });
+});
+
+/* --- Console Easter egg for devs --- */
+(function consoleEasterEgg() {
+    const styles = {
+        big:  'font-size:18px;font-weight:bold;color:#f59e0b;',
+        sub:  'font-size:11px;color:#a78bfa;',
+        muted:'font-size:10px;color:#6b6660;',
+    };
+    console.log('%c✦ hey, you found the console.', styles.big);
+    console.log('%cRafeed Mohammad Sultan — Software Engineer & AI Researcher', styles.sub);
+    console.log('%cBuilt by hand. No frameworks were harmed.\nSource: github.com/sultanrafeed', styles.muted);
+    console.log('%c★ try the Konami code on the page: ↑↑↓↓←→←→BA', styles.sub);
+})();
+
+/* --- Walking cat Easter egg --- */
+(function initWalkingCat() {
+    if (reduceMotion) return;
+    const cat = document.getElementById('walkingCat');
+    if (!cat) return;
+
+    function sendCat() {
+        cat.classList.remove('walk');
+        void cat.offsetHeight;
+        cat.classList.add('walk');
+        setTimeout(() => cat.classList.remove('walk'), 8200);
+    }
+
+    setTimeout(() => {
+        sendCat();
+        setInterval(sendCat, 50000 + Math.random() * 40000);
+    }, 15000);
+
+    document.addEventListener('konami', sendCat);
+})();
 
 });
