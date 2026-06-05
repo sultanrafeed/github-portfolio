@@ -947,7 +947,7 @@
                 </form>
 
                 <aside class="contact-side reveal">
-                    <a href="mailto:sultanrafeed@gmail.com" class="contact-link" data-spotlight data-copy = "sultanrafeed@gmail.com">
+                    <a href="mailto:sultanrafeed@gmail.com" class="contact-link" data-spotlight data-copy="sultanrafeed@gmail.com">
                         <span class="contact-link-label">Email</span>
                     <span class="contact-link-value">
     <span class="js-scramble" data-text="sultanrafeed@gmail.com">sultanrafeed@gmail.com</span>
@@ -971,7 +971,7 @@
 </span>
                         <i class="fa-brands fa-github"></i>
                     </a>
-                    <a href="tel:+8801732073478" class="contact-link" data-spotlight data-copy = "+8801732073478">
+                    <a href="tel:+8801732073478" class="contact-link" data-spotlight data-copy="+8801732073478">
                         <span class="contact-link-label">Phone</span>
 <span class="contact-link-value">
     <span class="js-scramble" data-text="+880 1732-073478">+880 1732-073478</span>
@@ -1062,6 +1062,39 @@
         </div>
 
     </footer>
+
+    <!-- Vinyl Record Player -->
+    <div class="vinyl-player" id="vinylPlayer" aria-label="Now playing — click to toggle audio" title="Click to toggle music">
+        <div class="vinyl-disc" id="vinylDisc"></div>
+        <div class="vinyl-info">
+            <div class="vinyl-track">✦ Odyssey</div>
+            <div class="vinyl-artist">▶ click to launch 🚀</div>
+        </div>
+        <div class="vinyl-eq" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
+        </div>
+    </div>
+
+    <!-- Terminal Easter Egg -->
+    <div class="terminal-overlay" id="terminalOverlay" aria-hidden="true">
+        <div class="terminal-window" role="dialog" aria-modal="true" aria-label="Terminal">
+            <div class="terminal-titlebar">
+                <div class="terminal-dots">
+                    <span class="t-dot t-dot--close" id="termClose" title="Close"></span>
+                    <span class="t-dot t-dot--min"></span>
+                    <span class="t-dot t-dot--max"></span>
+                </div>
+                <span class="terminal-title">rafeed@portfolio: ~</span>
+                <span class="terminal-hint">Press ` or Esc to close</span>
+            </div>
+            <div class="terminal-body" id="terminalBody"></div>
+            <div class="terminal-input-row">
+                <span class="terminal-prompt">rafeed@portfolio ~ $&nbsp;</span>
+                <input type="text" class="terminal-input" id="terminalInput"
+                    autocomplete="off" spellcheck="false" aria-label="Terminal input">
+            </div>
+        </div>
+    </div>
 
     <!-- Toast container -->
     <div class="toast-container" id="toastContainer" aria-live="polite"></div>

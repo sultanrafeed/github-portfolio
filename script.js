@@ -1172,4 +1172,484 @@ document.querySelectorAll('[data-tilt]').forEach(el => {
     document.addEventListener('konami', sendCat);
 })();
 
+/* ========== TERMINAL EASTER EGG ========== */
+(function initTerminal() {
+    const overlay  = document.getElementById('terminalOverlay');
+    const body     = document.getElementById('terminalBody');
+    const input    = document.getElementById('terminalInput');
+    const closeBtn = document.getElementById('termClose');
+    if (!overlay || !body || !input) return;
+
+    let history = [], histIdx = -1;
+    let isOpen = false;
+
+    const WELCOME = [
+        { cls: 'green', text: '  ██████╗  ███████╗' },
+        { cls: 'green', text: '  ██╔══██╗ ██╔════╝' },
+        { cls: 'green', text: '  ██████╔╝ ███████╗' },
+        { cls: 'green', text: '  ██╔══██╗ ╚════██║' },
+        { cls: 'green', text: '  ██║  ██║ ███████║' },
+        { cls: 'green', text: '  ╚═╝  ╚═╝ ╚══════╝  Portfolio CLI v1.0' },
+        { cls: 'empty', text: '' },
+        { cls: 'out',   text: '  Rafeed Mohammad Sultan — Software Engineer & AI Researcher' },
+        { cls: 'out',   text: '  Dhaka, Bangladesh · sultanrafeed@gmail.com' },
+        { cls: 'empty', text: '' },
+        { cls: 'amber', text: "  Type 'help' for available commands. Tab to autocomplete." },
+        { cls: 'empty', text: '' },
+    ];
+
+    const COMMANDS = {
+        help: {
+            desc: 'Show available commands',
+            run: () => [
+                { cls: 'amber', text: 'Available commands:' },
+                { cls: 'hi',    text: '  whoami         Who is Rafeed?' },
+                { cls: 'hi',    text: '  ls             List sections' },
+                { cls: 'hi',    text: '  ls projects    List all projects' },
+                { cls: 'hi',    text: '  cat about      About me' },
+                { cls: 'hi',    text: '  cat research   Research papers' },
+                { cls: 'hi',    text: '  skills         Tech stack' },
+                { cls: 'hi',    text: '  contact        Contact info' },
+                { cls: 'hi',    text: '  open [section] Scroll to section' },
+                { cls: 'hi',    text: '  clear          Clear terminal' },
+                { cls: 'hi',    text: '  matrix         ???' },
+                { cls: 'empty', text: '' },
+            ],
+        },
+        whoami: {
+            desc: 'Print user info',
+            run: () => [
+                { cls: 'hi',    text: 'Rafeed Mohammad Sultan' },
+                { cls: 'out',   text: 'Software Engineer @ SELISE Digital Platforms' },
+                { cls: 'out',   text: 'AI Researcher — NLP · LLM Alignment · RAG · Trustworthy AI' },
+                { cls: 'out',   text: 'Published @ ICPR 2024 · IEEE Big Data 2024 · IJCNN 2025 · Q1 Journal' },
+                { cls: 'amber', text: '4 publications · 4+ years coding · ∞ curiosity' },
+                { cls: 'empty', text: '' },
+            ],
+        },
+        ls: {
+            desc: 'List sections or projects',
+            run: (args) => {
+                if (args[0] === 'projects') {
+                    return [
+                        { cls: 'lilac', text: 'drwxr-xr-x  Rokkha              — Personal-safety Android app (Kotlin · Firebase)' },
+                        { cls: 'lilac', text: 'drwxr-xr-x  Roomafy             — Collaborative listening rooms (Django · React · Spotify)' },
+                        { cls: 'lilac', text: 'drwxr-xr-x  Cross-Model Eval    — Judging AI ethics with LLMs (Python · DFAR)' },
+                        { cls: 'lilac', text: 'drwxr-xr-x  White Spot XAI      — Shrimp farm ML (Python · SHAP · scikit-learn)' },
+                        { cls: 'lilac', text: 'drwxr-xr-x  Optimizer Benchmarks — CNN optimizer study (PyTorch · VGG)' },
+                        { cls: 'lilac', text: 'drwxr-xr-x  Language Efficiency — Runtime · memory · CPU benchmarks' },
+                        { cls: 'lilac', text: 'drwxr-xr-x  Library Management  — Online PDF library (PHP · MySQL)' },
+                        { cls: 'lilac', text: 'drwxr-xr-x  Selenium QA Suite   — GigaTech test automation (Python · Selenium)' },
+                        { cls: 'lilac', text: 'drwxr-xr-x  Phonebook           — Java Swing GUI (Java · SQLite)' },
+                        { cls: 'empty', text: '' },
+                    ];
+                }
+                return [
+                    { cls: 'green', text: 'about/  experience/  research/  projects/  stack/  education/  certifications/  contact/' },
+                    { cls: 'empty', text: '' },
+                ];
+            },
+        },
+        cat: {
+            desc: 'Read a file',
+            run: (args) => {
+                if (args[0] === 'about') return [
+                    { cls: 'amber', text: '── about.md ──────────────────────────────────' },
+                    { cls: 'hi',    text: '' },
+                    { cls: 'hi',    text: "I'm a Software Engineer at SELISE Digital Platforms, leading" },
+                    { cls: 'hi',    text: 'development of OpenClaw and MCP server tooling. I drive' },
+                    { cls: 'hi',    text: 'architecture across agentic AI and enterprise automation.' },
+                    { cls: 'empty', text: '' },
+                    { cls: 'hi',    text: 'Research: trustworthy NLP · LLM alignment & evaluation ·' },
+                    { cls: 'hi',    text: 'RAG in multilingual/low-resource settings · medical AI.' },
+                    { cls: 'empty', text: '' },
+                    { cls: 'out',   text: 'BSc CSE @ North South University · CGPA 3.38/4.00' },
+                    { cls: 'empty', text: '' },
+                ];
+                if (args[0] === 'research') return [
+                    { cls: 'amber', text: '── research.md ───────────────────────────────' },
+                    { cls: 'hi',    text: '' },
+                    { cls: 'green', text: '[1] ICPR 2024      — Beyond Labels: Aligning LLMs with Human-like Reasoning' },
+                    { cls: 'out',   text: '                     arxiv.org/abs/2408.11879' },
+                    { cls: 'green', text: '[2] IEEE BigData24 — Empowering Meta-Analysis: LLMs for Scientific Synthesis' },
+                    { cls: 'out',   text: '                     arxiv.org/abs/2411.10878' },
+                    { cls: 'green', text: '[3] Q1 Journal     — Efficient Skin Cancer Detection' },
+                    { cls: 'out',   text: '                     Intelligence-Based Medicine (ScienceDirect)' },
+                    { cls: 'green', text: '[4] IJCNN 2025     — LegalRAG: Hybrid RAG for Multilingual Legal IR' },
+                    { cls: 'out',   text: '                     arxiv.org/abs/2504.16121' },
+                    { cls: 'empty', text: '' },
+                ];
+                return [{ cls: 'err', text: `cat: ${args[0] || '(nothing)'}: No such file` }, { cls: 'empty', text: '' }];
+            },
+        },
+        skills: {
+            desc: 'Show tech stack',
+            run: () => [
+                { cls: 'amber', text: '── stack ─────────────────────────────────────' },
+                { cls: 'hi',    text: 'Languages  Python · TypeScript · JavaScript · Java · C++ · C' },
+                { cls: 'hi',    text: 'AI / ML    PyTorch · HF Transformers · PEFT · FAISS · scikit-learn' },
+                { cls: 'hi',    text: 'NLP        LLM Fine-tuning · RAG · Prompt Engineering · Alignment' },
+                { cls: 'hi',    text: 'Backend    NestJS · Flask · Django · PostgreSQL · MongoDB' },
+                { cls: 'hi',    text: 'Frontend   React · HTML/CSS · WebSocket' },
+                { cls: 'hi',    text: 'Agentic    MCP · LangChain · ElevenLabs · OpenAI API' },
+                { cls: 'hi',    text: 'Cloud      Azure · Firebase · Git/GitHub · Postman' },
+                { cls: 'empty', text: '' },
+            ],
+        },
+        contact: {
+            desc: 'Show contact info',
+            run: () => [
+                { cls: 'amber', text: '── contact ───────────────────────────────────' },
+                { cls: 'hi',    text: 'Email    sultanrafeed@gmail.com' },
+                { cls: 'hi',    text: 'LinkedIn linkedin.com/in/rafeed-sultan' },
+                { cls: 'hi',    text: 'GitHub   github.com/sultanrafeed' },
+                { cls: 'hi',    text: 'Phone    +880 1732-073478' },
+                { cls: 'empty', text: '' },
+            ],
+        },
+        open: {
+            desc: 'Scroll to a section',
+            run: (args) => {
+                const id = args[0];
+                const map = { about: 'about', experience: 'experience', research: 'research',
+                    projects: 'projects', stack: 'stack', education: 'education',
+                    certifications: 'certifications', contact: 'contact' };
+                const target = map[id?.toLowerCase()];
+                if (target) {
+                    const el = document.getElementById(target);
+                    if (el) {
+                        closeTerminal();
+                        setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300);
+                        return [{ cls: 'green', text: `→ Navigating to #${target}…` }, { cls: 'empty', text: '' }];
+                    }
+                }
+                return [
+                    { cls: 'err',   text: `open: section '${id || '?'}' not found.` },
+                    { cls: 'out',   text: 'Try: open about | experience | research | projects | stack | education | certifications | contact' },
+                    { cls: 'empty', text: '' },
+                ];
+            },
+        },
+        clear: {
+            desc: 'Clear the terminal',
+            run: () => { body.innerHTML = ''; return []; },
+        },
+        matrix: {
+            desc: 'Matrix rain easter egg',
+            run: () => {
+                if (window.confettiBurst) window.confettiBurst(window.innerWidth / 2, window.innerHeight / 2, 60);
+                document.body.classList.add('konami-active');
+                setTimeout(() => document.body.classList.remove('konami-active'), 1500);
+                if (window.sound) window.sound.success();
+                return [
+                    { cls: 'green', text: 'Wake up, Neo…' },
+                    { cls: 'green', text: 'The Matrix has you.' },
+                    { cls: 'out',   text: '(The portfolio was built by hand. No frameworks were harmed.)' },
+                    { cls: 'empty', text: '' },
+                ];
+            },
+        },
+    };
+
+    const ALL_CMDS = Object.keys(COMMANDS);
+
+    function addLines(lines) {
+        lines.forEach(({ cls, text }) => {
+            const el = document.createElement('div');
+            el.className = `term-line ${cls}`;
+            el.textContent = text;
+            body.appendChild(el);
+        });
+        body.scrollTop = body.scrollHeight;
+    }
+
+    function openTerminal() {
+        overlay.setAttribute('aria-hidden', 'false');
+        overlay.classList.add('open');
+        isOpen = true;
+        if (body.children.length === 0) addLines(WELCOME);
+        setTimeout(() => input.focus(), 280);
+    }
+
+    function closeTerminal() {
+        overlay.classList.remove('open');
+        overlay.setAttribute('aria-hidden', 'true');
+        isOpen = false;
+        input.blur();
+    }
+
+    // Trigger: backtick key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === '`' && !e.ctrlKey && !e.metaKey) {
+            const tag = document.activeElement.tagName;
+            if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+            e.preventDefault();
+            isOpen ? closeTerminal() : openTerminal();
+        }
+        if (e.key === 'Escape' && isOpen) { e.preventDefault(); closeTerminal(); }
+    });
+
+    closeBtn?.addEventListener('click', closeTerminal);
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) closeTerminal(); });
+
+    // Command submission
+    input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            const raw = input.value.trim();
+            input.value = '';
+            if (!raw) return;
+            history.unshift(raw);
+            histIdx = -1;
+
+            addLines([{ cls: 'cmd', text: raw }]);
+
+            const parts = raw.toLowerCase().split(/\s+/);
+            const cmd   = parts[0];
+            const args  = parts.slice(1);
+
+            if (COMMANDS[cmd]) {
+                addLines(COMMANDS[cmd].run(args) || []);
+            } else {
+                addLines([
+                    { cls: 'err',  text: `command not found: ${cmd}` },
+                    { cls: 'out',  text: "Type 'help' for available commands." },
+                    { cls: 'empty', text: '' },
+                ]);
+                if (window.sound) window.sound.error();
+            }
+        }
+
+        // History navigation
+        if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            if (histIdx < history.length - 1) { histIdx++; input.value = history[histIdx]; }
+        }
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            if (histIdx > 0) { histIdx--; input.value = history[histIdx]; }
+            else { histIdx = -1; input.value = ''; }
+        }
+
+        // Tab autocomplete
+        if (e.key === 'Tab') {
+            e.preventDefault();
+            const val = input.value.toLowerCase();
+            const match = ALL_CMDS.find(c => c.startsWith(val));
+            if (match) input.value = match;
+        }
+    });
+
+    // Update console Easter Egg tip
+    console.log('%c★ press ` (backtick) to open the terminal easter egg', 'font-size:11px;color:#f59e0b;');
+})();
+
+/* ========== ACHIEVEMENT UNLOCK SYSTEM ========== */
+(function initAchievements() {
+    const unlocked = new Set(JSON.parse(sessionStorage.getItem('rs-achievements') || '[]'));
+
+    const ACHIEVEMENTS = [
+        { id: 'about',          icon: '🔍', name: 'Curious Mind',          desc: 'Explored the About section'         },
+        { id: 'experience',     icon: '💼', name: 'Career Archaeologist',   desc: 'Dug through the experience timeline' },
+        { id: 'research',       icon: '🔬', name: 'Fellow Researcher',      desc: 'Read the published papers'           },
+        { id: 'projects',       icon: '🚀', name: 'Code Explorer',          desc: 'Discovered all the projects'         },
+        { id: 'stack',          icon: '⚡', name: 'Stack Inspector',         desc: 'Checked out the tech stack'          },
+        { id: 'education',      icon: '🎓', name: 'Scholar Found',          desc: 'Reviewed the education history'      },
+        { id: 'certifications', icon: '🏆', name: 'Cert Hunter',            desc: 'Browsed all certifications'          },
+        { id: 'contact',        icon: '💌', name: 'Let\'s Connect!',        desc: 'Made it to the contact section'      },
+    ];
+
+    let queue = [];
+    let showing = false;
+
+    function showNext() {
+        if (!queue.length) { showing = false; return; }
+        showing = true;
+        const ach = queue.shift();
+
+        const banner = document.createElement('div');
+        banner.className = 'achievement-banner';
+        banner.innerHTML = `
+            <div class="achievement-icon">${ach.icon}</div>
+            <div class="achievement-body">
+                <div class="achievement-label">Achievement Unlocked</div>
+                <div class="achievement-name">${ach.name}</div>
+                <div class="achievement-desc">${ach.desc}</div>
+            </div>`;
+        document.body.appendChild(banner);
+
+        if (window.sound) window.sound.success();
+
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => banner.classList.add('show'));
+        });
+
+        setTimeout(() => {
+            banner.classList.remove('show');
+            banner.classList.add('leaving');
+            banner.addEventListener('transitionend', () => {
+                banner.remove();
+                setTimeout(showNext, 300);
+            }, { once: true });
+        }, 3500);
+    }
+
+    function unlock(id) {
+        if (unlocked.has(id)) return;
+        unlocked.add(id);
+        sessionStorage.setItem('rs-achievements', JSON.stringify([...unlocked]));
+        const ach = ACHIEVEMENTS.find(a => a.id === id);
+        if (!ach) return;
+        queue.push(ach);
+        if (!showing) showNext();
+    }
+
+    const achObs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                unlock(entry.target.id);
+                achObs.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.3 });
+
+    ACHIEVEMENTS.forEach(({ id }) => {
+        const el = document.getElementById(id);
+        if (el) achObs.observe(el);
+    });
+})();
+
+/* ========== VINYL RECORD PLAYER ========== */
+(function initVinylPlayer() {
+    const player = document.getElementById('vinylPlayer');
+    const disc   = document.getElementById('vinylDisc');
+    if (!player) return;
+
+    let audio       = null;
+    let isPlaying   = false;
+
+    function getAudio() {
+        if (!audio) {
+            audio = new Audio('joelfazhari-interstellar-adventure-space-theme-soundtrack-4494.mp3');
+            audio.loop   = true;
+            audio.volume = 0.25;
+            // Keep isPlaying in sync if browser pauses (tab switch, etc.)
+            audio.addEventListener('pause', () => { isPlaying = false; player.classList.remove('playing'); });
+            audio.addEventListener('play',  () => { isPlaying = true;  player.classList.add('playing');    });
+        }
+        return audio;
+    }
+
+    player.addEventListener('click', () => {
+        const a = getAudio();
+        if (isPlaying) {
+            a.pause();
+            // syncState handled by pause event above
+        } else {
+            // Immediately reflect intent so disc starts spinning before async resolves
+            player.classList.add('playing');
+            a.play()
+                .then(() => { isPlaying = true; })
+                .catch(() => {
+                    // Blocked — roll back
+                    player.classList.remove('playing');
+                    isPlaying = false;
+                    if (window.showToast) showToast('Browser blocked autoplay — try again.', 'info', 2500);
+                });
+        }
+        if (window.sound) window.sound.click();
+    });
+
+    // Show vinyl after boot screen clears
+    setTimeout(() => player.classList.add('visible'), 3200);
+})();
+
+/* ========== PROJECT CARD DETAIL PANELS ========== */
+(function initProjectDetails() {
+    const DETAILS = {
+        '01': {
+            story: 'Built during a personal safety awareness initiative at NSU. Learned Firebase Realtime DB + Kotlin coroutines by shipping it end-to-end in 3 weeks.',
+            link: 'https://github.com/SumitKar01/rokkha',
+        },
+        '02': {
+            story: 'Ongoing passion project — wanted synchronized listening rooms with friends. Currently wiring up Spotify OAuth + Django Channels for real-time sync.',
+            link: 'https://github.com/sultanrafeed/roomafy',
+        },
+        '03': {
+            story: 'Direct extension of the DFAR dataset paper (ICPR 2024). Used GPT-4 and Llama-2 as judges — found 85%+ agreement with human evaluators.',
+            link: 'https://github.com/sultanrafeed/Cross-Model-Evaluation-Judging-AI-Ethics-and-Alignment-Responses-with-Language-Models',
+        },
+        '04': {
+            story: 'Partnered with aquaculture researchers. SHAP explanations revealed water temperature and stocking density as the two dominant risk factors.',
+            link: 'https://github.com/sultanrafeed/Predictive-Modeling-and-Explainable-AI-Analysis',
+        },
+        '05': {
+            story: 'Systematic study across Adam, SGD, RMSProp with batch sizes 16–256 on VGG-style CNN. Adam + batch 64 consistently won on CIFAR-10.',
+            link: 'https://github.com/sultanrafeed/Optimizer-Perfomance-Evaluation',
+        },
+        '06': {
+            story: 'Benchmarked identical algorithms in Python, Java, and C++ across O(n), O(n²), O(n log n) tasks. C++ was 40–80× faster than Python on sorting.',
+            link: 'https://github.com/sultanrafeed/Efficiency-Comparison-Of-PL-in-Algorithm-Development',
+        },
+        '07': {
+            story: 'First full-stack web project. Built a library portal with PDF uploads, user auth, and search. MySQL foreign keys taught me relational modeling.',
+            link: 'https://github.com/sultanrafeed/librarymanagementsystem',
+        },
+        '08': {
+            story: 'Wrote 60+ Selenium test cases covering login, checkout, and search flows. Generated HTML reports with pytest-html for the QA team.',
+            link: 'https://github.com/sultanrafeed/Software-Testing-For-GigaTech',
+        },
+        '09': {
+            story: 'Mini desktop app with CRUD contacts, SQLite persistence, and a Swing GUI. First Java project — got hooked on event-driven programming.',
+            link: 'https://github.com/sultanrafeed/phonebook',
+        },
+    };
+
+    document.querySelectorAll('.project-card').forEach(card => {
+        const numEl = card.querySelector('.project-num');
+        if (!numEl) return;
+        const num = numEl.textContent.trim();
+        const detail = DETAILS[num];
+        if (!detail) return;
+
+        // Inject detail panel HTML
+        const panel = document.createElement('div');
+        panel.className = 'project-detail';
+        panel.innerHTML = `
+            <div class="project-detail-title">Behind the build</div>
+            <div class="project-detail-story">${detail.story}</div>
+            <a href="${detail.link}" target="_blank" rel="noopener" class="project-detail-link">
+                <i class="fa-brands fa-github"></i> View on GitHub
+            </a>`;
+        card.appendChild(panel);
+
+        // Click on card number or anywhere non-link toggles detail
+        card.addEventListener('click', (e) => {
+            // If clicking the GitHub detail link, let it navigate
+            if (e.target.closest('.project-detail-link')) return;
+
+            const isOpen = card.classList.contains('detail-open');
+
+            // Close all others first
+            document.querySelectorAll('.project-card.detail-open').forEach(c => {
+                c.classList.remove('detail-open');
+            });
+
+            if (!isOpen) {
+                e.preventDefault(); // prevent navigating on first click (open detail)
+                card.classList.add('detail-open');
+                if (window.sound) window.sound.click();
+            }
+            // Second click (was open → now closed) → allow navigation via href
+        });
+    });
+
+    // Close on outside click
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.project-card')) {
+            document.querySelectorAll('.project-card.detail-open').forEach(c => c.classList.remove('detail-open'));
+        }
+    });
+})();
+
 });
+
