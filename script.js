@@ -1203,16 +1203,27 @@ document.querySelectorAll('[data-tilt]').forEach(el => {
             desc: 'Show available commands',
             run: () => [
                 { cls: 'amber', text: 'Available commands:' },
-                { cls: 'hi',    text: '  whoami         Who is Rafeed?' },
-                { cls: 'hi',    text: '  ls             List sections' },
-                { cls: 'hi',    text: '  ls projects    List all projects' },
-                { cls: 'hi',    text: '  cat about      About me' },
-                { cls: 'hi',    text: '  cat research   Research papers' },
-                { cls: 'hi',    text: '  skills         Tech stack' },
-                { cls: 'hi',    text: '  contact        Contact info' },
-                { cls: 'hi',    text: '  open [section] Scroll to section' },
-                { cls: 'hi',    text: '  clear          Clear terminal' },
-                { cls: 'hi',    text: '  matrix         ???' },
+                { cls: 'hi',    text: '  whoami            Who is Rafeed?' },
+                { cls: 'hi',    text: '  ls                List sections' },
+                { cls: 'hi',    text: '  ls projects       List all projects' },
+                { cls: 'hi',    text: '  ls -la            Directory listing' },
+                { cls: 'hi',    text: '  cat about         About me' },
+                { cls: 'hi',    text: '  cat research      Research papers' },
+                { cls: 'hi',    text: '  skills            Tech stack' },
+                { cls: 'hi',    text: '  contact           Contact info' },
+                { cls: 'hi',    text: '  open [section]    Scroll to section' },
+                { cls: 'hi',    text: '  neofetch          System info' },
+                { cls: 'hi',    text: '  ping [host]       Ping a host' },
+                { cls: 'hi',    text: '  git log           Commit history' },
+                { cls: 'hi',    text: '  git status        Working tree status' },
+                { cls: 'hi',    text: '  top               Running processes' },
+                { cls: 'hi',    text: '  uname -a          Kernel info' },
+                { cls: 'hi',    text: '  history           Command history' },
+                { cls: 'hi',    text: '  sudo [cmd]        Escalate privileges' },
+                { cls: 'hi',    text: '  coffee            Essential utility' },
+                { cls: 'hi',    text: '  banner            Show welcome banner' },
+                { cls: 'hi',    text: '  clear             Clear terminal' },
+                { cls: 'hi',    text: '  matrix            ???' },
                 { cls: 'empty', text: '' },
             ],
         },
@@ -1349,6 +1360,163 @@ document.querySelectorAll('[data-tilt]').forEach(el => {
                 ];
             },
         },
+        neofetch: {
+            desc: 'System info (Rafeed OS)',
+            run: () => [
+                { cls: 'green', text: '       .\'\'-.        rafeed@portfolio' },
+                { cls: 'green', text: '      /  _ \\       ─────────────────────────────────' },
+                { cls: 'green', text: '     | (/ ) |      OS:       Rafeed OS (Dhaka Linux) 1.0' },
+                { cls: 'amber', text: '      \\____/       Kernel:   LLM-6.0-alignment-patched' },
+                { cls: 'amber', text: '     /  __  \\      Uptime:   4 years, 0 regrets' },
+                { cls: 'amber', text: '    / /    \\ \\     Shell:    /bin/python3 --curiosity=∞' },
+                { cls: 'hi',    text: '   / /      \\ \\    DE:       React 18 + NestJS Compositor' },
+                { cls: 'hi',    text: '  /_/        \\_\\   WM:       Agentic AI + MCP Server' },
+                { cls: 'hi',    text: '                   Terminal: rafeed@portfolio (this one)' },
+                { cls: 'hi',    text: '                   CPU:      Human Brain™ @ ∞ GHz' },
+                { cls: 'hi',    text: '                   GPU:      Curiosity Engine v2.0' },
+                { cls: 'hi',    text: '                   RAM:      ∞ / ∞ MiB  (leak-free)' },
+                { cls: 'hi',    text: '                   Disk:     4 publications · 9 projects' },
+                { cls: 'empty', text: '' },
+                { cls: 'out',   text: '                   ████ ████ ████ ████ ████ ████ ████' },
+                { cls: 'empty', text: '' },
+            ],
+        },
+        neofetch2: { desc: '', run: () => COMMANDS.neofetch.run() }, // alias
+        ping: {
+            desc: 'Ping a host',
+            run: (args) => {
+                const host = args[0] || 'selise.com';
+                const rtts = Array.from({ length: 4 }, () => (8 + Math.random() * 12).toFixed(3));
+                return [
+                    { cls: 'hi',    text: `PING ${host} (127.0.0.∞): 56 data bytes` },
+                    ...rtts.map((r, i) => ({ cls: 'green', text: `64 bytes from ${host}: icmp_seq=${i} ttl=64 time=${r} ms` })),
+                    { cls: 'empty', text: '' },
+                    { cls: 'amber', text: `--- ${host} ping statistics ---` },
+                    { cls: 'hi',    text: `4 packets transmitted, 4 received, 0% packet loss` },
+                    { cls: 'out',   text: `rtt min/avg/max = ${Math.min(...rtts.map(Number)).toFixed(3)}/${(rtts.map(Number).reduce((a,b)=>a+b,0)/4).toFixed(3)}/${Math.max(...rtts.map(Number)).toFixed(3)} ms` },
+                    { cls: 'empty', text: '' },
+                ];
+            },
+        },
+        'git': {
+            desc: 'Git log or status',
+            run: (args) => {
+                if (args[0] === 'log') return [
+                    { cls: 'amber', text: 'commit a1b2c3d (HEAD → main, origin/main)' },
+                    { cls: 'out',   text: 'Author: Rafeed Sultan <sultanrafeed@gmail.com>' },
+                    { cls: 'out',   text: 'Date:   ' + new Date().toDateString() },
+                    { cls: 'hi',    text: '    feat: ship OpenClaw v2 with MCP server tooling' },
+                    { cls: 'empty', text: '' },
+                    { cls: 'amber', text: 'commit 9f8e7d6' },
+                    { cls: 'out',   text: '    feat: LegalRAG — hybrid dense+sparse retrieval (IJCNN 2025)' },
+                    { cls: 'empty', text: '' },
+                    { cls: 'amber', text: 'commit 5c4b3a2' },
+                    { cls: 'out',   text: '    feat: voice agent with ElevenLabs TTS + guardrails' },
+                    { cls: 'empty', text: '' },
+                    { cls: 'amber', text: 'commit 2d1e0f9' },
+                    { cls: 'out',   text: '    feat: DFAR dataset + ICPR 2024 paper accepted 🎉' },
+                    { cls: 'empty', text: '' },
+                    { cls: 'amber', text: 'commit 0a9b8c7' },
+                    { cls: 'out',   text: '    init: curiosity.exe — no going back' },
+                    { cls: 'empty', text: '' },
+                ];
+                if (args[0] === 'status') return [
+                    { cls: 'green', text: 'On branch main' },
+                    { cls: 'green', text: 'Your branch is up to date with \'origin/main\'.' },
+                    { cls: 'empty', text: '' },
+                    { cls: 'hi',    text: 'nothing to commit, working tree clean ✓' },
+                    { cls: 'empty', text: '' },
+                ];
+                return [{ cls: 'err', text: `git: '${args[0] || ''}' is not a git command. Try: git log, git status` }, { cls: 'empty', text: '' }];
+            },
+        },
+        sudo: {
+            desc: 'Elevate privileges',
+            run: (args) => {
+                const cmd = args.join(' ') || '(nothing)';
+                const responses = [
+                    [ { cls: 'err',   text: `[sudo] password for rafeed: ` },
+                      { cls: 'err',   text: 'rafeed is not in the sudoers file. This incident will be reported.' },
+                      { cls: 'out',   text: '(JK — you\'re already the admin of your own story.)' } ],
+                    [ { cls: 'amber', text: `sudo ${cmd}: Running at ∞ privilege level…` },
+                      { cls: 'green', text: 'Done. Also ordered pizza.' } ],
+                    [ { cls: 'hi',    text: 'Nice try. The root password is the Konami code.' } ],
+                ];
+                return [...responses[Math.floor(Math.random() * responses.length)], { cls: 'empty', text: '' }];
+            },
+        },
+        top: {
+            desc: 'Show running processes',
+            run: () => [
+                { cls: 'amber', text: 'rafeed@portfolio  uptime: 4yrs  load: ∞/∞/∞' },
+                { cls: 'out',   text: 'Tasks: 12 running, 3 sleeping, 0 zombie' },
+                { cls: 'empty', text: '' },
+                { cls: 'hi',    text: '  PID  %CPU  %MEM  COMMAND' },
+                { cls: 'green', text: '  001  42.0   8.1  llm-research --align --honest' },
+                { cls: 'green', text: '  002  28.5   6.0  agentic-ai --mcp --voice --react' },
+                { cls: 'amber', text: '  003  18.3   4.2  curiosity.exe --infinite' },
+                { cls: 'hi',    text: '  004   9.1   3.3  writing-papers --venue=icpr,ieee' },
+                { cls: 'out',   text: '  005   1.2   0.4  coffee-daemon --loop' },
+                { cls: 'out',   text: '  006   0.7   0.2  sleep (weekends)' },
+                { cls: 'out',   text: '  007   0.2   0.1  bugs --count=0 [liar]' },
+                { cls: 'empty', text: '' },
+            ],
+        },
+        pwd: {
+            desc: 'Print working directory',
+            run: () => [
+                { cls: 'hi',  text: '/home/rafeed/portfolio' },
+                { cls: 'empty', text: '' },
+            ],
+        },
+        'ls -la': {
+            desc: 'List files (verbose)',
+            run: () => [
+                { cls: 'amber', text: 'total 48' },
+                { cls: 'hi',    text: 'drwxr-xr-x  rafeed  staff   -  ./' },
+                { cls: 'out',   text: '-rw-r--r--  rafeed  staff  12K  index.html' },
+                { cls: 'out',   text: '-rw-r--r--  rafeed  staff  98K  style.css' },
+                { cls: 'out',   text: '-rw-r--r--  rafeed  staff  54K  script.js' },
+                { cls: 'green', text: '-rw-r--r--  rafeed  staff  2.1M DAS.gif              ← best file' },
+                { cls: 'out',   text: '-rw-r--r--  rafeed  staff  4.7M joelfazhari-*.mp3' },
+                { cls: 'out',   text: '-rw-r--r--  rafeed  staff  180K rafeed_sultan_academic_CV.pdf' },
+                { cls: 'out',   text: '-rw-r--r--  rafeed  staff  512K profile.jpg' },
+                { cls: 'empty', text: '' },
+            ],
+        },
+        uname: {
+            desc: 'Print system info',
+            run: (args) => {
+                if (args[0] === '-a' || args[0] === '-all') return [
+                    { cls: 'hi', text: 'RafeedOS portfolio 6.0-LLM-aligned #1 SMP Dhaka Bangladesh x86_curiosity' },
+                    { cls: 'empty', text: '' },
+                ];
+                return [{ cls: 'hi', text: 'RafeedOS' }, { cls: 'empty', text: '' }];
+            },
+        },
+        history: {
+            desc: 'Show command history',
+            run: () => {
+                const h = history.slice(0, 12).map((cmd, i) => ({
+                    cls: 'out', text: `  ${String(i + 1).padStart(4, ' ')}  ${cmd}`,
+                }));
+                return h.length ? h.concat([{ cls: 'empty', text: '' }])
+                    : [{ cls: 'out', text: '  (no history yet)' }, { cls: 'empty', text: '' }];
+            },
+        },
+        banner: {
+            desc: 'Print the welcome banner again',
+            run: () => { addLines(WELCOME); return []; },
+        },
+        coffee: {
+            desc: 'Make coffee',
+            run: () => [
+                { cls: 'hi',    text: '☕ Brewing…' },
+                { cls: 'green', text: '████████████████████ 100%' },
+                { cls: 'amber', text: 'Coffee ready. +10 focus. Bugs reduced by 40%.' },
+                { cls: 'empty', text: '' },
+            ],
+        },
     };
 
     const ALL_CMDS = Object.keys(COMMANDS);
@@ -1406,8 +1574,12 @@ document.querySelectorAll('[data-tilt]').forEach(el => {
             const parts = raw.toLowerCase().split(/\s+/);
             const cmd   = parts[0];
             const args  = parts.slice(1);
+            // Support two-word commands: "ls -la", "git log", "git status"
+            const cmd2  = parts.slice(0, 2).join(' ');
 
-            if (COMMANDS[cmd]) {
+            if (COMMANDS[cmd2]) {
+                addLines(COMMANDS[cmd2].run(args.slice(1)) || []);
+            } else if (COMMANDS[cmd]) {
                 addLines(COMMANDS[cmd].run(args) || []);
             } else {
                 addLines([
@@ -1651,5 +1823,157 @@ document.querySelectorAll('[data-tilt]').forEach(el => {
     });
 })();
 
+/* THREE.JS NEURAL PARTICLE NETWORK — disabled per user request */
+(function initParticleNet() {
+    return; // disabled
+    if (reduceMotion || window.innerWidth < 768) return;
+    if (typeof THREE === 'undefined') return;
+
+    /* ── Scene setup ─────────────────────────────────────── */
+    const W = window.innerWidth, H = window.innerHeight;
+    const scene    = new THREE.Scene();
+    const camera   = new THREE.PerspectiveCamera(60, W / H, 0.1, 300);
+    camera.position.set(0, 0, 65);
+
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: false, powerPreference: 'low-power' });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+    renderer.setSize(W, H);
+    renderer.setClearColor(0x000000, 0);
+
+    const canvas = renderer.domElement;
+    canvas.id    = 'particleNetCanvas';
+    canvas.setAttribute('aria-hidden', 'true');
+    canvas.style.cssText = 'position:fixed;inset:0;z-index:1;pointer-events:none;';
+    // Insert right after atmosphere div so it's above aurora but below content
+    const atmo = document.querySelector('.atmosphere');
+    atmo ? atmo.after(canvas) : document.body.prepend(canvas);
+
+    /* ── Particles ───────────────────────────────────────── */
+    const COUNT = window.innerWidth > 1200 ? 240 : 160;
+    const BOX   = { x: 110, y: 70, z: 55 };
+
+    const pts = Array.from({ length: COUNT }, () => ({
+        x:  (Math.random() - 0.5) * BOX.x,
+        y:  (Math.random() - 0.5) * BOX.y,
+        z:  (Math.random() - 0.5) * BOX.z,
+        vx: (Math.random() - 0.5) * 0.045,
+        vy: (Math.random() - 0.5) * 0.045,
+        vz: (Math.random() - 0.5) * 0.018,
+    }));
+
+    const ptPos  = new Float32Array(COUNT * 3);
+    const ptGeo  = new THREE.BufferGeometry();
+    ptGeo.setAttribute('position', new THREE.BufferAttribute(ptPos, 3));
+
+    // Particles — warm amber dots, varying size for depth illusion
+    const ptMat  = new THREE.PointsMaterial({
+        color: 0xfbbf24, size: 1.4, transparent: true,
+        opacity: 0.55, sizeAttenuation: true,
+    });
+    scene.add(new THREE.Points(ptGeo, ptMat));
+
+    /* ── Connection lines ────────────────────────────────── */
+    const MAX_SEGS  = 500;
+    const linePos   = new Float32Array(MAX_SEGS * 6);  // 2 verts × xyz
+    const lineCol   = new Float32Array(MAX_SEGS * 6);  // vertex colors
+    const lineGeo   = new THREE.BufferGeometry();
+    lineGeo.setAttribute('position', new THREE.BufferAttribute(linePos, 3));
+    lineGeo.setAttribute('color',    new THREE.BufferAttribute(lineCol, 3));
+
+    const lineMat   = new THREE.LineBasicMaterial({
+        vertexColors: true, transparent: true, opacity: 0.28,
+    });
+    const lineSegs  = new THREE.LineSegments(lineGeo, lineMat);
+    scene.add(lineSegs);
+
+    const DIST     = 20;       // connection threshold (world units)
+    const DIST_SQ  = DIST * DIST;
+    // Amber decomposed for vertex color math
+    const CR = 0.984, CG = 0.749, CB = 0.141; // #fbbf24
+
+    /* ── Mouse parallax ──────────────────────────────────── */
+    let mx = 0, my = 0;
+    let camTX = 0, camTY = 0;
+    document.addEventListener('mousemove', e => {
+        mx = (e.clientX / window.innerWidth  - 0.5) * 2;
+        my = (e.clientY / window.innerHeight - 0.5) * 2;
+    }, { passive: true });
+
+    /* ── Resize ───────────────────────────────────────────── */
+    window.addEventListener('resize', () => {
+        const w = window.innerWidth, h = window.innerHeight;
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h);
+    }, { passive: true });
+
+    /* ── Render loop ─────────────────────────────────────── */
+    let frameId;
+    function animate() {
+        frameId = requestAnimationFrame(animate);
+
+        // Move particles + bounce
+        for (let i = 0; i < COUNT; i++) {
+            const p = pts[i];
+            p.x += p.vx;  p.y += p.vy;  p.z += p.vz;
+            if (Math.abs(p.x) > BOX.x / 2) p.vx *= -1;
+            if (Math.abs(p.y) > BOX.y / 2) p.vy *= -1;
+            if (Math.abs(p.z) > BOX.z / 2) p.vz *= -1;
+            const b = i * 3;
+            ptPos[b] = p.x;  ptPos[b+1] = p.y;  ptPos[b+2] = p.z;
+        }
+        ptGeo.attributes.position.needsUpdate = true;
+
+        // Build line segments between nearby particles
+        let seg = 0;
+        outer: for (let i = 0; i < COUNT; i++) {
+            for (let j = i + 1; j < COUNT; j++) {
+                const dx = pts[i].x - pts[j].x;
+                const dy = pts[i].y - pts[j].y;
+                const dz = pts[i].z - pts[j].z;
+                const d2 = dx*dx + dy*dy + dz*dz;
+                if (d2 < DIST_SQ) {
+                    const alpha = (1 - Math.sqrt(d2) / DIST) * 0.5;
+                    const b = seg * 6;
+                    linePos[b]   = pts[i].x; linePos[b+1] = pts[i].y; linePos[b+2] = pts[i].z;
+                    linePos[b+3] = pts[j].x; linePos[b+4] = pts[j].y; linePos[b+5] = pts[j].z;
+                    lineCol[b]   = CR*alpha; lineCol[b+1] = CG*alpha; lineCol[b+2] = CB*alpha;
+                    lineCol[b+3] = CR*alpha; lineCol[b+4] = CG*alpha; lineCol[b+5] = CB*alpha;
+                    if (++seg >= MAX_SEGS) break outer;
+                }
+            }
+        }
+        lineGeo.setDrawRange(0, seg * 2);
+        lineGeo.attributes.position.needsUpdate = true;
+        lineGeo.attributes.color.needsUpdate    = true;
+
+        // Smooth camera parallax
+        camTX += (mx * 10 - camTX) * 0.04;
+        camTY += (-my * 6  - camTY) * 0.04;
+        camera.position.x = camTX;
+        camera.position.y = camTY;
+        camera.lookAt(0, 0, 0);
+
+        renderer.render(scene, camera);
+    }
+    animate();
+
+    // Fade out particles when scrolled far from hero (performance)
+    window.addEventListener('scroll', () => {
+        const pct = Math.min(window.scrollY / window.innerHeight, 1);
+        canvas.style.opacity = String(1 - pct * 0.85);
+    }, { passive: true });
+
+    // Light mode — reduce opacity so particles don't clash
+    const applyThemeOpacity = () => {
+        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+        ptMat.opacity  = isLight ? 0.25 : 0.55;
+        lineMat.opacity = isLight ? 0.12 : 0.28;
+    };
+    applyThemeOpacity();
+    document.getElementById('themeToggle')?.addEventListener('click', applyThemeOpacity);
+})();
+
 });
+
 
