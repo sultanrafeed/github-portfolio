@@ -1221,6 +1221,11 @@ document.querySelectorAll('[data-tilt]').forEach(el => {
                 { cls: 'hi',    text: '  history           Command history' },
                 { cls: 'hi',    text: '  sudo [cmd]        Escalate privileges' },
                 { cls: 'hi',    text: '  coffee            Essential utility' },
+                { cls: 'hi',    text: '  date              Current date & time' },
+                { cls: 'hi',    text: '  echo [text]       Print text' },
+                { cls: 'hi',    text: '  fortune           Random dev wisdom' },
+                { cls: 'hi',    text: '  sl                A classic mistake' },
+                { cls: 'hi',    text: '  hack              I\'m in.' },
                 { cls: 'hi',    text: '  banner            Show welcome banner' },
                 { cls: 'hi',    text: '  clear             Clear terminal' },
                 { cls: 'hi',    text: '  matrix            ???' },
@@ -1517,6 +1522,99 @@ document.querySelectorAll('[data-tilt]').forEach(el => {
                 { cls: 'empty', text: '' },
             ],
         },
+        date: {
+            desc: 'Show current date and time',
+            run: () => {
+                const now = new Date();
+                return [
+                    { cls: 'hi',    text: now.toUTCString() },
+                    { cls: 'out',   text: `Timezone: ${Intl.DateTimeFormat().resolvedOptions().timeZone}` },
+                    { cls: 'empty', text: '' },
+                ];
+            },
+        },
+        echo: {
+            desc: 'Print text',
+            run: (args) => [
+                { cls: 'hi',    text: args.join(' ') || '' },
+                { cls: 'empty', text: '' },
+            ],
+        },
+        fortune: {
+            desc: 'A random dev wisdom',
+            run: () => {
+                const quotes = [
+                    '"Any fool can write code that a computer can understand. Good programmers write code that humans can understand." — Fowler',
+                    '"First, solve the problem. Then, write the code." — Johnson',
+                    '"Programs must be written for people to read, and only incidentally for machines to execute." — Abelson',
+                    '"The best code is no code at all." — Jeff Atwood',
+                    '"It works on my machine." — every developer, ever',
+                    '"Have you tried turning it off and on again?" — the wisest advice',
+                    '"A designer knows they have achieved perfection not when there is nothing more to add, but when there is nothing left to take away." — de Saint-Exupéry',
+                    '"Talk is cheap. Show me the code." — Torvalds',
+                    '"Without requirements or design, programming is the art of adding bugs to an empty text file." — Mayes',
+                    '"One man\'s crappy software is another man\'s full-time job." — Segaller',
+                ];
+                const pick = quotes[Math.floor(Math.random() * quotes.length)];
+                return [
+                    { cls: 'amber', text: '── fortune ───────────────────────────────────' },
+                    { cls: 'hi',    text: pick },
+                    { cls: 'empty', text: '' },
+                ];
+            },
+        },
+        sl: {
+            desc: 'A classic Unix mistake',
+            run: () => [
+                { cls: 'green', text: '      ====        ________                ___________    ' },
+                { cls: 'green', text: '  _D _|  |_______/        \\__I_I_____===__|_________|   ' },
+                { cls: 'green', text: '   |(_)---  |   H\\________/ |   |        =|___ ___|      ' },
+                { cls: 'green', text: '   /     |  |   H  |  |     |   |         ||_| |_||      ' },
+                { cls: 'green', text: '  |      |  |   H  |__--------------------| [___] |      ' },
+                { cls: 'green', text: '  | ________|___H__/__|_____/[][]~\\_______|       |      ' },
+                { cls: 'green', text: '  |/ |   |-----------I_____I [][] []  D   |=======|__    ' },
+                { cls: 'green', text: "__/ =| o |=-~~\\  /~~\\  /~~\\  /~~\\ ____Y___________|__   " },
+                { cls: 'green', text: ' |/-=|___|=    ||    ||    ||    |_____/~\\_____/~\\_____  ' },
+                { cls: 'green', text: '  \\_/      \\O=====O=====O=====O_/      \\_/      \\_/     ' },
+                { cls: 'amber', text: '  You meant ls, didn\'t you?' },
+                { cls: 'empty', text: '' },
+            ],
+        },
+        hack: {
+            desc: 'I\'m in.',
+            run: () => {
+                const lines = [
+                    { cls: 'green', text: 'Initializing hack sequence…' },
+                    { cls: 'out',   text: 'Bypassing firewall ████████░░ 80%' },
+                    { cls: 'out',   text: 'Injecting payload  ██████████ 100%' },
+                    { cls: 'green', text: 'ACCESS GRANTED' },
+                    { cls: 'empty', text: '' },
+                    { cls: 'amber', text: 'Just kidding. This is a portfolio.' },
+                    { cls: 'out',   text: 'But if you\'re a recruiter — hi! 👋' },
+                    { cls: 'lilac', text: 'sultanrafeed@gmail.com' },
+                    { cls: 'empty', text: '' },
+                ];
+                document.dispatchEvent(new CustomEvent('konami'));
+                return lines;
+            },
+        },
+        'hire me': {
+            desc: 'The most important command',
+            run: () => {
+                showToast('🎉 Great taste! Let\'s talk → sultanrafeed@gmail.com', 'success', 5000);
+                if (window.sound) window.sound.success();
+                if (window.launchConfetti) window.launchConfetti();
+                return [
+                    { cls: 'amber', text: '✦ Great idea. Here\'s how to reach me:' },
+                    { cls: 'hi',    text: '  Email   : sultanrafeed@gmail.com' },
+                    { cls: 'hi',    text: '  LinkedIn: linkedin.com/in/sultanrafeed' },
+                    { cls: 'hi',    text: '  GitHub  : github.com/sultanrafeed' },
+                    { cls: 'empty', text: '' },
+                    { cls: 'green', text: '  I\'m open to research collabs & engineering roles.' },
+                    { cls: 'empty', text: '' },
+                ];
+            },
+        },
     };
 
     const ALL_CMDS = Object.keys(COMMANDS);
@@ -1534,6 +1632,7 @@ document.querySelectorAll('[data-tilt]').forEach(el => {
     function openTerminal() {
         overlay.setAttribute('aria-hidden', 'false');
         overlay.classList.add('open');
+        document.body.classList.add('term-open');
         isOpen = true;
         if (body.children.length === 0) addLines(WELCOME);
         setTimeout(() => input.focus(), 280);
@@ -1542,6 +1641,7 @@ document.querySelectorAll('[data-tilt]').forEach(el => {
     function closeTerminal() {
         overlay.classList.remove('open');
         overlay.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('term-open');
         isOpen = false;
         input.blur();
     }
@@ -1556,6 +1656,14 @@ document.querySelectorAll('[data-tilt]').forEach(el => {
         }
         if (e.key === 'Escape' && isOpen) { e.preventDefault(); closeTerminal(); }
     });
+
+    // Trigger: FAB button
+    const fab = document.getElementById('termFab');
+    if (fab) fab.addEventListener('click', () => isOpen ? closeTerminal() : openTerminal());
+
+    // Sync body class so FAB can hide while terminal is open
+    const _origOpen = openTerminal;
+    const _origClose = closeTerminal;
 
     closeBtn?.addEventListener('click', closeTerminal);
     overlay.addEventListener('click', (e) => { if (e.target === overlay) closeTerminal(); });
@@ -1612,7 +1720,75 @@ document.querySelectorAll('[data-tilt]').forEach(el => {
     });
 
     // Update console Easter Egg tip
-    console.log('%c★ press ` (backtick) to open the terminal easter egg', 'font-size:11px;color:#f59e0b;');
+    console.log('%c★ press ` (backtick) — or click the >_ button — to open the terminal', 'font-size:11px;color:#f59e0b;');
+
+    // expose openTerminal globally for other easter eggs
+    window._openTerminal = openTerminal;
+    window._termAddLines = addLines;
+})();
+
+/* ========== GHOST TYPING EASTER EGG ========== */
+/* type "hireme" anywhere on the page (outside inputs) */
+(function initGhostTyping() {
+    const targets = ['hireme', 'sudo hire', 'hire me'];
+    let buf = '';
+    const maxLen = Math.max(...targets.map(t => t.length));
+
+    document.addEventListener('keypress', (e) => {
+        const tag = document.activeElement.tagName;
+        if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+
+        buf = (buf + e.key.toLowerCase()).slice(-maxLen);
+
+        if (targets.some(t => buf.endsWith(t))) {
+            buf = '';
+            showToast('🎉 Great taste! Let\'s talk → sultanrafeed@gmail.com', 'success', 5000);
+            if (window.sound) window.sound.success();
+            if (window.launchConfetti) window.launchConfetti();
+            if (window._openTerminal) {
+                window._openTerminal();
+                setTimeout(() => {
+                    if (window._termAddLines) window._termAddLines([
+                        { cls: 'amber', text: '✦ Oh, you typed that. I like you already.' },
+                        { cls: 'hi',    text: '  Email   : sultanrafeed@gmail.com' },
+                        { cls: 'hi',    text: '  LinkedIn: linkedin.com/in/sultanrafeed' },
+                        { cls: 'empty', text: '' },
+                    ]);
+                }, 350);
+            }
+        }
+    });
+})();
+
+/* ========== HERO NAME CLICK EASTER EGG ========== */
+/* click the hero name 5 times fast → surprise */
+(function initNameClicks() {
+    const heroName = document.querySelector('.hero-name');
+    if (!heroName) return;
+
+    let clicks = 0, timer = null;
+    heroName.style.cursor = 'pointer';
+
+    heroName.addEventListener('click', () => {
+        clicks++;
+        clearTimeout(timer);
+        timer = setTimeout(() => { clicks = 0; }, 2000);
+
+        if (clicks === 3) showToast('Keep going…', 'info', 1200);
+        if (clicks >= 5) {
+            clicks = 0; clearTimeout(timer);
+            const msgs = [
+                '✨ You found me! Yes, that\'s my name.',
+                '🎯 Five clicks. You\'re persistent. I respect it.',
+                '🤔 Still clicking? Bold move.',
+                '☕ Okay at this point just email me: sultanrafeed@gmail.com',
+            ];
+            const pick = msgs[Math.floor(Math.random() * msgs.length)];
+            showToast(pick, 'success', 4000);
+            if (window.sound) window.sound.success();
+            document.dispatchEvent(new CustomEvent('konami'));
+        }
+    });
 })();
 
 /* ========== ACHIEVEMENT UNLOCK SYSTEM ========== */
