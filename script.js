@@ -846,36 +846,55 @@ if (footerCat && footerEl) {
         H = canvas.height = window.innerHeight;
     }, { passive: true });
 
-    const TRAIL_COLS = ['#f59e0b','#fbbf24','#fb7185','#a78bfa','#60a5fa','#4ade80'];
+    const MODES = {
+        default: { cols: ['#f59e0b','#fbbf24','#fb7185','#a78bfa','#60a5fa','#4ade80'], interval: 50, r: [2,3], vy: [-0.5,-0.8], fade: 0.03, shape: 'circle' },
+        matrix:  { cols: ['#00ff41','#39ff14','#0aff0a','#00cc33'], interval: 30, r: [3,5], vy: [0.5, 1.5], fade: 0.018, shape: 'char' },
+        fire:    { cols: ['#ff4500','#ff6600','#ff8c00','#ffd700','#ff3300'], interval: 25, r: [3,6], vy: [-1.2,-1.8], fade: 0.022, shape: 'circle' },
+        rainbow: { cols: ['#ff0000','#ff7f00','#ffff00','#00ff00','#0000ff','#8b00ff'], interval: 20, r: [2,4], vy: [-0.8,-1.2], fade: 0.025, shape: 'circle' },
+    };
+
+    let currentMode = 'default';
+    window.setCursorMode = (mode) => { currentMode = MODES[mode] ? mode : 'default'; };
+
     const dots = [];
     let mx = -999, my = -999;
-
     document.addEventListener('mousemove', (e) => { mx = e.clientX; my = e.clientY; }, { passive: true });
 
+    const matrixChars = '01アイウエオカキクケコ';
     let lastDot = 0;
-    function tick() {
-        const now = performance.now();
-        if (now - lastDot > 50 && mx > 0) {
+    function tick(now) {
+        const m = MODES[currentMode];
+        if (now - lastDot > m.interval && mx > 0) {
             lastDot = now;
             dots.push({
                 x: mx, y: my,
-                r: 2 + Math.random() * 3,
-                color: TRAIL_COLS[Math.floor(Math.random() * TRAIL_COLS.length)],
-                alpha: 0.7,
-                vy: -0.5 - Math.random() * 0.8,
+                r: m.r[0] + Math.random() * m.r[1],
+                color: m.cols[Math.floor(Math.random() * m.cols.length)],
+                alpha: 0.75,
+                vy: -(m.vy[0] + Math.random() * m.vy[1]),
+                vx: (Math.random() - 0.5) * 0.6,
+                char: matrixChars[Math.floor(Math.random() * matrixChars.length)],
+                shape: m.shape,
+                fade: m.fade,
             });
         }
         ctx.clearRect(0, 0, W, H);
         for (let i = dots.length - 1; i >= 0; i--) {
             const d = dots[i];
-            d.alpha -= 0.03;
+            d.alpha -= d.fade;
             d.y += d.vy;
+            d.x += d.vx;
             if (d.alpha <= 0) { dots.splice(i, 1); continue; }
             ctx.globalAlpha = d.alpha;
             ctx.fillStyle   = d.color;
-            ctx.beginPath();
-            ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
-            ctx.fill();
+            if (d.shape === 'char') {
+                ctx.font = `${d.r * 3}px monospace`;
+                ctx.fillText(d.char, d.x, d.y);
+            } else {
+                ctx.beginPath();
+                ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+                ctx.fill();
+            }
         }
         ctx.globalAlpha = 1;
         requestAnimationFrame(tick);
@@ -1226,6 +1245,14 @@ document.querySelectorAll('[data-tilt]').forEach(el => {
                 { cls: 'hi',    text: '  fortune           Random dev wisdom' },
                 { cls: 'hi',    text: '  sl                A classic mistake' },
                 { cls: 'hi',    text: '  hack              I\'m in.' },
+                { cls: 'hi',    text: '  cursor [mode]     Change trail style' },
+                { cls: 'hi',    text: '  weather           Dhaka live weather' },
+                { cls: 'hi',    text: '  joke              Programmer joke' },
+                { cls: 'hi',    text: '  ascii [text]      ASCII art text' },
+                { cls: 'hi',    text: '  spotify           Current playlist' },
+                { cls: 'hi',    text: '  quiz              CS trivia quiz' },
+                { cls: 'hi',    text: '  snake             Play snake 🐍' },
+                { cls: 'hi',    text: '  hire me           👀' },
                 { cls: 'hi',    text: '  banner            Show welcome banner' },
                 { cls: 'hi',    text: '  clear             Clear terminal' },
                 { cls: 'hi',    text: '  matrix            ???' },
@@ -1603,7 +1630,7 @@ document.querySelectorAll('[data-tilt]').forEach(el => {
             run: () => {
                 showToast('🎉 Great taste! Let\'s talk → sultanrafeed@gmail.com', 'success', 5000);
                 if (window.sound) window.sound.success();
-                if (window.launchConfetti) window.launchConfetti();
+                if (window.confettiBurst) window.confettiBurst(window.innerWidth/2, window.innerHeight/2, 80);
                 return [
                     { cls: 'amber', text: '✦ Great idea. Here\'s how to reach me:' },
                     { cls: 'hi',    text: '  Email   : sultanrafeed@gmail.com' },
@@ -1611,6 +1638,147 @@ document.querySelectorAll('[data-tilt]').forEach(el => {
                     { cls: 'hi',    text: '  GitHub  : github.com/sultanrafeed' },
                     { cls: 'empty', text: '' },
                     { cls: 'green', text: '  I\'m open to research collabs & engineering roles.' },
+                    { cls: 'empty', text: '' },
+                ];
+            },
+        },
+        cursor: {
+            desc: 'Change cursor trail mode',
+            run: (args) => {
+                const mode = args[0] || '';
+                const valid = ['default','matrix','fire','rainbow'];
+                if (!valid.includes(mode)) return [
+                    { cls: 'amber', text: 'Usage: cursor [mode]' },
+                    { cls: 'hi',    text: '  cursor default   — colourful dots' },
+                    { cls: 'hi',    text: '  cursor matrix    — falling green chars' },
+                    { cls: 'hi',    text: '  cursor fire      — fire trail' },
+                    { cls: 'hi',    text: '  cursor rainbow   — rainbow burst' },
+                    { cls: 'empty', text: '' },
+                ];
+                if (window.setCursorMode) window.setCursorMode(mode);
+                const msgs = { default: 'Back to default. Comfy.', matrix: 'You are now in the Matrix.', fire: '🔥 Fire trail activated.', rainbow: '🌈 Rainbow mode engaged.' };
+                showToast(msgs[mode], 'success', 2500);
+                return [
+                    { cls: 'green', text: `Cursor mode set to: ${mode}` },
+                    { cls: 'empty', text: '' },
+                ];
+            },
+        },
+        weather: {
+            desc: 'Current weather in Dhaka',
+            run: () => {
+                addLines([{ cls: 'out', text: 'Fetching weather for Dhaka…' }]);
+                fetch('https://api.open-meteo.com/v1/forecast?latitude=23.81&longitude=90.41&current=temperature_2m,weathercode,windspeed_10m,relativehumidity_2m&timezone=Asia%2FDhaka')
+                    .then(r => r.json())
+                    .then(d => {
+                        const c = d.current;
+                        const codes = { 0:'☀️ Clear sky', 1:'🌤 Mostly clear', 2:'⛅ Partly cloudy', 3:'☁️ Overcast', 45:'🌫 Foggy', 51:'🌦 Light drizzle', 61:'🌧 Rain', 71:'🌨 Snow', 95:'⛈ Thunderstorm' };
+                        const desc = codes[c.weathercode] || codes[Math.floor(c.weathercode/10)*10] || '🌡 Unknown';
+                        addLines([
+                            { cls: 'amber', text: '── weather: Dhaka, Bangladesh ────────────────' },
+                            { cls: 'hi',    text: `  ${desc}` },
+                            { cls: 'hi',    text: `  Temperature : ${c.temperature_2m}°C` },
+                            { cls: 'hi',    text: `  Humidity    : ${c.relativehumidity_2m}%` },
+                            { cls: 'hi',    text: `  Wind        : ${c.windspeed_10m} km/h` },
+                            { cls: 'empty', text: '' },
+                        ]);
+                    })
+                    .catch(() => addLines([{ cls: 'err', text: 'Failed to fetch weather. No internet?' }, { cls: 'empty', text: '' }]));
+                return [];
+            },
+        },
+        joke: {
+            desc: 'A programmer joke',
+            run: () => {
+                const jokes = [
+                    ['Why do programmers prefer dark mode?', 'Because light attracts bugs.'],
+                    ['Why did the developer go broke?', 'Because he used up all his cache.'],
+                    ['A SQL query walks into a bar,', 'walks up to two tables and asks… "Can I JOIN you?"'],
+                    ['How many programmers does it take to change a light bulb?', 'None — that\'s a hardware problem.'],
+                    ['Why do Java developers wear glasses?', 'Because they don\'t C#.'],
+                    ['What\'s a programmer\'s favorite place?', 'Foo Bar.'],
+                    ['It\'s not a bug —', 'it\'s an undocumented feature.'],
+                    ['There are 10 types of people in the world:', 'those who understand binary, and those who don\'t.'],
+                    ['Why was the JavaScript developer sad?', 'Because he didn\'t know how to null his feelings.'],
+                    ['What do you call a programmer from Finland?', 'Nerdic.'],
+                ];
+                const [q, a] = jokes[Math.floor(Math.random() * jokes.length)];
+                return [
+                    { cls: 'amber', text: '── joke ──────────────────────────────────────' },
+                    { cls: 'hi',    text: `  Q: ${q}` },
+                    { cls: 'empty', text: '' },
+                    { cls: 'green', text: `  A: ${a}` },
+                    { cls: 'empty', text: '' },
+                ];
+            },
+        },
+        ascii: {
+            desc: 'ASCII art text (short words only)',
+            run: (args) => {
+                const word = args.join(' ').toUpperCase().slice(0, 8) || 'HELLO';
+                const FONT = {
+                    A:['▄▀█','█▀█'],' ':['   ','   '],B:['█▄▄','█▄█'],C:['█▀▀','█▄▄'],D:['█▀▄','█▄▀'],
+                    E:['█▀▀','█▄▄'],F:['█▀▀','█▀ '],G:['█▀▀','█▄█'],H:['█ █','█▀█'],I:['█','█'],
+                    J:[' ▀█','█▄█'],K:['█▀▄','█▄▀'],L:['█  ','█▄▄'],M:['█▄█','█ █'],N:['█▄█','█ █'],
+                    O:['▄▀▄','▀▄▀'],P:['█▀▄','█▀ '],Q:['▄▀▄','▀▀▄'],R:['█▀▄','█▀▄'],S:['▄▀▀','▄▄▀'],
+                    T:['▀█▀','  █'],U:['█ █','▀▄█'],V:['█ █','▀▄▀'],W:['█ █','▀▄▀'],X:['▀▄▀','█ █'],
+                    Y:['▀▄▀',' █ '],Z:['▀▄ ','▄▄▀'],
+                    '0':['▄▀▄','▀▄▀'],'1':[' █','▄█'],'2':['▀▄ ','▄▄▀'],'3':['▄▄▀','▄▄▀'],
+                    '4':['█ █','  █'],'5':['▄▀▀','▄▄▀'],'6':['▄▀▀','▀▄▀'],'7':['▀▀█',' █ '],
+                    '8':['▄▀▄','▀▄▀'],'9':['▄▀▄','▄▄▀'],
+                };
+                const chars = word.split('').filter(c => FONT[c]);
+                if (!chars.length) return [{ cls: 'err', text: 'No supported characters found.' }, { cls: 'empty', text: '' }];
+                const rows = [0,1].map(r => '  ' + chars.map(c => (FONT[c][r] || '  ')).join(' '));
+                return [
+                    ...rows.map(r => ({ cls: 'green', text: r })),
+                    { cls: 'empty', text: '' },
+                ];
+            },
+        },
+        spotify: {
+            desc: 'Current vibes playlist',
+            run: () => [
+                { cls: 'amber', text: '── now vibing to ─────────────────────────────' },
+                { cls: 'hi',    text: '  🎵 Tame Impala — Let It Happen' },
+                { cls: 'hi',    text: '  🎵 Bon Iver — Holocene' },
+                { cls: 'hi',    text: '  🎵 FKJ — Lying Together' },
+                { cls: 'hi',    text: '  🎵 Mac Miller — Small Worlds' },
+                { cls: 'hi',    text: '  🎵 Khruangbin — A Calf Born in Winter' },
+                { cls: 'hi',    text: '  🎵 The Japanese House — Saw It Coming' },
+                { cls: 'empty', text: '' },
+                { cls: 'out',   text: '  Late-night coding playlist. You\'re welcome.' },
+                { cls: 'empty', text: '' },
+            ],
+        },
+        quiz: {
+            desc: 'CS trivia quiz',
+            run: () => {
+                window._quizActive = true;
+                window._quizScore  = 0;
+                window._quizStep   = 0;
+                const qs = [
+                    { q: 'Q1: What does "HTTP" stand for?', a: 'hypertext transfer protocol', hint: 'hypertext transfer protocol' },
+                    { q: 'Q2: What sorting algorithm has worst-case O(n²)?',  a: 'bubble sort', hint: 'bubble sort' },
+                    { q: 'Q3: In Python, what is the output of: bool("") ?', a: 'false', hint: 'false' },
+                ];
+                window._quizQs = qs;
+                return [
+                    { cls: 'amber', text: '── CS trivia quiz ────────────────────────────' },
+                    { cls: 'hi',    text: '  3 questions. Type your answer and press Enter.' },
+                    { cls: 'empty', text: '' },
+                    { cls: 'amber', text: `  ${qs[0].q}` },
+                    { cls: 'empty', text: '' },
+                ];
+            },
+        },
+        snake: {
+            desc: 'Play snake in the terminal',
+            run: () => {
+                setTimeout(() => window._launchSnake && window._launchSnake(), 100);
+                return [
+                    { cls: 'green', text: 'Launching Snake… use arrow keys to play.' },
+                    { cls: 'out',   text: 'Press Q to quit, R to restart.' },
                     { cls: 'empty', text: '' },
                 ];
             },
@@ -1679,10 +1847,38 @@ document.querySelectorAll('[data-tilt]').forEach(el => {
 
             addLines([{ cls: 'cmd', text: raw }]);
 
+            // Quiz intercept
+            if (window._quizActive) {
+                const qs = window._quizQs;
+                const step = window._quizStep;
+                const correct = raw.toLowerCase().includes(qs[step].a);
+                if (correct) {
+                    window._quizScore++;
+                    addLines([{ cls: 'green', text: '  ✓ Correct!' }, { cls: 'empty', text: '' }]);
+                } else {
+                    addLines([{ cls: 'err', text: `  ✗ Nope. Answer: ${qs[step].hint}` }, { cls: 'empty', text: '' }]);
+                }
+                window._quizStep++;
+                if (window._quizStep < qs.length) {
+                    addLines([{ cls: 'amber', text: `  ${qs[window._quizStep].q}` }, { cls: 'empty', text: '' }]);
+                } else {
+                    window._quizActive = false;
+                    const score = window._quizScore;
+                    const msg = score === 3 ? '🏆 Perfect score! You\'re a CS wizard.' : score === 2 ? '🎉 2/3 — pretty solid.' : score === 1 ? '🤔 1/3 — brush up on those basics.' : '😅 0/3 — it\'s okay, keep learning!';
+                    addLines([
+                        { cls: 'amber', text: `  Final score: ${score}/3` },
+                        { cls: 'hi',    text: `  ${msg}` },
+                        { cls: 'empty', text: '' },
+                    ]);
+                    if (score === 3 && window.confettiBurst) window.confettiBurst(window.innerWidth / 2, window.innerHeight / 2, 60);
+                }
+                return;
+            }
+
             const parts = raw.toLowerCase().split(/\s+/);
             const cmd   = parts[0];
             const args  = parts.slice(1);
-            // Support two-word commands: "ls -la", "git log", "git status"
+            // Support two-word commands: "ls -la", "git log", "git status", "hire me"
             const cmd2  = parts.slice(0, 2).join(' ');
 
             if (COMMANDS[cmd2]) {
@@ -1744,7 +1940,7 @@ document.querySelectorAll('[data-tilt]').forEach(el => {
             buf = '';
             showToast('🎉 Great taste! Let\'s talk → sultanrafeed@gmail.com', 'success', 5000);
             if (window.sound) window.sound.success();
-            if (window.launchConfetti) window.launchConfetti();
+            if (window.confettiBurst) window.confettiBurst(window.innerWidth/2, window.innerHeight/2, 80);
             if (window._openTerminal) {
                 window._openTerminal();
                 setTimeout(() => {
@@ -1789,6 +1985,307 @@ document.querySelectorAll('[data-tilt]').forEach(el => {
             document.dispatchEvent(new CustomEvent('konami'));
         }
     });
+})();
+
+/* ========== CLICK STORM EASTER EGG ========== */
+/* click anywhere 10 times in 2 seconds → confetti + toast */
+(function initClickStorm() {
+    let clicks = 0, timer = null;
+    document.addEventListener('click', (e) => {
+        // ignore clicks on interactive elements
+        if (e.target.closest('a,button,input,textarea,.mascot')) return;
+        clicks++;
+        clearTimeout(timer);
+        timer = setTimeout(() => { clicks = 0; }, 2000);
+        if (clicks >= 10) {
+            clicks = 0;
+            if (window.confettiBurst) window.confettiBurst(e.clientX, e.clientY, 80);
+            showToast('ok ok I get it 😅', 'success', 3000);
+            if (window.sound) window.sound.success();
+        }
+    });
+})();
+
+/* ========== IDLE CAT SIT BEHAVIOR ========== */
+(function initIdleCat() {
+    const cat = document.getElementById('walkingCat');
+    if (!cat || reduceMotion) return;
+    let idleTimer = null;
+
+    function goIdle() {
+        cat.classList.remove('walk');
+        cat.classList.add('sit');
+    }
+    function wakeUp() {
+        cat.classList.remove('sit');
+    }
+
+    function resetIdle() {
+        clearTimeout(idleTimer);
+        wakeUp();
+        idleTimer = setTimeout(goIdle, 120000); // 2 minutes
+    }
+
+    ['mousemove', 'keydown', 'scroll', 'click'].forEach(evt =>
+        document.addEventListener(evt, resetIdle, { passive: true })
+    );
+    resetIdle();
+})();
+
+/* ========== DRAGGABLE MASCOT ========== */
+(function initDraggableMascot() {
+    const mascot = document.querySelector('.mascot');
+    if (!mascot || !isFinePointer) return;
+
+    let dragging = false, ox = 0, oy = 0, startX = 0, startY = 0;
+    mascot.style.cursor = 'grab';
+
+    mascot.addEventListener('mousedown', (e) => {
+        if (e.target.closest('.mascot-bubble')) return;
+        dragging = true;
+        startX = e.clientX; startY = e.clientY;
+        const rect = mascot.getBoundingClientRect();
+        ox = e.clientX - rect.left;
+        oy = e.clientY - rect.top;
+        mascot.style.cursor = 'grabbing';
+        mascot.style.transition = 'none';
+        e.preventDefault();
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (!dragging) return;
+        const x = e.clientX - ox;
+        const y = e.clientY - oy;
+        mascot.style.position = 'fixed';
+        mascot.style.right = 'auto';
+        mascot.style.bottom = 'auto';
+        mascot.style.left = Math.max(0, Math.min(window.innerWidth - 80, x)) + 'px';
+        mascot.style.top  = Math.max(0, Math.min(window.innerHeight - 80, y)) + 'px';
+    });
+
+    document.addEventListener('mouseup', (e) => {
+        if (!dragging) return;
+        dragging = false;
+        mascot.style.cursor = 'grab';
+        mascot.style.transition = '';
+        const moved = Math.abs(e.clientX - startX) + Math.abs(e.clientY - startY);
+        if (moved > 20) showToast('You can drag me! 🐱', 'info', 2000);
+    });
+})();
+
+/* ========== SECRET NAV ITEM (after Konami) ========== */
+(function initSecretNav() {
+    const navLinks = document.querySelector('.nav-links');
+    if (!navLinks) return;
+    let revealed = false;
+
+    // Add secret section to page
+    const secretSection = document.createElement('section');
+    secretSection.id = 'secret';
+    secretSection.className = 'secret-section';
+    secretSection.setAttribute('aria-label', 'Secret section');
+    secretSection.innerHTML = `
+        <div class="container">
+            <h2 class="secret-title">// secret.md</h2>
+            <div class="secret-facts">
+                <div class="secret-fact"><span class="sf-icon">☕</span><span>I debug best between 11pm and 2am. Something about the quiet.</span></div>
+                <div class="secret-fact"><span class="sf-icon">🎵</span><span>I listen to lo-fi hip-hop while writing research papers. Every single time.</span></div>
+                <div class="secret-fact"><span class="sf-icon">🐈</span><span>The walking cat on this page? Named DAS. Yes, I named my site's cat.</span></div>
+                <div class="secret-fact"><span class="sf-icon">🌏</span><span>I've been learning Japanese slowly for 3 years. まだまだです。</span></div>
+                <div class="secret-fact"><span class="sf-icon">📚</span><span>I re-read "The Pragmatic Programmer" every year. Different things hit differently each time.</span></div>
+                <div class="secret-fact"><span class="sf-icon">🤖</span><span>My first AI experiment was a rule-based Bangla chatbot in 2020. It was terrible. I loved it.</span></div>
+                <div class="secret-fact"><span class="sf-icon">🎮</span><span>I got here via the Konami code. You're one of us now.</span></div>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(secretSection);
+
+    document.addEventListener('konami', () => {
+        if (revealed) return;
+        revealed = true;
+        const li = document.createElement('li');
+        li.className = 'secret-nav-item';
+        li.innerHTML = '<a href="#secret" data-nav>???</a>';
+        navLinks.appendChild(li);
+        // animate it in
+        requestAnimationFrame(() => {
+            li.classList.add('show');
+            secretSection.classList.add('revealed');
+        });
+        showToast('🔓 A secret section was unlocked in the nav!', 'success', 4000);
+    });
+})();
+
+/* ========== "STILL HERE" TOAST ========== */
+(function initStillHereToast() {
+    const FIVE_MIN = 5 * 60 * 1000;
+    const shown = sessionStorage.getItem('rs-stillhere');
+    if (shown) return;
+    setTimeout(() => {
+        sessionStorage.setItem('rs-stillhere', '1');
+        showToast('Still here? You\'re thorough. I like that. 👀', 'info', 5000);
+    }, FIVE_MIN);
+})();
+
+/* ========== GHOST TYPING: DEBUG OVERLAY ========== */
+(function initDebugMode() {
+    const targets = ['debug', 'inspect'];
+    let buf = '', active = false;
+    const maxLen = Math.max(...targets.map(t => t.length));
+
+    function toggleDebug(on) {
+        active = on;
+        document.querySelectorAll('section, .card, .project-card, nav, header, footer').forEach((el, i) => {
+            if (on) {
+                el.dataset._dbgOutline = el.style.outline || '';
+                el.style.outline = `1px solid hsl(${(i * 47) % 360},80%,60%)`;
+                const label = document.createElement('span');
+                label.className = 'debug-label';
+                label.textContent = el.tagName.toLowerCase() + (el.id ? `#${el.id}` : el.className.split(' ')[0] ? `.${el.className.split(' ')[0]}` : '');
+                el.appendChild(label);
+            } else {
+                el.style.outline = el.dataset._dbgOutline || '';
+                el.querySelectorAll('.debug-label').forEach(l => l.remove());
+            }
+        });
+        if (on) {
+            showToast('🛠 Debug mode ON — type "debug" again to exit', 'info', 3000);
+            setTimeout(() => { if (active) toggleDebug(false); }, 8000);
+        }
+    }
+
+    document.addEventListener('keypress', (e) => {
+        const tag = document.activeElement.tagName;
+        if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+        buf = (buf + e.key.toLowerCase()).slice(-maxLen);
+        if (targets.some(t => buf.endsWith(t))) {
+            buf = '';
+            toggleDebug(!active);
+        }
+    });
+})();
+
+/* ========== SNAKE GAME IN TERMINAL ========== */
+(function initSnakeGame() {
+    window._launchSnake = function () {
+        const overlay = document.getElementById('terminalOverlay');
+        const termBody = document.getElementById('terminalBody');
+        const termInput = document.getElementById('terminalInput');
+        if (!overlay || !termBody) return;
+
+        // Build canvas inside terminal body
+        const existing = document.getElementById('snakeCanvas');
+        if (existing) { existing.remove(); }
+
+        termInput.disabled = true;
+        termInput.placeholder = 'Arrow keys to play • Q to quit • R to restart';
+
+        const CELL = 14, COLS = 28, ROWS = 16;
+        const W = CELL * COLS, H = CELL * ROWS;
+
+        const canvas = document.createElement('canvas');
+        canvas.id = 'snakeCanvas';
+        canvas.width = W; canvas.height = H;
+        canvas.style.cssText = 'display:block;margin:8px auto;border:1px solid #3fb950;border-radius:4px;';
+        termBody.appendChild(canvas);
+        termBody.scrollTop = termBody.scrollHeight;
+        const ctx = canvas.getContext('2d');
+
+        let snake, dir, nextDir, food, score, alive, raf;
+
+        function rand(n) { return Math.floor(Math.random() * n); }
+        function spawnFood(s) {
+            let f;
+            do { f = { x: rand(COLS), y: rand(ROWS) }; }
+            while (s.some(p => p.x === f.x && p.y === f.y));
+            return f;
+        }
+
+        function init() {
+            snake = [{ x: 14, y: 8 }, { x: 13, y: 8 }, { x: 12, y: 8 }];
+            dir = { x: 1, y: 0 }; nextDir = { x: 1, y: 0 };
+            food = spawnFood(snake);
+            score = 0; alive = true;
+        }
+
+        function draw() {
+            ctx.fillStyle = '#0d1117';
+            ctx.fillRect(0, 0, W, H);
+            // grid
+            ctx.strokeStyle = 'rgba(63,185,80,0.06)';
+            ctx.lineWidth = 0.5;
+            for (let x = 0; x <= COLS; x++) { ctx.beginPath(); ctx.moveTo(x*CELL,0); ctx.lineTo(x*CELL,H); ctx.stroke(); }
+            for (let y = 0; y <= ROWS; y++) { ctx.beginPath(); ctx.moveTo(0,y*CELL); ctx.lineTo(W,y*CELL); ctx.stroke(); }
+            // food
+            ctx.fillStyle = '#f59e0b';
+            ctx.beginPath(); ctx.arc(food.x*CELL+CELL/2, food.y*CELL+CELL/2, CELL/2-1, 0, Math.PI*2); ctx.fill();
+            // snake
+            snake.forEach((p, i) => {
+                ctx.fillStyle = i === 0 ? '#3fb950' : `hsl(140,60%,${25+i*2}%)`;
+                ctx.fillRect(p.x*CELL+1, p.y*CELL+1, CELL-2, CELL-2);
+            });
+            // score
+            ctx.fillStyle = '#a78bfa';
+            ctx.font = '11px monospace';
+            ctx.fillText(`score: ${score}`, 6, H - 5);
+            if (!alive) {
+                ctx.fillStyle = 'rgba(0,0,0,0.7)';
+                ctx.fillRect(0, H/2-22, W, 44);
+                ctx.fillStyle = '#f85149';
+                ctx.font = 'bold 16px monospace';
+                ctx.textAlign = 'center';
+                ctx.fillText(`GAME OVER  score: ${score}`, W/2, H/2-4);
+                ctx.fillStyle = '#a78bfa';
+                ctx.font = '11px monospace';
+                ctx.fillText('press R to restart  •  Q to quit', W/2, H/2+16);
+                ctx.textAlign = 'left';
+            }
+        }
+
+        let lastTick = 0;
+        function loop(ts) {
+            if (!alive) { draw(); return; }
+            if (ts - lastTick > 120) {
+                lastTick = ts;
+                dir = { ...nextDir };
+                const head = { x: (snake[0].x + dir.x + COLS) % COLS, y: (snake[0].y + dir.y + ROWS) % ROWS };
+                if (snake.some(p => p.x === head.x && p.y === head.y)) { alive = false; draw(); return; }
+                snake.unshift(head);
+                if (head.x === food.x && head.y === food.y) { score++; food = spawnFood(snake); }
+                else snake.pop();
+            }
+            draw();
+            raf = requestAnimationFrame(loop);
+        }
+
+        function quit() {
+            cancelAnimationFrame(raf);
+            canvas.remove();
+            termInput.disabled = false;
+            termInput.placeholder = '';
+            termInput.focus();
+            if (window._termAddLines) window._termAddLines([
+                { cls: 'amber', text: `Snake over. Final score: ${score}` },
+                { cls: 'empty', text: '' },
+            ]);
+            document.removeEventListener('keydown', handleKey);
+        }
+
+        function handleKey(e) {
+            const map = { ArrowUp:{x:0,y:-1}, ArrowDown:{x:0,y:1}, ArrowLeft:{x:-1,y:0}, ArrowRight:{x:1,y:0} };
+            if (map[e.key]) {
+                const d = map[e.key];
+                if (d.x !== -dir.x || d.y !== -dir.y) nextDir = d;
+                e.preventDefault();
+            }
+            if (e.key === 'q' || e.key === 'Q') quit();
+            if ((e.key === 'r' || e.key === 'R') && !alive) { cancelAnimationFrame(raf); init(); raf = requestAnimationFrame(loop); }
+        }
+
+        document.addEventListener('keydown', handleKey);
+        init();
+        raf = requestAnimationFrame(loop);
+    };
 })();
 
 /* ========== ACHIEVEMENT UNLOCK SYSTEM ========== */
