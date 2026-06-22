@@ -1165,7 +1165,7 @@ document.querySelectorAll('[data-tilt]').forEach(el => {
         muted:'font-size:10px;color:#6b6660;',
     };
     console.log('%c✦ hey, you found the console.', styles.big);
-    console.log('%cRafeed Mohammad Sultan — Software Engineer & AI Researcher', styles.sub);
+    console.log('%cRafeed Mohammad Sultan — AI Researcher & Incoming UTS Master\'s Student', styles.sub);
     console.log('%cBuilt by hand. No frameworks were harmed.\nSource: github.com/sultanrafeed', styles.muted);
     console.log('%c★ try the Konami code on the page: ↑↑↓↓←→←→BA', styles.sub);
 })();
@@ -1263,7 +1263,7 @@ document.querySelectorAll('[data-tilt]').forEach(el => {
             desc: 'Print user info',
             run: () => [
                 { cls: 'hi',    text: 'Rafeed Mohammad Sultan' },
-                { cls: 'out',   text: 'Software Engineer @ SELISE Digital Platforms' },
+                { cls: 'out',   text: 'Incoming Master of AI @ UTS Sydney (Jul 2026)' },
                 { cls: 'out',   text: 'AI Researcher — NLP · LLM Alignment · RAG · Trustworthy AI' },
                 { cls: 'out',   text: 'Published @ ICPR 2024 · IEEE Big Data 2024 · IJCNN 2025 · Q1 Journal' },
                 { cls: 'amber', text: '4 publications · 4+ years coding · ∞ curiosity' },
@@ -1299,9 +1299,9 @@ document.querySelectorAll('[data-tilt]').forEach(el => {
                 if (args[0] === 'about') return [
                     { cls: 'amber', text: '── about.md ──────────────────────────────────' },
                     { cls: 'hi',    text: '' },
-                    { cls: 'hi',    text: "I'm a Software Engineer at SELISE Digital Platforms, leading" },
-                    { cls: 'hi',    text: 'development of OpenClaw and MCP server tooling. I drive' },
-                    { cls: 'hi',    text: 'architecture across agentic AI and enterprise automation.' },
+                    { cls: 'hi',    text: "Incoming Master of AI @ UTS Sydney (Jul 2026)." },
+                    { cls: 'hi',    text: 'Previously Software Engineer at SELISE Digital Platforms,' },
+                    { cls: 'hi',    text: 'leading OpenClaw and MCP server tooling.' },
                     { cls: 'empty', text: '' },
                     { cls: 'hi',    text: 'Research: trustworthy NLP · LLM alignment & evaluation ·' },
                     { cls: 'hi',    text: 'RAG in multilingual/low-resource settings · medical AI.' },
