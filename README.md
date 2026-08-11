@@ -71,17 +71,33 @@ turned on the page itself).
   figures, that is a functional choice before it is an aesthetic one.
 - **JetBrains Mono** for data, kept for its numerals and true tabular figures.
 
-## Collecting notes
+## Collecting notes and visits
 
-The **Score it** section carries a six-point rating (the same scale the judges
-used in Experiment 02, pointed at the page) plus an optional contact form. It
-posts to a Google Apps Script endpoint that appends to a Google Sheet, which
-exports to Excel. Setup takes about ten minutes and is written up in
-**[FORMS.md](FORMS.md)**.
+Two things land in one Google Sheet, via a single Apps Script endpoint. Setup is
+about ten minutes and is written up in **[FORMS.md](FORMS.md)**; one constant in
+`site.js` switches both on, and while it is empty neither collects anything.
 
-Nothing is collected unless a visitor presses send. There is no analytics, no
-tracking pixel and no cookie beyond the light/dark preference. If that ever
-changes, the privacy paragraph on the page has to change with it.
+- **`notes`**, when a visitor presses send. The **Score it** section carries a
+  six-point rating (the same scale the judges used in Experiment 02, turned on
+  the page itself) plus an optional message.
+- **`visits`**, automatically. Coarse location, referrer, device, browser, time
+  on page, scroll depth, which sections they stopped on, and whether they opened
+  the CV.
+
+The visit record collects as little as it can while still being useful:
+
+- **No IP is stored or transmitted.** The browser resolves its own address to a
+  city and discards the rest, so the sheet holds "Sydney, Australia" and nothing
+  that points at a person.
+- **No cookies.** The session id lives in `sessionStorage` and dies with the tab.
+- **Do Not Track and Global Privacy Control are honoured** without being asked.
+- **No third-party analytics or ad scripts**, and nothing joined to any other
+  dataset.
+
+There is no visible disclosure panel. The page therefore makes no claim about
+analytics either way; the colophon says only "no third-party trackers and no
+advertising", which remains true. If a third-party script, cookies or persistent
+identifiers are ever added, that line needs revisiting.
 
 ## Stack
 

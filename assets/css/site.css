@@ -981,7 +981,6 @@ a.certs__name:hover { color: var(--machine); border-bottom-color: var(--machine)
 .colophon__b { font-size: .87rem; color: var(--ink-2); max-width: var(--measure); line-height: 1.6; }
 .colophon__b--dim { color: var(--ink-3); font-size: .82rem; }
 .bn { font-family: var(--f-bn); color: var(--ink-3); }
-kbd { font-family: var(--f-mono); font-size: .85em; border: 1px solid var(--rule-2); border-bottom-width: 2px; border-radius: 3px; padding: 1px 5px; }
 
 /* ── 26. Toast + judge mode ───────────────────────────────────────────────── */
 .toast {

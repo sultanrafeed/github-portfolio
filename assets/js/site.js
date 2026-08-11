@@ -707,6 +707,183 @@
     });
   };
 
+  /* ═══ Visit record ═════════════════════════════════════════════════════
+     Passive record of a visit, appended to the same spreadsheet as the notes.
+     Three rules this obeys, and they are not optional:
+
+     1. It records COARSE LOCATION ONLY. The IP address is resolved to a
+        country/region/city in the visitor's own browser and then thrown away.
+        No IP is ever transmitted to the sheet, and none is stored.
+     2. It honours Do Not Track and Global Privacy Control, and has a visible
+        one-click opt-out in the footer.
+     3. It can be switched off. There is no visible control, by choice, but
+        `localStorage.setItem('noTrack','1')` in any browser console stops it
+        permanently for that browser, and the DNT/GPC signals above do the same
+        automatically.
+
+     No cookies are set. The session id lives in sessionStorage and dies with
+     the tab. There is no cross-site tracking and no third-party ad script.
+     Nothing here is shared, sold, or joined to any other dataset. */
+
+  const TRACK_OFF_KEY = 'noTrack';
+
+  const trackingRefused = () =>
+    localStorage.getItem(TRACK_OFF_KEY) === '1' ||
+    navigator.doNotTrack === '1' || window.doNotTrack === '1' ||
+    navigator.globalPrivacyControl === true;
+
+  const visit = {
+    sent: null,
+    seconds: 0,
+    scroll: 0,
+    sections: new Set(),
+    actions: []
+  };
+
+  (function record() {
+    if (!FORM_ENDPOINT || trackingRefused()) return;
+
+    let sid = sessionStorage.getItem('sid');
+    if (!sid) {
+      sid = Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+      sessionStorage.setItem('sid', sid);
+    }
+
+    const ua = navigator.userAgent;
+    const pick = (re, dflt) => (ua.match(re) || [, dflt])[1];
+    const browser =
+      /Edg\//.test(ua) ? 'Edge' : /OPR\//.test(ua) ? 'Opera' :
+      /Chrome\//.test(ua) ? 'Chrome' : /Safari\//.test(ua) && /Version\//.test(ua) ? 'Safari' :
+      /Firefox\//.test(ua) ? 'Firefox' : 'other';
+    const os =
+      /Windows/.test(ua) ? 'Windows' : /Android/.test(ua) ? 'Android' :
+      /iPhone|iPad|iPod/.test(ua) ? 'iOS' : /Mac OS X/.test(ua) ? 'macOS' :
+      /Linux/.test(ua) ? 'Linux' : 'other';
+    const device = innerWidth < 768 ? 'mobile' : innerWidth < 1100 ? 'tablet' : 'desktop';
+
+    const payload = {
+      type: 'visit',
+      session_id: sid,
+      arrived_at: new Date().toISOString(),
+      referrer: document.referrer || 'direct',
+      landing: location.pathname + location.search,
+      language: navigator.language || '',
+      timezone: (Intl.DateTimeFormat().resolvedOptions().timeZone) || '',
+      device, browser, os,
+      /* Some embedded/headless contexts report a 0x0 screen; fall back rather
+         than writing a meaningless "0x0" into the sheet. */
+      screen: (screen.width && screen.height) ? `${screen.width}x${screen.height}` : 'unknown',
+      viewport: `${innerWidth}x${innerHeight}`,
+      theme: document.documentElement.getAttribute('data-theme') ||
+             (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark (system)' : 'light (system)'),
+      country: '', region: '', city: ''
+    };
+
+    const post = (body, beacon) => {
+      const text = JSON.stringify(body);
+      try {
+        if (beacon && navigator.sendBeacon) {
+          navigator.sendBeacon(FORM_ENDPOINT, new Blob([text], { type: 'text/plain;charset=UTF-8' }));
+          return;
+        }
+        fetch(FORM_ENDPOINT, {
+          method: 'POST', keepalive: true,
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: text
+        }).catch(() => {});
+      } catch (_) { /* never let the record break the page */ }
+    };
+
+    /* Coarse location, resolved client-side. The IP never leaves the browser. */
+    (async () => {
+      const cached = sessionStorage.getItem('geo');
+      if (cached) {
+        Object.assign(payload, JSON.parse(cached));
+      } else {
+        try {
+          const r = await fetch('https://ipwho.is/', { cache: 'no-store' });
+          const g = await r.json();
+          if (g && g.success) {
+            const geo = { country: g.country || '', region: g.region || '', city: g.city || '' };
+            Object.assign(payload, geo);
+            sessionStorage.setItem('geo', JSON.stringify(geo));
+          }
+        } catch (_) { /* location is optional; the visit still records without it */ }
+      }
+      visit.sent = payload;
+      post(payload, false);
+    })();
+
+    /* Engagement: how long, how far, which sections, what they clicked. */
+    let visibleSince = document.visibilityState === 'visible' ? Date.now() : 0;
+
+    const sections = $$('main section[id]');
+    const measure = () => {
+      const doc = document.documentElement;
+      const pct = Math.min(100, Math.round(
+        ((scrollY + innerHeight) / Math.max(doc.scrollHeight, 1)) * 100));
+      if (pct > visit.scroll) visit.scroll = pct;
+      sections.forEach(sec => {
+        const r = sec.getBoundingClientRect();
+        if (r.top < innerHeight * 0.75 && r.bottom > innerHeight * 0.25) visit.sections.add(sec.id);
+      });
+    };
+
+    /* Throttled, not debounced. A trailing debounce only ever samples where
+       scrolling STOPS, so every section scrolled past on the way would be
+       missed and only the final resting position recorded. The interval is a
+       second safety net for movement that fires no scroll event at all, such as
+       an anchor jump or find-in-page. */
+    let lastSample = 0;
+    addEventListener('scroll', () => {
+      const now = Date.now();
+      if (now - lastSample < 150) return;
+      lastSample = now;
+      measure();
+    }, { passive: true });
+    setInterval(() => { if (document.visibilityState === 'visible') measure(); }, 1000);
+    measure();
+
+    document.addEventListener('click', e => {
+      const a = e.target.closest('a[href]');
+      if (!a) return;
+      const href = a.getAttribute('href');
+      if (/\.pdf$/i.test(href)) visit.actions.push('cv');
+      else if (/github\.com/.test(href)) visit.actions.push('github');
+      else if (/arxiv|doi\.org|sciencedirect/.test(href)) visit.actions.push('paper');
+      else if (/huggingface/.test(href)) visit.actions.push('huggingface');
+      else if (/^mailto:/.test(href)) visit.actions.push('email');
+      else if (/scholar\.google|researchgate|linkedin|orcid/.test(href)) visit.actions.push('profile');
+    }, true);
+
+    /* Send the engagement row once, on whichever teardown signal arrives first.
+       `visibilitychange` catches tab switches and most closes; `pagehide`
+       catches navigating away and the back/forward cache, which
+       `visibilitychange` alone misses. Guarded so it only ever sends once. */
+    let engagementSent = false;
+    const endVisit = () => {
+      if (engagementSent) return;
+      engagementSent = true;
+      if (visibleSince) visit.seconds += Math.round((Date.now() - visibleSince) / 1000);
+      visibleSince = 0;
+      measure();
+      post({
+        type: 'engagement',
+        session_id: sid,
+        seconds: visit.seconds,
+        scroll_pct: visit.scroll,
+        sections: [...visit.sections].join(' '),
+        actions: [...new Set(visit.actions)].join(' ')
+      }, true);
+    };
+
+    addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'hidden') endVisit();
+      else if (!engagementSent) visibleSince = Date.now();
+    });
+    addEventListener('pagehide', endVisit);
+  })();
+
   /* ═══ Easter eggs ══════════════════════════════════════════════════════ */
 
   /* 1. `j` = judge mode. Grades the page with meaningless scores, on purpose. */
