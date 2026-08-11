@@ -1,189 +1,108 @@
-<div align="center">
+# sultanrafeed.github.io/github-portfolio
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:FF6B35,40:E67E22,100:2C3E50&height=220&section=header&text=Rafeed%20Mohammad%20Sultan&fontSize=42&fontColor=FFFBF5&animation=fadeIn&fontAlignY=42&desc=🌶️%20AI%20Researcher%20%7C%20Software%20Chef%20%7C%20Code%20Connoisseur&descAlignY=62&descSize=17&descColor=FFE0B2" width="100%"/>
+Personal site for **Rafeed Mohammad Sultan**: LLM alignment, multilingual
+evaluation, and agentic retrieval.
 
-<br/>
-
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=20&duration=2800&pause=1000&color=E67E22&center=true&vCenter=true&width=650&height=60&lines=Cooking+up+AI+research...;Serving+fresh+algorithms+one+epoch+at+a+time;Building+spicy+software+since+2020)](https://git.io/typing-svg)
-
-<br/>
-
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Rafeed%20Sultan-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/rafeed-sultan/)
-[![GitHub](https://img.shields.io/badge/GitHub-sultanrafeed-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/sultanrafeed)
-[![Email](https://img.shields.io/badge/Email-sultanrafeed@gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:sultanrafeed@gmail.com)
-
-</div>
+**[Live site →](https://sultanrafeed.github.io/github-portfolio/)**
 
 ---
 
-## 🍛 Welcome to the Kitchen
+## The idea
 
-> **This isn't just a portfolio. It's a full-course meal.**
+The site is built around one claim, which is the first sentence of the research
+interests in the CV:
 
-I'm Rafeed — an AI researcher who also happens to code like a chef seasons biriyani: with intention, heat, and a lot of love. Every project is a dish, every commit is a spice, and this portfolio is the restaurant menu.
+> A model can look aligned without being aligned. A judge can look reliable
+> without being reliable. The work is telling the difference.
 
-Expect bold ideas, warm design, and software that actually *does* something.
+That is not a tagline invented for a website. It is the reason `Misalignment Rate`
+exists (right label, wrong reasoning, 52.0% of the time before reason supervision),
+the finding of the cross-model judge study (ρ from −0.71 to −0.09 on one task),
+the design principle of [`banglaeval`](https://github.com/sultanrafeed/banglaeval),
+and the reason that repo ships a `LIMITATIONS.md`.
 
-<br/>
+Three rules follow, and the whole site obeys them:
 
----
+1. **Every exhibit works before it breaks.** Show the system doing its job, then
+   hand the visitor the lever. Experiment 03 has a literal *"break it, remove the
+   relevance check"* button that puts LegalRAG into its documented failure mode.
+2. **Every number is traceable.** There is a ledger in the Evidence section
+   listing every figure on the page against its paper, repository or CV line.
+   No decorative statistics, no count-up animations.
+3. **Absence is reportable.** BanglaEval's leaderboard is empty, so the site
+   prints the empty JSON. The distilled student in Experiment 05 has no published
+   standalone accuracy, so no accuracy is shown for it.
 
-## 🌶️ The Menu — What I Bring to the Table
-
-<div align="center">
-
-| 🧠 AI & Research | 🛠️ Engineering | 🎨 Creative |
-|:---:|:---:|:---:|
-| Deep Learning | Full-Stack Dev | Interactive UI/UX |
-| NLP & LLMs | REST APIs | Motion & Animation |
-| Ethics in AI | System Design | Storytelling through Design |
-| Paper writing | Dev tooling | Visual Identity |
-
-</div>
-
-<br/>
-
----
-
-## 🔧 Tech Stack — The Spice Rack
-
-<div align="center">
-
-**Languages**
-
-[![Python](https://skillicons.dev/icons?i=python)](https://python.org)
-[![Java](https://skillicons.dev/icons?i=java)](https://java.com)
-[![JavaScript](https://skillicons.dev/icons?i=js)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-[![HTML](https://skillicons.dev/icons?i=html)](https://developer.mozilla.org/en-US/docs/Web/HTML)
-[![CSS](https://skillicons.dev/icons?i=css)](https://developer.mozilla.org/en-US/docs/Web/CSS)
-
-**Frameworks & Tools**
-
-[![Django](https://skillicons.dev/icons?i=django)](https://djangoproject.com)
-[![React](https://skillicons.dev/icons?i=react)](https://reactjs.org)
-[![TensorFlow](https://skillicons.dev/icons?i=tensorflow)](https://tensorflow.org)
-[![PyTorch](https://skillicons.dev/icons?i=pytorch)](https://pytorch.org)
-[![Git](https://skillicons.dev/icons?i=git)](https://git-scm.com)
-[![VS Code](https://skillicons.dev/icons?i=vscode)](https://code.visualstudio.com)
-
-</div>
-
-<br/>
+The full brainstorm (six concepts, what was cut and why) and the design system
+are in **[DESIGN.md](DESIGN.md)**.
 
 ---
 
-## 🍽️ What's on the Plate
-
-<details>
-<summary><b>🔬 AI Research</b> — click to peek inside</summary>
-<br/>
-
-Focused on **NLP, LLMs, and ethics-driven AI** — the kind of research that asks *"should we?"* before *"can we?"*
-
-- Recent publications and paper work in AI ethics and language models
-- Experiments with prompt engineering, fine-tuning, and evaluation benchmarks
-- Bridging the gap between research papers and real-world applications
-
-</details>
-
-<details>
-<summary><b>💻 Software Projects</b> — click to peek inside</summary>
-<br/>
-
-From backend APIs to interactive frontends — built with care and deployed with confidence.
-
-- Web apps in **Django + React**
-- Data pipelines and ML experiments in **Python**
-- CLI tools, automation scripts, and academic software
-
-</details>
-
-<details>
-<summary><b>🎨 This Portfolio Itself</b> — click to peek inside</summary>
-<br/>
-
-A handcrafted **biriyani-themed** personal site featuring:
-
-- 🌶️ Warm saffron and spice hues
-- ✨ Custom animated cursor and hover glow effects
-- 🔊 Subtle sound feedback on interactions
-- 🍲 Illustrated biriyani pot hero section
-- 📊 Mock GitHub contribution heatmap
-
-</details>
-
-<br/>
-
----
-
-## 📁 What's in this Repo
+## Structure
 
 ```
-📦 github-portfolio/
-├── 🌐 index.html                    — the full portfolio experience
-├── 🎨 style.css                     — the spicy visual theme
-├── ⚡ script.js                     — cursor magic, sounds, animations
-├── 🖼️  profile.jpg                   — the chef himself
-└── 📄 rafeed_sultan_academic_CV.pdf  — the full menu (resume)
+index.html                    the whole page, semantic, no templating
+assets/css/site.css           design system + components
+assets/js/site.js             exhibit behaviour, no dependencies
+assets/img/rafeed-*.webp      portrait, 2 sizes, WebP + JPEG fallback
+rafeed_sultan_Researcher_CV.pdf
+DESIGN.md                     design record and reasoning
+legacy/                       the previous version of the site, kept for reference
 ```
 
-<br/>
+Six sections: **the bench** (who and what) · **experiments** (five interactive
+exhibits) · **systems** (production engineering) · **evidence** (papers,
+provenance map, live GitHub, CV) · **trail** (timeline) · **next** (research
+directions).
 
----
+## Stack
 
-## 🚀 Run it Yourself
+Static HTML, CSS and JavaScript. No framework, no build step, no bundler, no
+package.json, no analytics, no cookies. It deploys by pushing to `main`.
+
+That is a deliberate choice rather than a limitation: nothing on this page needs
+a virtual DOM, and a portfolio that takes eight seconds to load is a bad
+portfolio regardless of what it says.
+
+- **No 3D.** Nothing in this work is spatial, so a WebGL constellation would have
+  been a rotating object communicating nothing. The provenance map does the same
+  job in hand-placed SVG at a few kilobytes, works with a keyboard, and prints.
+- **Exhibits initialise lazily** on approach, with a scroll sweep and a timeout as
+  independent fallbacks so no single mechanism failing can leave the page inert.
+- **Works without JavaScript.** Every reveal ships visible in the HTML and is
+  collapsed by script, or uses a native `<details>`. Turn JS off and no content
+  is lost; only the animation and the live GitHub data go away.
+- **Live GitHub data** is fetched once, cached in `sessionStorage`, and falls back
+  to descriptions written into the page when the API rate-limits.
+- Respects `prefers-reduced-motion` and `prefers-color-scheme`; both themes are
+  designed rather than inverted.
+
+## Content sourcing
+
+Everything on the page comes from the researcher CV, the four peer-reviewed
+papers, or public repositories. Nothing is invented: no fabricated metrics,
+projects, dates or GitHub activity. Two projects present on the previous version
+of the site were removed because no source could be found for them.
+
+## Running locally
 
 ```bash
-# 1. Clone the repo
-git clone https://github.com/sultanrafeed/github-portfolio.git
-
-# 2. Open in browser
-open index.html
-
-# 3. For full experience (contact form), use a local server
-npx serve .
-# or
-python -m http.server 8000
+python -m http.server 8823
 ```
 
-> **Note:** The contact form uses FormSubmit and works best on a hosted page (GitHub Pages, Netlify, Vercel).
+Then open <http://localhost:8823>. There is nothing to install or build.
 
-<br/>
+> Asset links carry a `?v=` query string. Bump it when changing CSS or JS so
+> GitHub Pages' cache serves the new file.
 
----
+## Easter eggs
 
-## 📊 GitHub Stats
+Five, none of them load-bearing. Press <kbd>j</kbd> for one of them. Turn them all
+off and nothing is lost.
 
-<div align="center">
+## Contact
 
-<img src="https://github-readme-stats.vercel.app/api?username=sultanrafeed&show_icons=true&theme=radical&title_color=E67E22&icon_color=E67E22&text_color=2C3E50&bg_color=FFFBF5&border_color=E67E22&border_radius=12" height="165"/>
-&nbsp;&nbsp;
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=sultanrafeed&layout=compact&theme=radical&title_color=E67E22&text_color=2C3E50&bg_color=FFFBF5&border_color=E67E22&border_radius=12" height="165"/>
-
-</div>
-
-<br/>
-
----
-
-## 🔗 Let's Connect
-
-<div align="center">
-
-Got a project idea? A research collab? Just want to talk biriyani?
-
-<br/>
-
-[![LinkedIn](https://img.shields.io/badge/-Connect%20on%20LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/rafeed-sultan/)
-[![Gmail](https://img.shields.io/badge/-Send%20an%20Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:sultanrafeed@gmail.com)
-[![GitHub](https://img.shields.io/badge/-Follow%20on%20GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/sultanrafeed)
-
-<br/>
-
-*"The kitchen is always open."* 🍲
-
-</div>
-
-<br/>
-
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:2C3E50,60:E67E22,100:FF6B35&height=120&section=footer" width="100%"/>
+[sultanrafeed@gmail.com](mailto:sultanrafeed@gmail.com) ·
+[GitHub](https://github.com/sultanrafeed) ·
+[LinkedIn](https://www.linkedin.com/in/rafeed-sultan/) ·
+[ORCID 0009-0008-4291-1570](https://orcid.org/0009-0008-4291-1570)
