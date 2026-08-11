@@ -613,7 +613,7 @@
      See FORMS.md for the ten-minute setup. While this is empty the form still
      validates and still works: it falls back to a pre-filled email, so it is
      never a dead control. */
-  const FORM_ENDPOINT = '';
+  const FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyrnqjtgMH1wHdRwyE0YL5rGa9CnZ8Ud2Px6Skh1tEKnZtgKc-6jorLZcxJ-1NayCI66Q/exec';
 
   const SCORE_ECHO = {
     1: 'One. Noted, and more useful than a six if you tell me what fell over.',
