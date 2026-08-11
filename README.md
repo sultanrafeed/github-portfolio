@@ -1,154 +1,94 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:FF6B35,40:E67E22,100:2C3E50&height=220&section=header&text=Rafeed%20Mohammad%20Sultan&fontSize=42&fontColor=FFFBF5&animation=fadeIn&fontAlignY=42&desc=🌶️%20AI%20Researcher%20%7C%20Software%20Chef%20%7C%20Code%20Connoisseur&descAlignY=62&descSize=17&descColor=FFE0B2" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=venom&color=0:0d1117,30:1a1a2e,60:16213e,100:0f3460&height=200&section=header&text=Rafeed%20Mohammad%20Sultan&fontSize=45&fontColor=58a6ff&animation=fadeIn&fontAlignY=38&desc=AI%20Researcher%20%7C%20Incoming%20UTS%20Master%20of%20AI%20%7C%20NLP%20Enthusiast&descAlignY=58&descColor=c9d1d9&descSize=17" />
 
 <br/>
 
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=20&duration=2800&pause=1000&color=E67E22&center=true&vCenter=true&width=650&height=60&lines=Cooking+up+AI+research...;Serving+fresh+algorithms+one+epoch+at+a+time;Building+spicy+software+since+2020)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=18&duration=2500&pause=800&color=58A6FF&center=true&vCenter=true&random=false&width=650&lines=🔬+LLM+Alignment+%7C+RAG+Systems+%7C+Multilingual+NLP;🎓+Incoming+Master+of+AI+%40+UTS+Sydney+%28Jul+2026%29;📄+4+Publications+%7C+ICPR+·+IEEE+BigData+·+IJCNN+·+Elsevier;🌏+Open+to+Graduate+Research+Opportunities)](https://github.com/sultanrafeed)
 
 <br/>
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Rafeed%20Sultan-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/rafeed-sultan/)
-[![GitHub](https://img.shields.io/badge/GitHub-sultanrafeed-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/sultanrafeed)
-[![Email](https://img.shields.io/badge/Email-sultanrafeed@gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:sultanrafeed@gmail.com)
+[![Profile Views](https://komarev.com/ghpvc/?username=sultanrafeed&label=Profile+Views&color=58a6ff&style=flat)](https://github.com/sultanrafeed)
+[![Google Scholar](https://img.shields.io/badge/Google%20Scholar-Citations-4285F4?style=flat&logo=googlescholar&logoColor=white)](https://scholar.google.com/citations?user=EPt8XpsAAAAJ&hl=en)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/rafeed-sultan/)
 
 </div>
 
 ---
 
-## 🍛 Welcome to the Kitchen
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
-> **This isn't just a portfolio. It's a full-course meal.**
+## <img src="https://media.giphy.com/media/iY8CRBdQXODJSCERIr/giphy.gif" width="28"> About Me
 
-I'm Rafeed — an AI researcher who also happens to code like a chef seasons biriyani: with intention, heat, and a lot of love. Every project is a dish, every commit is a spice, and this portfolio is the restaurant menu.
+```python
+class Rafeed:
+    name       = "Rafeed Mohammad Sultan"
+    role       = "Incoming Master of AI @ UTS Sydney (Jul 2026)"
+    research   = ["LLM Alignment & Evaluation", "Retrieval-Augmented Generation",
+                  "Multilingual NLP", "Trustworthy AI", "Medical AI"]
+    education  = ["MSc AI — University of Technology Sydney (Commencing Jul 2026)",
+                  "BSc CSE — North South University, Dhaka (2024)"]
+    supervisor = "Dr. Nabeel Mohammed — Apurba-NSU R&D Lab"
+    papers     = 4   # ICPR 2024 · IEEE BigData 2024 · IJCNN 2025 · Q1 Elsevier
+    location   = "Sydney, Australia 🇦🇺 (relocating Jul 2026)"
+    goal       = "PhD in NLP / AI 🎯"
+```
 
-Expect bold ideas, warm design, and software that actually *does* something.
-
-<br/>
-
----
-
-## 🌶️ The Menu — What I Bring to the Table
-
-<div align="center">
-
-| 🧠 AI & Research | 🛠️ Engineering | 🎨 Creative |
-|:---:|:---:|:---:|
-| Deep Learning | Full-Stack Dev | Interactive UI/UX |
-| NLP & LLMs | REST APIs | Motion & Animation |
-| Ethics in AI | System Design | Storytelling through Design |
-| Paper writing | Dev tooling | Visual Identity |
-
-</div>
-
-<br/>
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 ---
 
-## 🔧 Tech Stack — The Spice Rack
+## <img src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif" width="30"> Research Publications
+
+<table>
+<tr>
+<td width="60%"><b>🧠 Beyond Labels: Aligning LLMs with Human-like Reasoning</b><br/><sub>International Conference on Pattern Recognition (ICPR 2024)</sub></td>
+<td><a href="https://doi.org/10.48550/arXiv.2408.11879"><img src="https://img.shields.io/badge/arXiv-2408.11879-b31b1b?style=flat&logo=arxiv"/></a> <a href="https://github.com/apurba-nsu-rnd-lab/DFAR.git"><img src="https://img.shields.io/badge/GitHub-Code-181717?style=flat&logo=github"/></a></td>
+</tr>
+<tr>
+<td><b>⚖️ LegalRAG: Hybrid RAG for Multilingual Legal NLP</b><br/><sub>IJCNN 2025 — International Joint Conference on Neural Networks</sub></td>
+<td><a href="https://arxiv.org/abs/2504.16121"><img src="https://img.shields.io/badge/arXiv-2504.16121-b31b1b?style=flat&logo=arxiv"/></a></td>
+</tr>
+<tr>
+<td><b>📊 Empowering Meta-Analysis with LLMs for Scientific Synthesis</b><br/><sub>IEEE International Conference on Big Data 2024</sub></td>
+<td><a href="https://arxiv.org/abs/2411.10878"><img src="https://img.shields.io/badge/arXiv-2411.10878-b31b1b?style=flat&logo=arxiv"/></a> <a href="https://github.com/EncryptedBinary/Meta_analysis.git"><img src="https://img.shields.io/badge/GitHub-Code-181717?style=flat&logo=github"/></a></td>
+</tr>
+<tr>
+<td><b>🔬 Efficient Skin Cancer Detection via Model Souping & Distillation</b><br/><sub>Q1 Elsevier — Intelligence-Based Medicine</sub></td>
+<td><a href="https://www.sciencedirect.com/science/article/pii/S2666521224000437"><img src="https://img.shields.io/badge/Elsevier-Published-FF6B00?style=flat&logo=elsevier"/></a></td>
+</tr>
+</table>
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+---
+
+## 🛠️ Tech Stack
 
 <div align="center">
 
 **Languages**
 
-[![Python](https://skillicons.dev/icons?i=python)](https://python.org)
-[![Java](https://skillicons.dev/icons?i=java)](https://java.com)
-[![JavaScript](https://skillicons.dev/icons?i=js)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-[![HTML](https://skillicons.dev/icons?i=html)](https://developer.mozilla.org/en-US/docs/Web/HTML)
-[![CSS](https://skillicons.dev/icons?i=css)](https://developer.mozilla.org/en-US/docs/Web/CSS)
+[![Skills](https://skillicons.dev/icons?i=python,typescript,javascript,cpp,java&theme=dark)](https://skillicons.dev)
 
-**Frameworks & Tools**
+**ML / AI**
 
-[![Django](https://skillicons.dev/icons?i=django)](https://djangoproject.com)
-[![React](https://skillicons.dev/icons?i=react)](https://reactjs.org)
-[![TensorFlow](https://skillicons.dev/icons?i=tensorflow)](https://tensorflow.org)
-[![PyTorch](https://skillicons.dev/icons?i=pytorch)](https://pytorch.org)
-[![Git](https://skillicons.dev/icons?i=git)](https://git-scm.com)
-[![VS Code](https://skillicons.dev/icons?i=vscode)](https://code.visualstudio.com)
+[![Skills](https://skillicons.dev/icons?i=pytorch,tensorflow&theme=dark)](https://skillicons.dev)
+![HuggingFace](https://img.shields.io/badge/🤗%20HuggingFace-FFD21E?style=for-the-badge&logoColor=black)
+![FAISS](https://img.shields.io/badge/FAISS-0467DF?style=for-the-badge&logo=meta&logoColor=white)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white)
+
+**Backend & Databases**
+
+[![Skills](https://skillicons.dev/icons?i=nestjs,flask,django,postgres,mongodb&theme=dark)](https://skillicons.dev)
+
+**Frontend & Cloud**
+
+[![Skills](https://skillicons.dev/icons?i=react,azure,firebase,git,github,docker&theme=dark)](https://skillicons.dev)
 
 </div>
 
-<br/>
-
----
-
-## 🍽️ What's on the Plate
-
-<details>
-<summary><b>🔬 AI Research</b> — click to peek inside</summary>
-<br/>
-
-Focused on **NLP, LLMs, and ethics-driven AI** — the kind of research that asks *"should we?"* before *"can we?"*
-
-- Recent publications and paper work in AI ethics and language models
-- Experiments with prompt engineering, fine-tuning, and evaluation benchmarks
-- Bridging the gap between research papers and real-world applications
-
-</details>
-
-<details>
-<summary><b>💻 Software Projects</b> — click to peek inside</summary>
-<br/>
-
-From backend APIs to interactive frontends — built with care and deployed with confidence.
-
-- Web apps in **Django + React**
-- Data pipelines and ML experiments in **Python**
-- CLI tools, automation scripts, and academic software
-
-</details>
-
-<details>
-<summary><b>🎨 This Portfolio Itself</b> — click to peek inside</summary>
-<br/>
-
-A handcrafted **biriyani-themed** personal site featuring:
-
-- 🌶️ Warm saffron and spice hues
-- ✨ Custom animated cursor and hover glow effects
-- 🔊 Subtle sound feedback on interactions
-- 🍲 Illustrated biriyani pot hero section
-- 📊 Mock GitHub contribution heatmap
-
-</details>
-
-<br/>
-
----
-
-## 📁 What's in this Repo
-
-```
-📦 github-portfolio/
-├── 🌐 index.html                    — the full portfolio experience
-├── 🎨 style.css                     — the spicy visual theme
-├── ⚡ script.js                     — cursor magic, sounds, animations
-├── 🖼️  profile.jpg                   — the chef himself
-└── 📄 rafeed_sultan_academic_CV.pdf  — the full menu (resume)
-```
-
-<br/>
-
----
-
-## 🚀 Run it Yourself
-
-```bash
-# 1. Clone the repo
-git clone https://github.com/sultanrafeed/github-portfolio.git
-
-# 2. Open in browser
-open index.html
-
-# 3. For full experience (contact form), use a local server
-npx serve .
-# or
-python -m http.server 8000
-```
-
-> **Note:** The contact form uses FormSubmit and works best on a hosted page (GitHub Pages, Netlify, Vercel).
-
-<br/>
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 ---
 
@@ -156,34 +96,46 @@ python -m http.server 8000
 
 <div align="center">
 
-<img src="https://github-readme-stats.vercel.app/api?username=sultanrafeed&show_icons=true&theme=radical&title_color=E67E22&icon_color=E67E22&text_color=2C3E50&bg_color=FFFBF5&border_color=E67E22&border_radius=12" height="165"/>
-&nbsp;&nbsp;
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=sultanrafeed&layout=compact&theme=radical&title_color=E67E22&text_color=2C3E50&bg_color=FFFBF5&border_color=E67E22&border_radius=12" height="165"/>
+<img height="175em" src="https://github-readme-stats.vercel.app/api?username=sultanrafeed&show_icons=true&theme=tokyonight&include_all_commits=true&count_private=true&hide_border=true&bg_color=0d1117&title_color=58a6ff&icon_color=58a6ff&text_color=c9d1d9" />
+<img height="175em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=sultanrafeed&layout=compact&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=58a6ff&text_color=c9d1d9&langs_count=8" />
 
 </div>
-
-<br/>
-
----
-
-## 🔗 Let's Connect
 
 <div align="center">
 
-Got a project idea? A research collab? Just want to talk biriyani?
-
-<br/>
-
-[![LinkedIn](https://img.shields.io/badge/-Connect%20on%20LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/rafeed-sultan/)
-[![Gmail](https://img.shields.io/badge/-Send%20an%20Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:sultanrafeed@gmail.com)
-[![GitHub](https://img.shields.io/badge/-Follow%20on%20GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/sultanrafeed)
-
-<br/>
-
-*"The kitchen is always open."* 🍲
+[![GitHub Streak](https://streak-stats.demolab.com?user=sultanrafeed&theme=tokyonight-duo&hide_border=true&background=0D1117&ring=58A6FF&fire=FF6B6B&currStreakLabel=58A6FF)](https://git.io/streak-stats)
 
 </div>
 
-<br/>
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:2C3E50,60:E67E22,100:FF6B35&height=120&section=footer" width="100%"/>
+---
+
+## 🌐 Connect with Me
+
+<div align="center">
+
+<a href="https://www.linkedin.com/in/rafeed-sultan">
+  <img src="https://img.shields.io/badge/LinkedIn-Rafeed%20Sultan-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"/>
+</a>
+<a href="https://scholar.google.com/citations?user=XCYSAkAAAAAJ&hl=en">
+  <img src="https://img.shields.io/badge/Google%20Scholar-Research-4285F4?style=for-the-badge&logo=googlescholar&logoColor=white"/>
+</a>
+<a href="https://sultanrafeed.github.io/github-portfolio/">
+  <img src="https://img.shields.io/badge/Portfolio-Visit-FF5722?style=for-the-badge&logo=githubpages&logoColor=white"/>
+</a>
+<a href="mailto:sultanrafeed@gmail.com">
+  <img src="https://img.shields.io/badge/Email-sultanrafeed@gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white"/>
+</a>
+
+</div>
+
+---
+
+<div align="center">
+
+<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&size=14&duration=3000&pause=1000&color=58A6FF&center=true&vCenter=true&width=600&lines=Thanks+for+visiting!;Always+learning,+always+building+%F0%9F%9A%80;Driven+by+curiosity,+grounded+in+research+%F0%9F%94%AC" />
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0f3460,50:16213e,100:0d1117&height=100&section=footer"/>
+
+</div>
