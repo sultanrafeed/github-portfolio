@@ -42,18 +42,46 @@ are in **[DESIGN.md](DESIGN.md)**.
 
 ```
 index.html                    the whole page, semantic, no templating
+404.html                      an error page that abstains instead of guessing
+robots.txt · sitemap.xml      crawl basics
 assets/css/site.css           design system + components
 assets/js/site.js             exhibit behaviour, no dependencies
 assets/img/rafeed-*.webp      portrait, 2 sizes, WebP + JPEG fallback
 rafeed_sultan_Researcher_CV.pdf
 DESIGN.md                     design record and reasoning
+FORMS.md                      how to wire the note form to a spreadsheet
 legacy/                       the previous version of the site, kept for reference
 ```
 
-Six sections: **the bench** (who and what) · **experiments** (five interactive
+Seven sections: **the bench** (who and what) · **experiments** (five interactive
 exhibits) · **systems** (production engineering) · **evidence** (papers,
-provenance map, live GitHub, CV) · **trail** (timeline) · **next** (research
-directions).
+provenance map, live GitHub, CV) · **trail** (reverse-chronological, with linked
+certifications) · **next** (research directions) · **score it** (the rubric,
+turned on the page itself).
+
+## Type
+
+- **Fraunces** for display. A variable serif with an optical-size axis, so
+  headings tighten as they grow rather than being one static cut stretched
+  across the whole range.
+- **Atkinson Hyperlegible Next** for everything else. Engineered by the Braille
+  Institute to maximise character recognition at low acuity: the letterforms
+  that normally collapse into one another (`I l 1`, `O 0`, `rn`/`m`) are
+  deliberately disambiguated. On a page this dense with model names, IDs and
+  figures, that is a functional choice before it is an aesthetic one.
+- **JetBrains Mono** for data, kept for its numerals and true tabular figures.
+
+## Collecting notes
+
+The **Score it** section carries a six-point rating (the same scale the judges
+used in Experiment 02, pointed at the page) plus an optional contact form. It
+posts to a Google Apps Script endpoint that appends to a Google Sheet, which
+exports to Excel. Setup takes about ten minutes and is written up in
+**[FORMS.md](FORMS.md)**.
+
+Nothing is collected unless a visitor presses send. There is no analytics, no
+tracking pixel and no cookie beyond the light/dark preference. If that ever
+changes, the privacy paragraph on the page has to change with it.
 
 ## Stack
 

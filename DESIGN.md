@@ -249,16 +249,19 @@ toggle, and persists. Both themes are designed, not inverted.
 
 | Role | Face | Why |
 |---|---|---|
-| Display | **Newsreader** (serif, incl. italic) | Journal-like. The italic carries every research *question*, which is the site's recurring gesture. |
-| Text/UI | **Instrument Sans** | Neutral without being Inter. Pairs cleanly. |
-| Data | **JetBrains Mono** | Every number, label, ID and axis. Tabular figures on. |
+| Display | **Fraunces** | Variable serif with an optical-size axis, so a heading at 4rem and a heading at 1.2rem are genuinely different drawings rather than one cut scaled. Distinctive without being a novelty face, and its italic carries every research *question*. |
+| Text/UI | **Atkinson Hyperlegible Next** | Engineered by the Braille Institute for character recognition at low acuity. `I`, `l` and `1` are drawn apart; `O` and `0` are drawn apart; `rn` cannot be misread as `m`. On a page carrying model names, run IDs, ρ values and parameter counts, that is a correctness feature, not a style. |
+| Data | **JetBrains Mono** | Clearest numerals of the mono faces, true tabular figures. Every figure, label, ID and axis. |
 | Bangla | **Noto Sans Bengali** | Loaded by unicode-range, so it only downloads for visitors who reach Experiment 04. |
 
-Scale is a fluid 1.2-ish ratio via `clamp()`. Measure is capped at 68ch in prose.
+Rule, unchanged: **serif italic = a question, mono = a measurement, sans =
+everything else.** Applied consistently, this tells you what kind of sentence
+you are reading before you read it.
 
-Rule: **serif italic = a question. Mono = a measurement. Sans = everything
-else.** Applied consistently, this alone tells you what kind of sentence you are
-reading before you read it.
+Fraunces sets wider per character than the serif it replaced, so every display
+size carries more negative tracking; Atkinson runs a large x-height, so the body
+size is set slightly smaller than it would be for a normal humanist sans and
+still reads a size larger.
 
 ### Space, rule, shadow
 
