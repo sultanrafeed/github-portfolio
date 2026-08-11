@@ -607,6 +607,106 @@
   const esc = s => String(s).replace(/[&<>"']/g, c =>
     ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
+  /* ═══ Score + note ═════════════════════════════════════════════════════ */
+
+  /* Paste the Apps Script web-app URL here to start collecting into the sheet.
+     See FORMS.md for the ten-minute setup. While this is empty the form still
+     validates and still works: it falls back to a pre-filled email, so it is
+     never a dead control. */
+  const FORM_ENDPOINT = '';
+
+  const SCORE_ECHO = {
+    1: 'One. Noted, and more useful than a six if you tell me what fell over.',
+    2: 'Two. Something here is not landing. The note box is right there.',
+    3: 'Three. Honest middle. Which half was the weak half?',
+    4: 'Four. Fine, then. What would move it up one?',
+    5: 'Five. Generous. I will assume you did not press <kbd>j</kbd>.',
+    6: 'Six. A perfect score from a single judge is exactly the result Experiment 02 says not to trust.'
+  };
+
+  INIT.note = root => {
+    const form = $('#noteForm', root);
+    const echo = $('#rateEcho', root);
+    const status = $('#nfStatus', root);
+    const send = $('#nfSend', root);
+    if (!form) return;
+
+    $$('input[name="score"]', form).forEach(r => r.addEventListener('change', () => {
+      echo.innerHTML = SCORE_ECHO[r.value] || '';
+    }));
+
+    const mailtoFallback = data => {
+      const body = [
+        data.score ? `Score: ${data.score} / 6` : '',
+        data.role ? `Role: ${data.role}` : '',
+        '', data.message || ''
+      ].filter(Boolean).join('\n');
+      return 'mailto:sultanrafeed@gmail.com?subject=' +
+        encodeURIComponent('From your portfolio' + (data.name ? `, ${data.name}` : '')) +
+        '&body=' + encodeURIComponent(body);
+    };
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      status.className = 'note__status';
+
+      const fd = new FormData(form);
+      const data = {
+        score: fd.get('score') || '',
+        name: (fd.get('name') || '').trim(),
+        email: (fd.get('email') || '').trim(),
+        role: fd.get('role') || '',
+        message: (fd.get('message') || '').trim(),
+        page: location.pathname,
+        submitted_at: new Date().toISOString()
+      };
+
+      if (!data.score && !data.message) {
+        status.textContent = 'Give it a score, or write a note. Either one is enough.';
+        status.classList.add('is-bad');
+        return;
+      }
+      const emailField = $('#nfEmail', form).parentElement;
+      emailField.classList.remove('is-bad');
+      if (data.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+        status.textContent = 'That email address does not look right. Fix it, or clear it and send anyway.';
+        status.classList.add('is-bad');
+        emailField.classList.add('is-bad');
+        return;
+      }
+
+      if (!FORM_ENDPOINT) {
+        status.innerHTML = 'The spreadsheet is not connected yet, so nothing was stored. ' +
+          '<a href="' + mailtoFallback(data) + '">Send it as an email instead</a> and it will reach the same person.';
+        status.classList.add('is-bad');
+        return;
+      }
+
+      send.disabled = true;
+      status.textContent = 'Sending…';
+      try {
+        /* text/plain keeps this a CORS-simple request, so no preflight is sent
+           and Apps Script can answer it directly. */
+        const res = await fetch(FORM_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(data)
+        });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        form.classList.add('is-sent');
+        status.classList.add('is-ok');
+        status.textContent = data.score
+          ? `Recorded, with a score of ${data.score}. It will not be averaged into a headline number on this page, for the reason set out in Experiment 02.`
+          : 'Recorded. Thank you, genuinely.';
+      } catch (err) {
+        status.innerHTML = 'That did not go through. ' +
+          '<a href="' + mailtoFallback(data) + '">Send it as an email instead</a>, nothing you typed is lost.';
+        status.classList.add('is-bad');
+        send.disabled = false;
+      }
+    });
+  };
+
   /* ═══ Easter eggs ══════════════════════════════════════════════════════ */
 
   /* 1. `j` = judge mode. Grades the page with meaningless scores, on purpose. */
@@ -632,6 +732,23 @@
       if (e.metaKey || e.ctrlKey || e.altKey) return;
       if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return;
       toggle();
+    });
+  })();
+
+  /* Copy-to-clipboard for the email address. */
+  (function copyMail() {
+    const btn = $('#copyMail');
+    if (!btn || !navigator.clipboard) return;
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(btn.dataset.copy);
+        const was = btn.textContent;
+        btn.textContent = 'copied';
+        btn.classList.add('is-done');
+        setTimeout(() => { btn.textContent = was; btn.classList.remove('is-done'); }, 1800);
+      } catch (_) {
+        toast('Could not reach the clipboard. The address is ' + btn.dataset.copy);
+      }
     });
   })();
 

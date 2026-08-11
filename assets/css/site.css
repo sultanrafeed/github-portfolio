@@ -24,8 +24,18 @@
   --machine:  #0B6C82;
   --machine-bg:#D9E9EE;
 
-  --f-display: "Newsreader", Georgia, "Times New Roman", serif;
-  --f-sans: "Instrument Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  /* Type. Chosen for legibility first, distinctiveness second.
+     Atkinson Hyperlegible Next was engineered by the Braille Institute to
+     maximise character recognition at low acuity: the letterforms that usually
+     collapse into each other (I l 1, O 0, r n / m) are deliberately
+     disambiguated, which is exactly what a page full of model names, IDs and
+     figures needs. Fraunces is a variable display serif with an optical-size
+     axis, so headings tighten as they grow instead of being one static cut
+     stretched across the range. Neither is a face you see on other portfolios.
+     JetBrains Mono stays for data: it has the clearest numerals of the mono
+     faces and a true tabular figure set. */
+  --f-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --f-sans: "Atkinson Hyperlegible Next", "Atkinson Hyperlegible", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
   --f-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
   --f-bn: "Noto Sans Bengali", "Nirmala UI", "Shonar Bangla", sans-serif;
 
@@ -87,13 +97,21 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: var(--f-sans);
-  font-size: clamp(16px, 0.55vw + 14.4px, 17.5px);
-  line-height: 1.62;
+  /* Atkinson runs a large x-height, so it reads a size bigger than its nominal
+     value; 16.5–17.5px here matches ~17–18px of a normal humanist sans. */
+  font-size: clamp(16.5px, 0.5vw + 15px, 17.75px);
+  line-height: 1.6;
   font-synthesis-weight: none;
+  font-optical-sizing: auto;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
 }
+
+/* Fraunces is wider per character than the serif it replaced, so display sizes
+   need more negative tracking to hold the same colour on the page. Its optical
+   size axis handles the rest automatically. */
+h1, h2, h3, h4 { font-optical-sizing: auto; }
 
 img, svg, picture { display: block; max-width: 100%; }
 button, input { font: inherit; color: inherit; }
@@ -201,8 +219,8 @@ a { color: inherit; }
 
 h1, #hero-h {
   font-family: var(--f-display); font-weight: 400;
-  font-size: clamp(2.15rem, 5.4vw, 4.15rem);
-  line-height: 1.06; letter-spacing: -.022em;
+  font-size: clamp(2rem, 5vw, 3.85rem);
+  line-height: 1.08; letter-spacing: -.032em;
   margin: var(--s5) 0 var(--s6); text-wrap: balance;
 }
 #hero-h em {
@@ -243,7 +261,7 @@ h1, #hero-h {
 }
 .thesis__title {
   font-family: var(--f-display); font-weight: 400; letter-spacing: -.015em;
-  font-size: clamp(1.3rem, 2.4vw, 1.75rem); line-height: 1.2;
+  font-size: clamp(1.25rem, 2.3vw, 1.7rem); line-height: 1.22; letter-spacing: -.026em;
 }
 .thesis__sub { margin-top: var(--s3); max-width: 62ch; color: var(--ink-2); font-size: .93rem; }
 .thesis__sub .note { display: block; margin-top: 4px; font-family: var(--f-mono); font-size: 11.5px; color: var(--ink-3); }
@@ -288,8 +306,8 @@ h1, #hero-h {
 .band__head { max-width: var(--measure); margin-bottom: var(--s8); }
 .band__title {
   font-family: var(--f-display); font-weight: 400;
-  font-size: clamp(2rem, 4.2vw, 3rem); line-height: 1.04;
-  letter-spacing: -.025em; margin: var(--s3) 0 var(--s4);
+  font-size: clamp(1.95rem, 4vw, 2.9rem); line-height: 1.06;
+  letter-spacing: -.034em; margin: var(--s3) 0 var(--s4);
 }
 .band__intro { color: var(--ink-2); font-size: 1.02rem; }
 .band--next { background: var(--paper-2); max-width: none; }
@@ -324,8 +342,8 @@ h1, #hero-h {
 
 .xp__q {
   font-family: var(--f-display); font-style: italic; font-weight: 300;
-  font-size: clamp(1.5rem, 3.1vw, 2.3rem); line-height: 1.14;
-  letter-spacing: -.018em; margin: var(--s3) 0 var(--s4); max-width: 22ch;
+  font-size: clamp(1.45rem, 2.95vw, 2.2rem); line-height: 1.16;
+  letter-spacing: -.026em; margin: var(--s3) 0 var(--s4); max-width: 22ch;
   text-wrap: balance;
 }
 .xp__setup { max-width: var(--measure); color: var(--ink-2); }
@@ -631,7 +649,7 @@ h1, #hero-h {
 /* ── 16. Systems ──────────────────────────────────────────────────────────── */
 .job { border-top: 1px solid var(--ink); padding-top: var(--s5); }
 .job__head { display: flex; flex-wrap: wrap; gap: var(--s4); justify-content: space-between; align-items: baseline; }
-.job__title { font-family: var(--f-display); font-weight: 400; font-size: clamp(1.5rem, 3vw, 2.1rem); letter-spacing: -.02em; line-height: 1.1; }
+.job__title { font-family: var(--f-display); font-weight: 400; font-size: clamp(1.45rem, 2.9vw, 2rem); letter-spacing: -.03em; line-height: 1.12; }
 .job__org { font-family: var(--f-mono); font-size: 12.5px; color: var(--ink-2); margin-top: 4px; }
 .job__when { font-family: var(--f-mono); font-size: 12px; text-align: right; color: var(--ink-2); line-height: 1.5; }
 .job__when span { color: var(--ink-3); font-size: 11px; }
@@ -808,7 +826,10 @@ h1, #hero-h {
   content: ""; position: absolute; left: 0; top: 1.15em;
   width: 8px; height: 1px; background: var(--machine);
 }
-.certs__name { font-size: .92rem; }
+/* Certificate names are verification links; the arrow marks them as leaving. */
+.certs__name { font-size: .92rem; color: inherit; text-decoration: none; border-bottom: 1px solid var(--rule-2); transition: color var(--t-fast), border-color var(--t-fast); }
+a.certs__name::after { content: " ↗"; font-size: .78em; color: var(--machine); }
+a.certs__name:hover { color: var(--machine); border-bottom-color: var(--machine); }
 .certs__hon {
   font-family: var(--f-mono); font-size: 10px; letter-spacing: .08em;
   text-transform: uppercase; color: var(--human);
@@ -854,7 +875,7 @@ h1, #hero-h {
 .dir { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 0 var(--s5); padding: var(--s6) 0; border-bottom: 1px solid var(--rule); }
 .dir__n { grid-column: 1; grid-row: 1 / -1; font-family: var(--f-mono); font-size: 12px; color: var(--human); letter-spacing: .1em; padding-top: .45em; }
 .dir__q, .dir__b, .dir__from { grid-column: 2; }
-.dir__q { font-family: var(--f-display); font-style: italic; font-weight: 300; font-size: clamp(1.35rem, 2.7vw, 1.95rem); line-height: 1.16; letter-spacing: -.018em; max-width: 24ch; }
+.dir__q { font-family: var(--f-display); font-style: italic; font-weight: 300; font-size: clamp(1.3rem, 2.6vw, 1.85rem); line-height: 1.18; letter-spacing: -.026em; max-width: 24ch; }
 .dir__b { margin-top: var(--s4); color: var(--ink-2); font-size: .96rem; line-height: 1.66; max-width: var(--measure); }
 .dir__from { margin-top: var(--s4); font-family: var(--f-mono); font-size: 11.5px; color: var(--ink-3); }
 @media (max-width: 640px) {
@@ -867,8 +888,8 @@ h1, #hero-h {
 .closing { border-top: 1px solid var(--rule); padding: var(--s10) var(--pad); }
 .closing__in { max-width: var(--page); margin-inline: auto; }
 .closing__h {
-  font-family: var(--f-display); font-weight: 400; letter-spacing: -.025em;
-  font-size: clamp(1.75rem, 4vw, 2.85rem); line-height: 1.1; max-width: 22ch; text-wrap: balance;
+  font-family: var(--f-display); font-weight: 400;
+  font-size: clamp(1.7rem, 3.8vw, 2.7rem); line-height: 1.12; letter-spacing: -.03em; max-width: 24ch; text-wrap: balance;
 }
 .closing__h em { font-style: italic; color: var(--human); font-weight: 300; }
 .closing__b { margin-top: var(--s5); max-width: var(--measure); color: var(--ink-2); }
@@ -876,6 +897,79 @@ h1, #hero-h {
 .closing__links a { font-family: var(--f-mono); font-size: 13px; text-decoration: none; border-bottom: 1px solid var(--rule-2); padding-bottom: 2px; transition: border-color var(--t-fast), color var(--t-fast); }
 .closing__links a:hover { color: var(--human); border-bottom-color: var(--human); }
 .closing__loc { margin-top: var(--s5); font-family: var(--f-mono); font-size: 11px; color: var(--ink-3); }
+.closing__links li { display: inline-flex; align-items: center; gap: var(--s2); }
+.copy {
+  font-family: var(--f-mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--ink-3); border: 1px solid var(--rule-2); border-radius: 2px; padding: 2px 6px;
+  transition: color var(--t-fast), border-color var(--t-fast);
+}
+.copy:hover { color: var(--machine); border-color: var(--machine); }
+.copy.is-done { color: var(--machine); border-color: var(--machine); }
+
+/* ── 24b. Score + note ────────────────────────────────────────────────────── */
+.band--score { background: var(--paper-2); max-width: none; border-top: 1px solid var(--rule); }
+.band--score > * { max-width: var(--page); margin-inline: auto; }
+
+.note { max-width: var(--page); margin-inline: auto; }
+
+.rate { border: 1px solid var(--rule-2); background: var(--paper); padding: var(--s5); margin: 0 0 var(--s6); }
+.rate__q {
+  font-family: var(--f-display); font-size: clamp(1.15rem, 2vw, 1.45rem);
+  letter-spacing: -.02em; line-height: 1.25; padding: 0; float: left;
+}
+.rate__scale {
+  clear: both; display: flex; justify-content: space-between; gap: var(--s4);
+  font-family: var(--f-mono); font-size: 10.5px; color: var(--ink-3);
+  margin: var(--s5) 0 6px; max-width: 460px;
+}
+.rate__row { display: flex; gap: 6px; max-width: 460px; }
+.rate__b { flex: 1; }
+.rate__b input { position: absolute; opacity: 0; width: 0; height: 0; }
+.rate__b span {
+  display: block; text-align: center; padding: 14px 0;
+  border: 1px solid var(--rule-2); border-radius: 3px; cursor: pointer;
+  font-family: var(--f-mono); font-size: 15px; color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+  transition: background var(--t-fast), color var(--t-fast), border-color var(--t-fast);
+}
+.rate__b:hover span { border-color: var(--ink); color: var(--ink); }
+.rate__b input:checked + span { background: var(--machine); border-color: var(--machine); color: var(--paper); }
+.rate__b input:focus-visible + span { outline: 2px solid var(--human); outline-offset: 3px; }
+.rate__echo {
+  margin-top: var(--s4); font-size: .9rem; color: var(--ink-2); line-height: 1.55;
+  max-width: 62ch; min-height: 1.4em;
+}
+.rate__echo b { color: var(--ink); font-weight: 600; }
+
+.note__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--s5); }
+.field { display: grid; gap: 6px; margin: 0; }
+.field--wide { grid-column: 1 / -1; }
+.field label { font-family: var(--f-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); }
+.field__opt { text-transform: none; letter-spacing: 0; color: var(--ink-3); font-size: 10.5px; }
+.field input, .field select, .field textarea {
+  font-family: var(--f-sans); font-size: .95rem; color: var(--ink);
+  background: var(--paper); border: 1px solid var(--rule-2); border-radius: 3px;
+  padding: 11px var(--s3); width: 100%;
+  transition: border-color var(--t-fast);
+}
+.field textarea { resize: vertical; min-height: 100px; line-height: 1.55; }
+.field input:hover, .field select:hover, .field textarea:hover { border-color: var(--ink-3); }
+.field input:focus, .field select:focus, .field textarea:focus { border-color: var(--machine); outline: none; box-shadow: 0 0 0 3px var(--machine-bg); }
+.field.is-bad input { border-color: var(--human); }
+
+.note__foot { display: grid; gap: var(--s4); margin-top: var(--s6); }
+.note__privacy { font-size: .84rem; color: var(--ink-3); line-height: 1.55; max-width: var(--measure); }
+.note__status { font-family: var(--f-mono); font-size: 12.5px; line-height: 1.6; max-width: var(--measure); min-height: 1.4em; }
+.note__status.is-ok { color: var(--machine); }
+.note__status.is-bad { color: var(--human); }
+.note__status a { color: inherit; }
+.note.is-sent .note__grid, .note.is-sent .rate__row { opacity: .5; pointer-events: none; }
+#nfSend[disabled] { opacity: .55; pointer-events: none; }
+
+@media (max-width: 560px) {
+  .rate__b span { padding: 12px 0; font-size: 14px; }
+  .rate__q { float: none; }
+}
 
 /* ── 25. Colophon ─────────────────────────────────────────────────────────── */
 .colophon { border-top: 1px solid var(--rule); padding: var(--s6) var(--pad) var(--s8); background: var(--paper-2); }
