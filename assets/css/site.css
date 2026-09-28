@@ -3,44 +3,45 @@
    Design system: "comic plate". Ligne claire + neo-pop: flat colour, one
    weight of black ink outline around everything, hard offset shadows with no
    blur, Ben-Day halftone dots, caption boxes and speech bubbles.
-   The inks are still the subtractive process inks, now printed at full
-   strength the way a pop-art plate prints them:
+   The ground is neutral white: no cream, no yellow, no warm tint anywhere.
+   The inks are the subtractive process inks, printed at full strength the
+   way a pop-art plate prints them:
      --human   magenta : anything measured by people
      --machine cyan    : anything measured by models
-     --pop     yellow  : narration only (captions, stickers, the current tab).
-                         It never encodes data.
+     --pop     black   : narration only (captions, section numbers, the
+                         current tab), in solid ink with white lettering.
    Text colours are darker cuts of each ink so they clear WCAG AA; the bright
    *-pop cuts are for fills only. See DESIGN.md, section 5.
    ═══════════════════════════════════════════════════════════════════════════ */
 
 /* ── 1. Tokens ────────────────────────────────────────────────────────────── */
 :root {
-  --paper:    #FFF6E0;   /* newsprint */
-  --paper-2:  #FFFDF7;   /* inside a panel */
-  --paper-3:  #F6E7BF;
+  --paper:    #F5F6F8;   /* neutral, no warm tint */
+  --paper-2:  #FFFFFF;   /* inside a panel */
+  --paper-3:  #E8EBEF;
   --ink:      #121212;
-  --ink-2:    #38332C;
-  --ink-3:    #5B544A;   /* 6.6:1 on --paper */
-  --rule:     #DCCDA6;
+  --ink-2:    #333840;
+  --ink-3:    #555C66;   /* 6.4:1 on --paper */
+  --rule:     #D3D8DE;
   --rule-2:   #121212;
   --line:     #121212;   /* the ligne claire outline */
   --shade:    #121212;   /* hard offset shadow colour */
   --dot:      rgb(18 18 18 / .07);
   --human:    #C4005F;   /* text cut, 5.6:1 */
   --human-pop:#FF2E93;   /* fill cut */
-  --human-bg: #FFD9EA;
+  --human-bg: #FFE0EE;
   --machine:  #006A87;   /* text cut, 5.7:1 */
   --machine-pop:#19C3F0;
   --machine-bg:#D2F3FF;
-  --pop:      #FFD60A;
-  --on-pop:   #121212;
+  --pop:      #121212;
+  --on-pop:   #FFFFFF;
 
   /* Type. Archivo Black is the headline: a flat, heavy grotesque that reads
      like poster lettering without the novelty of a "comic" face. Comic Neue is
      the voice inside speech bubbles, which is where every research question
      now lives. Atkinson Hyperlegible Next stays for body text, and JetBrains
      Mono for data: legibility of figures and IDs is not up for restyling.
-     Bangers appears only in stickers and the `break it` control, as SFX. */
+     Bangers appears only on the `break it` control, as SFX. */
   --f-display: "Archivo Black", "Arial Black", Impact, system-ui, sans-serif;
   --f-voice: "Comic Neue", "Comic Sans MS", "Chalkboard SE", system-ui, sans-serif;
   --f-sfx: "Bangers", "Archivo Black", Impact, sans-serif;
@@ -62,57 +63,7 @@
   --t-fast: 130ms cubic-bezier(.2,.6,.3,1);
   --t-mid: 300ms cubic-bezier(.2,.6,.3,1);
 
-  color-scheme: light;
-}
-
-/* Night edition: the page goes to a deep violet, outlines turn to cream ink,
-   and the hard shadows drop to true black underneath. */
-:root[data-theme="dark"] {
-  --paper:    #17141F;
-  --paper-2:  #221D2E;
-  --paper-3:  #2F2842;
-  --ink:      #FBF3DE;
-  --ink-2:    #D6CCB4;
-  --ink-3:    #ABA18C;
-  --rule:     #3B3350;
-  --rule-2:   #FBF3DE;
-  --line:     #FBF3DE;
-  --shade:    #000000;
-  --dot:      rgb(251 243 222 / .06);
-  --human:    #FF7DBC;
-  --human-pop:#FF2E93;
-  --human-bg: #43203A;
-  --machine:  #5FD8FF;
-  --machine-pop:#19C3F0;
-  --machine-bg:#123547;
-  --pop:      #FFD60A;
-  --on-pop:   #121212;
-  color-scheme: dark;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --paper:    #17141F;
-    --paper-2:  #221D2E;
-    --paper-3:  #2F2842;
-    --ink:      #FBF3DE;
-    --ink-2:    #D6CCB4;
-    --ink-3:    #ABA18C;
-    --rule:     #3B3350;
-    --rule-2:   #FBF3DE;
-    --line:     #FBF3DE;
-    --shade:    #000000;
-    --dot:      rgb(251 243 222 / .06);
-    --human:    #FF7DBC;
-    --human-pop:#FF2E93;
-    --human-bg: #43203A;
-    --machine:  #5FD8FF;
-    --machine-pop:#19C3F0;
-    --machine-bg:#123547;
-    --pop:      #FFD60A;
-    --on-pop:   #121212;
-    color-scheme: dark;
-  }
+  color-scheme: light only;
 }
 
 /* ── 2. Reset & base ──────────────────────────────────────────────────────── */
@@ -1048,7 +999,7 @@ a.certs__name:hover { color: var(--machine); border-bottom-color: var(--machine)
      · shadows are hard offsets of --shade with zero blur, never soft
      · flat fills only, no gradients except the Ben-Day dot pattern
      · questions are spoken, so they sit in speech bubbles
-     · narration (section numbers, captions, stickers) is yellow
+     · narration (section numbers, captions, current tab) is solid black ink
    ═══════════════════════════════════════════════════════════════════════════ */
 
 /* ── 30a. Ground, focus, selection ────────────────────────────────────────── */
@@ -1060,7 +1011,7 @@ body {
 :where(a, button, summary, input, [tabindex]):focus-visible {
   outline: 3px solid var(--human-pop); outline-offset: 3px; border-radius: 4px;
 }
-::selection { background: var(--pop); color: var(--on-pop); }
+::selection { background: var(--machine-bg); color: var(--ink); }
 
 /* Headline face is a single heavy cut; undo the tracking that was tuned for a
    light serif. */
@@ -1078,12 +1029,12 @@ h1, .band__title, .thesis__title, .job__title, .ship__t, .ships__h, .prov__h,
   box-shadow: 3px 3px 0 var(--shade);
   transition: background var(--t-fast), color var(--t-fast), transform var(--t-fast), box-shadow var(--t-fast);
 }
-.btn:hover { background: var(--pop); color: var(--on-pop); transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--shade); }
+.btn:hover { background: var(--machine-bg); color: var(--ink); transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--shade); }
 .btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--shade); }
 .btn--quiet { border-color: var(--line); color: var(--ink); }
 .btn--quiet:hover { border-color: var(--line); background: var(--machine-bg); color: var(--ink); }
 .btn--icon { border-color: var(--line); padding: 7px; }
-.btn--icon:hover { border-color: var(--line); background: var(--pop); color: var(--on-pop); }
+.btn--icon:hover { border-color: var(--line); background: var(--machine-bg); color: var(--ink); }
 .btn--big { background: var(--pop); color: var(--on-pop); border-color: var(--line); }
 .btn--big:hover { background: var(--human-pop); color: #121212; border-color: var(--line); }
 
@@ -1097,7 +1048,7 @@ h1, .band__title, .thesis__title, .job__title, .ship__t, .ships__h, .prov__h,
   border-radius: 10px; box-shadow: 3px 3px 0 var(--shade);
   transition: background var(--t-fast), color var(--t-fast), transform var(--t-fast), box-shadow var(--t-fast);
 }
-.break:hover { background: var(--pop); color: var(--on-pop); transform: translate(-1px, -1px) rotate(-.6deg); box-shadow: 4px 4px 0 var(--shade); }
+.break:hover { background: var(--human-bg); color: var(--ink); transform: translate(-1px, -1px) rotate(-.6deg); box-shadow: 4px 4px 0 var(--shade); }
 .break[aria-pressed="true"], .broke-d[open] > summary.break { background: var(--ink); color: var(--paper); }
 
 /* Tabs: the selected one is highlighted in the narration ink. */
@@ -1113,7 +1064,7 @@ h1, .band__title, .thesis__title, .job__title, .ship__t, .ships__h, .prov__h,
   box-shadow: 3px 3px 0 var(--shade); color: var(--ink);
   transition: transform var(--t-fast), box-shadow var(--t-fast), background var(--t-fast);
 }
-.vbtn:hover { border-color: var(--line); background: var(--pop); color: var(--on-pop); transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--shade); }
+.vbtn:hover { border-color: var(--line); background: var(--machine-bg); color: var(--ink); transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--shade); }
 .vbtn.is-picked { border-color: var(--line); background: var(--machine-bg); color: var(--ink); box-shadow: 1px 1px 0 var(--shade); transform: translate(2px, 2px); }
 
 .copy { border: var(--bw-s) solid var(--line); border-radius: 999px; color: var(--ink); background: var(--paper-2); }
@@ -1189,32 +1140,6 @@ h1, #hero-h { font-size: clamp(2rem, 5.2vw, 3.9rem); line-height: 1.04; }
   transform: rotate(-1.6deg);
 }
 
-.sticker {
-  position: absolute; top: -34px; right: -26px; width: 124px; height: 124px;
-  display: grid; place-items: center; text-decoration: none; color: var(--on-pop);
-  transform: rotate(10deg); transition: transform var(--t-mid); z-index: 2;
-}
-.sticker:hover { transform: rotate(-4deg) scale(1.06); }
-.sticker__burst { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-.sticker__burst polygon { fill: var(--pop); stroke: #121212; stroke-width: 3; stroke-linejoin: round; filter: drop-shadow(4px 4px 0 var(--shade)); }
-.sticker__t {
-  position: relative; font-family: var(--f-sfx); font-size: 19px; line-height: .95;
-  text-align: center; letter-spacing: .03em;
-}
-.sticker__t small { display: block; margin-top: 3px; font-family: var(--f-mono); font-size: 9.5px; letter-spacing: .06em; text-transform: uppercase; font-weight: 500; }
-
-.now {
-  margin-top: var(--s5); max-width: 58ch; padding: 12px 16px;
-  background: var(--paper-2); border: var(--bw-s) solid var(--line);
-  box-shadow: 4px 4px 0 var(--shade); font-size: .95rem; line-height: 1.55; color: var(--ink);
-}
-.now__k {
-  display: inline-block; margin-right: 6px; padding: 1px 8px;
-  font-family: var(--f-mono); font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
-  background: var(--human-pop); color: #121212; border: var(--bw-s) solid var(--line); border-radius: 999px;
-}
-.now a { color: var(--machine); font-weight: 700; }
-
 /* Thesis strip becomes the first comic panel. */
 .thesis {
   background: var(--paper-2); border: var(--bw) solid var(--line);
@@ -1228,13 +1153,11 @@ h1, #hero-h { font-size: clamp(2rem, 5.2vw, 3.9rem); line-height: 1.04; }
 
 /* ── 30g. Sections ────────────────────────────────────────────────────────── */
 .band { border-top: 0; }
-.band__title { font-size: clamp(2.1rem, 5vw, 3.3rem); text-shadow: 3px 3px 0 var(--pop); }
-:root[data-theme="dark"] .band__title { text-shadow: 3px 3px 0 var(--human-pop); }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .band__title { text-shadow: 3px 3px 0 var(--human-pop); } }
+.band__title { font-size: clamp(2.1rem, 5vw, 3.3rem); text-shadow: 3px 3px 0 var(--machine-bg); }
 
 .band--next, .band--score, .colophon {
   background-color: var(--paper-3);
-  background-image: radial-gradient(color-mix(in srgb, var(--pop) 55%, transparent) 1.5px, transparent 1.8px);
+  background-image: radial-gradient(color-mix(in srgb, var(--machine-pop) 30%, transparent) 1.5px, transparent 1.8px);
   background-size: 11px 11px;
   border-top: var(--bw) solid var(--line); border-bottom: var(--bw) solid var(--line);
 }
@@ -1254,73 +1177,7 @@ h1, #hero-h { font-size: clamp(2rem, 5.2vw, 3.9rem); line-height: 1.04; }
 .live { color: #121212; background: var(--human-pop); border: var(--bw-s) solid var(--line); border-radius: 999px; padding: 2px 9px; font-size: 10px; }
 .live::before { background: #121212; }
 
-.panel, .arch, .prov__wrap, .empty, .lim, .misc__d, .cvbox, .rate, .dataset, .delta, .ragout, .job, .kit__card, .ship--now {
-  border: var(--bw) solid var(--line); background: var(--paper);
-  box-shadow: 4px 4px 0 var(--shade);
-}
-.panel__bar { background: var(--paper-3); border-bottom: var(--bw-s) solid var(--line); }
-.panel__label { color: var(--ink); font-weight: 500; }
-.panel__foot, .panel__controls { border-top: var(--bw-s) solid var(--line); }
-
-.broke { border-left: 6px solid var(--human-pop); }
-.broke__label {
-  display: inline-block; padding: 2px 9px; color: #121212; background: var(--human-pop);
-  border: var(--bw-s) solid var(--line); border-radius: 999px;
-}
-.inv__hit { border: var(--bw-s) solid var(--line); background: var(--paper-2); }
-.inv__hit--bottom { border-left: 7px solid var(--human-pop); }
-.inv__hit--top { border-left: 7px solid var(--machine-pop); }
-
-.pipe__n { border: var(--bw-s) solid var(--line); background: var(--paper-2); border-radius: 6px; }
-.pipe__n.is-live { background: var(--machine-bg); border-color: var(--line); }
-.pipe__n.is-fail { background: var(--human-bg); border-color: var(--line); }
-.pipe__n::after { width: 2px; background: var(--line); }
-.ragout.is-abstain { background: var(--machine-bg); border-color: var(--line); }
-.ragout.is-halluc { background: var(--human-bg); border-color: var(--line); }
-
-.bar2__track { border: var(--bw-s) solid var(--line); background: var(--paper); }
-.bar2__f--pre { background: var(--paper-3); border: 0; border-right: var(--bw-s) solid var(--line); }
-.bar2__f--post { background: var(--machine-bg); border: 0; border-right: var(--bw-s) solid var(--line); }
-
-.squeeze__blob { border: var(--bw-s) dashed var(--line); background: var(--paper-2); }
-.squeeze__dot { background: var(--machine-pop); outline: var(--bw-s) solid var(--line); }
-.steps li { border-top-width: 4px; }
-.steps li.is-on { border-top-color: var(--machine-pop); color: var(--ink); font-weight: 700; }
-
-.empty { border-color: var(--line); }
-.empty__label { color: var(--human); border-bottom: var(--bw-s) solid var(--line); font-weight: 500; }
-.facts { border-top: var(--bw-s) solid var(--line); }
-.delta__to { color: var(--machine); font-weight: 700; }
-
-/* ── 30i. Systems, kit, evidence ──────────────────────────────────────────── */
-.job { padding: clamp(16px, 3vw, 32px); background: var(--paper-2); }
-.anode { border: var(--bw-s) solid transparent; border-radius: 8px; }
-.anode.is-on { background: var(--pop); color: var(--on-pop); border-color: var(--line); font-weight: 700; }
-.arch__flow { border-bottom: var(--bw-s) solid var(--line); padding: 6px; background: var(--paper-3); }
-.arch__flow li:not(:last-child)::after { color: var(--ink); font-weight: 700; }
-.job__more li { border-top: var(--bw-s) solid var(--line); }
-
-.ships__h { border-bottom: var(--bw) solid var(--line); }
-.ship__s { color: var(--ink); background: var(--machine-bg); border: var(--bw-s) solid var(--line); border-radius: 999px; font-weight: 500; }
-.ship__s--now { background: var(--human-pop); color: #121212; }
-.ship__nums b { color: var(--ink); }
-.ship__nums div:nth-child(1) b { color: var(--machine); }
-
-.ship--now {
-  display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: var(--s5);
-  padding: var(--s5); margin: var(--s5) 0 var(--s4); background: var(--paper-2);
-  scroll-margin-top: 90px;
-}
-.ship--now .ship__t { margin-top: 0; }
-.ship__art { width: 120px; height: 120px; }
-.art-bg { fill: var(--machine-bg); stroke: var(--line); stroke-width: 3; }
-.art-bone { fill: var(--paper-2); stroke: var(--line); stroke-width: 3; stroke-linejoin: round; }
-.art-meniscus { fill: var(--human-pop); stroke: var(--line); stroke-width: 2.5; stroke-linejoin: round; }
-.art-flag { fill: var(--pop); stroke: var(--line); stroke-width: 2.5; }
-.art-tick { fill: none; stroke: #121212; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
-@media (max-width: 560px) { .ship--now { grid-template-columns: 1fr; } .ship__art { width: 88px; height: 88px; } }
-
-.kit { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: var(--s6) var(--s5); }
+.panel, .arch, .prov__wrap, .empty, .lim, .misc__d, .cvbox, .rate, .dataset, .delta, .ragout, .job, .kit__card, .kit { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: var(--s6) var(--s5); }
 .kit__card { background: var(--paper-2); padding: var(--s5); display: flex; flex-direction: column; gap: var(--s3); position: relative; }
 .kit__card:nth-child(odd) { transform: rotate(-.5deg); }
 .kit__card:nth-child(even) { transform: rotate(.5deg); }
@@ -1330,7 +1187,7 @@ h1, #hero-h { font-size: clamp(2rem, 5.2vw, 3.9rem); line-height: 1.04; }
 .ic-fill-m, .ic-fill-p, .ic-fill-y { stroke: var(--line); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
 .ic-fill-m { fill: var(--machine-pop); }
 .ic-fill-p { fill: var(--human-pop); }
-.ic-fill-y { fill: var(--pop); }
+.ic-fill-y { fill: var(--paper-2); }
 .ic-fill-ink { fill: var(--line); }
 .kit__n { font-family: var(--f-mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
 .kit__h { font-family: var(--f-display); font-size: 1.35rem; line-height: 1.15; }
@@ -1358,7 +1215,7 @@ h1, #hero-h { font-size: clamp(2rem, 5.2vw, 3.9rem); line-height: 1.04; }
 .repo__lang::before { background: var(--machine-pop); outline: 1.5px solid var(--line); }
 
 .ledger__t thead th { border-bottom: var(--bw) solid var(--line); color: var(--ink); font-weight: 500; }
-.ledger__t tbody tr:nth-child(even) { background: color-mix(in srgb, var(--pop) 14%, transparent); }
+.ledger__t tbody tr:nth-child(even) { background: var(--paper); }
 .cvbox { background: var(--paper-2); }
 
 /* ── 30j. Trail, next, closing, form ──────────────────────────────────────── */
@@ -1376,7 +1233,7 @@ h1, #hero-h { font-size: clamp(2rem, 5.2vw, 3.9rem); line-height: 1.04; }
 }
 
 .closing__links a { border-bottom: 2px solid var(--line); font-weight: 500; }
-.closing__links a:hover { background: var(--pop); color: var(--on-pop); border-bottom-color: var(--line); }
+.closing__links a:hover { background: var(--machine-bg); color: var(--ink); border-bottom-color: var(--line); }
 
 .rate { background: var(--paper-2); }
 .rate__b span { border: var(--bw-s) solid var(--line); border-radius: 10px; background: var(--paper); color: var(--ink); box-shadow: 3px 3px 0 var(--shade); font-weight: 700; }
@@ -1390,22 +1247,20 @@ h1, #hero-h { font-size: clamp(2rem, 5.2vw, 3.9rem); line-height: 1.04; }
 .field label { color: var(--ink); font-weight: 500; }
 
 .colophon__conf .dotlive { background: var(--machine-pop); outline: 1.5px solid var(--line); }
-.toast { border: var(--bw) solid var(--pop); border-radius: 10px; box-shadow: 5px 5px 0 var(--shade); }
+.toast { border: var(--bw) solid var(--line); border-radius: 10px; box-shadow: 5px 5px 0 var(--shade); }
 .jm { color: var(--ink); background: var(--pop); border: var(--bw-s) solid var(--line); border-radius: 999px; }
 
 @media (max-width: 900px) {
-  .hero__portrait { max-width: 250px; margin-right: 40px; }
+  .hero__portrait { max-width: 250px; }
 }
 @media (max-width: 520px) {
   .xp { box-shadow: 4px 4px 0 var(--shade); }
-  .sticker { width: 104px; height: 104px; right: -34px; top: -26px; }
-  .sticker__t { font-size: 16px; }
 }
 
 /* Print: no shadows, no dot screens, no rotation. */
 @media print {
   body, .band--next, .band--score, .colophon { background: #fff !important; }
-  .hero__portrait picture::after, .sticker { display: none !important; }
+  .hero__portrait picture::after { display: none !important; }
   * { box-shadow: none !important; text-shadow: none !important; }
   .hero__portrait, .eyebrow, .kit__card, .dir__n { transform: none !important; }
 }

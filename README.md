@@ -54,7 +54,7 @@ legacy/                       the previous version of the site, kept for referen
 ```
 
 Eight sections: **the bench** (who and what) · **experiments** (five interactive
-exhibits) · **systems** (production engineering, plus the RSNA knee challenge) · **kit** (skills, by experiment step) · **evidence** (papers,
+exhibits) · **systems** (production engineering) · **kit** (skills, by experiment step) · **evidence** (papers,
 provenance map, live GitHub, CV) · **trail** (reverse-chronological, with linked
 certifications) · **next** (research directions) · **score it** (the rubric,
 turned on the page itself).

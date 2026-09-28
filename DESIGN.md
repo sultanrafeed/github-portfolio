@@ -242,8 +242,7 @@ light                          dark
 
 Every foreground token clears WCAG AA against its ground in both themes; the
 lowest is `--ink-3` at 4.75:1 light and 5.05:1 dark, and it is only used for
-meta text. Dark mode follows the system by default, can be overridden with the
-toggle, and persists. Both themes are designed, not inverted.
+meta text. (Superseded by section 5: the site is now light only.)
 
 ### Type
 
@@ -341,19 +340,24 @@ changed.
 
 **What the style is:** ligne claire and neo-pop. That means flat fills, one
 consistent weight of black outline around everything (3px on panels, 2px on
-controls), hard offset shadows with no blur, Ben-Day halftone dots, caption
-boxes and speech bubbles.
+controls), hard offset shadows with no blur, a faint halftone dot ground,
+caption boxes and speech bubbles.
 
 **Rules that changed on purpose:**
 
 - *"No box shadows"* is replaced by *"only hard shadows"*. A zero-blur offset of
   `--shade` is part of the comic line. A soft drop shadow is still banned.
-- *"Exactly two accents"* becomes two **semantic** inks and one **narration**
-  ink. `--pop` (yellow) is only used for captions, section numbers, stickers and
-  the selected tab. It never encodes data, so charts still read as
-  human = magenta and machine = cyan.
-- Each ink has a dark cut for text (`--human`, `--machine`, both AA on newsprint)
-  and a bright cut for fills (`--human-pop`, `--machine-pop`).
+- The ground is **neutral**: white panels on a cool light grey. No cream, no
+  beige, no yellow anywhere. A warm "paper" tint was tried and rejected as
+  looking like every other AI-generated page.
+- Magenta and cyan keep their meaning (human / machine). Narration (captions,
+  section numbers, the selected tab) is solid black ink with white lettering,
+  so it never competes with the two data colours.
+- Each ink has a dark cut for text (`--human`, `--machine`, both AA on the
+  ground) and a bright cut for fills (`--human-pop`, `--machine-pop`).
+
+**Light only.** There is no dark theme. One carefully drawn edition beats two
+that are each half-checked, and the comic line reads best as black ink on white.
 
 **Type, remapped:**
 
@@ -363,22 +367,15 @@ boxes and speech bubbles.
 | Voice | Comic Neue 700 | **a question is spoken, so it goes in a speech bubble** (replaces serif italic) |
 | Text | Atkinson Hyperlegible Next | unchanged, because legibility is not a style choice |
 | Data | JetBrains Mono | unchanged: mono = a measurement |
-| SFX | Bangers | stickers and `break it` only |
+| SFX | Bangers | the `break it` control only |
 
-**Night edition:** a deep violet ground, cream outlines and black shadows,
-designed separately rather than inverted.
-
-**Illustrations** are inline SVG drawn in the same line (the Kaggle sticker, the
-knee joint on the RSNA card, the six icons in the lab kit). Each is a few hundred
-bytes and inherits theme colours from the tokens.
+**Illustrations** are inline SVG drawn in the same line (the six icons in the
+lab kit), a few hundred bytes each.
 
 **Print** switches all of it off: no dots, no shadows, no rotation.
 
 ### Content added at the same time
 
-- **RSNA Knee Abnormality Detection** (Kaggle, closes 22 Oct 2026) appears in the
-  hero, in Systems, in the Trail and in the ledger. No placing is shown, because
-  there is none yet (rule 3).
 - **The lab kit** (Section 03): skills from the CV, grouped by the step of an
   experiment they serve, and each group links to where it was used on the page
   (rule 2, applied to skills).

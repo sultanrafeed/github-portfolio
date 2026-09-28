@@ -28,27 +28,6 @@
      the section can be scrolled to. */
   $$('[data-js-collapse]').forEach(el => { el.hidden = true; });
 
-  /* ── Theme ──────────────────────────────────────────────────────────────── */
-  (function theme() {
-    const root = document.documentElement;
-    const btn = $('#themeToggle');
-    const saved = localStorage.getItem('theme');
-    if (saved === 'dark' || saved === 'light') root.setAttribute('data-theme', saved);
-
-    const isDark = () => root.getAttribute('data-theme') === 'dark' ||
-      (!root.hasAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches);
-
-    const sync = () => btn && btn.setAttribute('aria-pressed', String(isDark()));
-    sync();
-
-    btn && btn.addEventListener('click', () => {
-      const next = isDark() ? 'light' : 'dark';
-      root.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-      sync();
-    });
-  })();
-
   /* ── Scroll spy ─────────────────────────────────────────────────────────── */
   (function spy() {
     const links = $$('.topbar__nav a');
@@ -774,8 +753,7 @@
          than writing a meaningless "0x0" into the sheet. */
       screen: (screen.width && screen.height) ? `${screen.width}x${screen.height}` : 'unknown',
       viewport: `${innerWidth}x${innerHeight}`,
-      theme: document.documentElement.getAttribute('data-theme') ||
-             (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark (system)' : 'light (system)'),
+      theme: 'light',
       country: '', region: '', city: ''
     };
 
