@@ -13,8 +13,11 @@ does not "improve" a deliberate decision by accident.
 >   set (`.skin-lime`, `.skin-ink`, `.skin-blue`, `.skin-paper`, `.skin-red`,
 >   `.skin-yellow` in `site.css`). Components are written once against tokens,
 >   so `--human` and `--machine` still mean people vs models on every sheet.
->   Dark mode now only re-themes the neutral paper sheet; the coloured sheets are
->   the identity and stay put.
+>   Dark mode re-themes every sheet: each colour becomes a deep version of
+>   itself and the original colour moves into the accents and ghost wordmark.
+> - **Portrait.** An untinted sketch-style illustration on a flat sage card
+>   (`assets/img/rafeed-sketch-*`), generated from the Sydney photo: background
+>   removed, pencil/dodge render, flat tonal shading, ink outlines.
 > - **Type.** Archivo (heavy grotesk for headlines, 62% width for stacked poster
 >   caps), Newsreader for anything read at length, JetBrains Mono for every
 >   measurement, Courier Prime inside the hand-drawn pills.
@@ -22,8 +25,8 @@ does not "improve" a deliberate decision by accident.
 >   (`data-ghost`), hairline rules under each headline line, `+` kickers, a
 >   drop cap, colour-block pull quotes, a rotated "Sources" column beside the
 >   ledger.
-> - **Campaign devices.** Pill navigation and a rotating round badge, duotone
->   portrait, circle-arrow buttons, black-box serif statements.
+> - **Campaign devices.** Pill navigation and a rotating round badge,
+>   circle-arrow buttons, black-box serif statements.
 > - **Poster devices.** Stacked condensed caps in the closing, `WRITE ──→`
 >   wayfinding, and inline-SVG doodles (stars, bursts, sparks, a smiley) drawn
 >   with an `feTurbulence` wobble. All doodles are `aria-hidden` and hidden on

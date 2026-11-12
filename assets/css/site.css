@@ -73,8 +73,7 @@
   color-scheme: light;
 }
 
-/* Dark theme only changes the neutral (paper) sheets. The coloured sheets are
-   the identity of the page and stay as they are in both themes. */
+/* Dark theme: root tokens (paper sheet) here; coloured sheets in 1c. */
 :root[data-theme="dark"] {
   --paper: #141414; --paper-2: #1E1E1E; --paper-3: #2A2A2A;
   --ink: #F3F3EE; --ink-2: #C4C4BC; --ink-3: #9C9C94;
@@ -147,6 +146,35 @@
 
 .skin-lime, .skin-ink, .skin-blue, .skin-red, .skin-yellow, .skin-paper {
   background: var(--paper); color: var(--ink);
+}
+
+
+/* ── 1c. Dark theme for the coloured sheets ───────────────────────────────
+   The toggle re-themes every sheet, not just paper: each colour becomes a
+   deep version of itself and the original colour moves into the accents. */
+:root[data-theme="dark"] .skin-lime { --paper:#151710; --paper-2:#1E2117; --paper-3:#2A2E1F; --ink:#EEF2D8; --ink-2:#C9CFAE; --ink-3:#A0A684; --rule:#3A3F2A; --rule-2:#EEF2D8; --human:#FF8A70; --human-bg:#3A1A12; --machine:#D4E36F; --machine-bg:#2A3112; --accent:#D4E36F; --ghost:#D4E36F; --ghost-o:.07; color-scheme: dark; }
+:root[data-theme="dark"] .skin-blue { --paper:#0F1626; --paper-2:#172036; --paper-3:#212C46; --ink:#E8EEFA; --ink-2:#BCC8E0; --ink-3:#94A3C2; --rule:#2E3B5A; --rule-2:#E8EEFA; --human:#FF8A70; --human-bg:#3A1A12; --machine:#8FB4F5; --machine-bg:#1A2A4D; --accent:#8FB4F5; --ghost:#74A3EE; --ghost-o:.1; color-scheme: dark; }
+:root[data-theme="dark"] .skin-red { --paper:#1C0F0D; --paper-2:#281613; --paper-3:#36201B; --ink:#FBEDEA; --ink-2:#E3C6BF; --ink-3:#BFA098; --rule:#4A2C25; --rule-2:#FBEDEA; --human:#FFE11A; --human-bg:#3A320A; --machine:#FF8A70; --machine-bg:#3A1A12; --accent:#FF6B55; --ghost:#CF2E19; --ghost-o:.25; color-scheme: dark; }
+:root[data-theme="dark"] .skin-yellow { --paper:#1A170A; --paper-2:#242010; --paper-3:#312B16; --ink:#F8F1D0; --ink-2:#D8CFA6; --ink-3:#ADA580; --rule:#403920; --rule-2:#F8F1D0; --human:#FF8A70; --human-bg:#3A1A12; --machine:#FFE11A; --machine-bg:#3A320A; --accent:#FFE11A; --ghost:#FFE11A; --ghost-o:.08; color-scheme: dark; }
+:root[data-theme="dark"] .dir { background: var(--paper-2); color: var(--ink); border-color: var(--rule); --ink:#F8F1D0; --ink-2:#D8CFA6; --ink-3:#ADA580; --machine:#FFE11A; }
+:root[data-theme="dark"] .dir:nth-child(2) { --machine:#8FB4F5; }
+:root[data-theme="dark"] .dir:nth-child(3) { --machine:#FF8A70; }
+:root[data-theme="dark"] .ship:nth-of-type(2) { background: var(--paper-3); }
+:root[data-theme="dark"] #hero-h em span, :root[data-theme="dark"] .thesis__punch strong { background: var(--lime); color: var(--ink-k); }
+:root[data-theme="dark"] .art { box-shadow: 0 0 0 1.5px var(--rule); }
+:root[data-theme="dark"] { --d-ink: #EDEDE6; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .skin-lime { --paper:#151710; --paper-2:#1E2117; --paper-3:#2A2E1F; --ink:#EEF2D8; --ink-2:#C9CFAE; --ink-3:#A0A684; --rule:#3A3F2A; --rule-2:#EEF2D8; --human:#FF8A70; --human-bg:#3A1A12; --machine:#D4E36F; --machine-bg:#2A3112; --accent:#D4E36F; --ghost:#D4E36F; --ghost-o:.07; color-scheme: dark; }
+  :root:not([data-theme="light"]) .skin-blue { --paper:#0F1626; --paper-2:#172036; --paper-3:#212C46; --ink:#E8EEFA; --ink-2:#BCC8E0; --ink-3:#94A3C2; --rule:#2E3B5A; --rule-2:#E8EEFA; --human:#FF8A70; --human-bg:#3A1A12; --machine:#8FB4F5; --machine-bg:#1A2A4D; --accent:#8FB4F5; --ghost:#74A3EE; --ghost-o:.1; color-scheme: dark; }
+  :root:not([data-theme="light"]) .skin-red { --paper:#1C0F0D; --paper-2:#281613; --paper-3:#36201B; --ink:#FBEDEA; --ink-2:#E3C6BF; --ink-3:#BFA098; --rule:#4A2C25; --rule-2:#FBEDEA; --human:#FFE11A; --human-bg:#3A320A; --machine:#FF8A70; --machine-bg:#3A1A12; --accent:#FF6B55; --ghost:#CF2E19; --ghost-o:.25; color-scheme: dark; }
+  :root:not([data-theme="light"]) .skin-yellow { --paper:#1A170A; --paper-2:#242010; --paper-3:#312B16; --ink:#F8F1D0; --ink-2:#D8CFA6; --ink-3:#ADA580; --rule:#403920; --rule-2:#F8F1D0; --human:#FF8A70; --human-bg:#3A1A12; --machine:#FFE11A; --machine-bg:#3A320A; --accent:#FFE11A; --ghost:#FFE11A; --ghost-o:.08; color-scheme: dark; }
+  :root:not([data-theme="light"]) .dir { background: var(--paper-2); color: var(--ink); border-color: var(--rule); --ink:#F8F1D0; --ink-2:#D8CFA6; --ink-3:#ADA580; --machine:#FFE11A; }
+  :root:not([data-theme="light"]) .dir:nth-child(2) { --machine:#8FB4F5; }
+  :root:not([data-theme="light"]) .dir:nth-child(3) { --machine:#FF8A70; }
+  :root:not([data-theme="light"]) .ship:nth-of-type(2) { background: var(--paper-3); }
+  :root:not([data-theme="light"]) #hero-h em span, :root:not([data-theme="light"]) .thesis__punch strong { background: var(--lime); color: var(--ink-k); }
+  :root:not([data-theme="light"]) .art { box-shadow: 0 0 0 1.5px var(--rule); }
+  :root:not([data-theme="light"]) { --d-ink: #EDEDE6; }
 }
 
 /* ── 2. Reset & base ──────────────────────────────────────────────────────── */
@@ -335,22 +363,10 @@ a { color: inherit; }
 }
 
 .hero__portrait { margin: 0; position: relative; width: 100%; max-width: 380px; margin-top: var(--s4); justify-self: center; }
-/* Duotone, after the campaign photography: the photo is printed in black over
-   a red-to-pink field, with a lime band bleeding in at the foot. */
-.duo {
-  position: relative; overflow: hidden; aspect-ratio: 4 / 5;
-  background: linear-gradient(170deg, #B9D2F7 0%, #8DB3F0 45%, #6E9AE6 78%, #D4E36F 98%);
-}
-.duo img {
-  width: 100%; height: 100%; object-fit: cover;
-  filter: grayscale(1) contrast(1.1) brightness(1.12);
-  mix-blend-mode: multiply;
-}
-.duo__band {
-  position: absolute; left: 0; right: 0; bottom: 0; height: 16%;
-  background: linear-gradient(to bottom, transparent, var(--lime) 70%);
-  mix-blend-mode: screen; opacity: .9;
-}
+/* The portrait is an illustration (sketch render on a flat sage card), after
+   the editorial "object on a plain ground" image style. No tint, no blend. */
+.art { aspect-ratio: 1 / 1; overflow: hidden; background: #BCCB7E; }
+.art img { width: 100%; height: 100%; object-fit: cover; }
 .hero__portrait figcaption {
   margin-top: var(--s3); font-family: var(--f-mono); font-size: 11.5px;
   line-height: 1.5; color: var(--ink-2); letter-spacing: .02em;
@@ -794,12 +810,12 @@ h1, #hero-h {
 .arch__flow li:not(:last-child)::after { content: "→"; color: var(--ink); padding: 0 2px; font-size: 14px; }
 .anode {
   flex: 1; padding: 9px var(--s3); font-family: var(--f-sans); font-weight: 600; font-size: 12.5px;
-  color: var(--ink); border: var(--line) solid var(--ink); border-radius: 999px; white-space: nowrap; background: #fff;
+  color: var(--ink); border: var(--line) solid var(--ink); border-radius: 999px; white-space: nowrap; background: var(--paper-2);
   transition: background var(--t-fast), color var(--t-fast), border-color var(--t-fast);
 }
-.anode:hover { background: var(--yellow); }
-.anode.is-on { background: var(--ink); color: #fff; }
-.arch__detail { padding: var(--s5) var(--s4); min-height: 116px; background: #fff; }
+.anode:hover { background: var(--paper-3); }
+.anode.is-on { background: var(--ink); color: var(--paper-2); }
+.arch__detail { padding: var(--s5) var(--s4); min-height: 116px; background: var(--paper-2); }
 .arch__title { font-family: var(--f-display); font-weight: 800; font-size: 1.45rem; letter-spacing: -.03em; }
 .arch__text { margin-top: var(--s2); color: var(--ink-2); font-size: 1.05rem; line-height: 1.5; max-width: 62ch; }
 
@@ -1147,12 +1163,12 @@ a.certs__name:hover { border-bottom-color: var(--ink); }
 .doodle {
   position: absolute; z-index: 0; pointer-events: none;
   width: var(--sz, 90px); height: var(--sz, 90px);
-  fill: var(--d-fill, var(--yellow)); stroke: var(--ink-k); stroke-width: 4;
+  fill: var(--d-fill, var(--yellow)); stroke: var(--d-ink, #121212); stroke-width: 4;
   stroke-linejoin: round; stroke-linecap: round;
   transform: rotate(var(--rot, 0deg));
   overflow: visible;
 }
-.doodle--line { fill: none; stroke: var(--d-fill, var(--ink-k)); stroke-width: 6; }
+.doodle--line { fill: none; stroke: var(--d-fill, var(--d-ink, #121212)); stroke-width: 6; }
 .band > *:not(.doodle), .closing__in > *:not(.doodle), .hero__grid > * { position: relative; z-index: 1; }
 @media (max-width: 700px) { .doodle--hide-sm { display: none; } }
 @media (prefers-reduced-motion: no-preference) {
@@ -1217,7 +1233,6 @@ kbd { font-family: var(--f-mono); font-size: .85em; border: 1.5px solid currentC
   }
   body { font-size: 10.5pt; }
   .band, .hero, .closing, .colophon { padding: 12pt 0; }
-  .duo { background: none; } .duo img { mix-blend-mode: normal; }
   details { display: block; }
   details > summary { list-style: none; }
   .sheet, .reveal, .broke, .misc__grid { display: block !important; }
