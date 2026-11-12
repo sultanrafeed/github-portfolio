@@ -18,15 +18,14 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="A model can look aligned without being aligned. Bar chart of four automatic judges and their agreement with human labels, ranging from rho -0.71 to degenerate.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#EEF1F3" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0E1316" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#DCF21E">
 
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23EEF1F3'/%3E%3Crect x='5' y='6' width='4' height='20' fill='%23A31D5B'/%3E%3Crect x='13' y='13' width='4' height='13' fill='%230B6C82'/%3E%3Crect x='21' y='9' width='4' height='17' fill='%230B6C82'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%23121212'/%3E%3Crect x='9' y='9' width='3.4' height='14' fill='%23FFE11A'/%3E%3Crect x='14.3' y='14' width='3.4' height='9' fill='%23DCF21E'/%3E%3Crect x='19.6' y='11' width='3.4' height='12' fill='%23DCF21E'/%3E%3C/svg%3E">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,400..700;1,400..600&family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+Bengali:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/site.css?v=13">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..900;1,62..125,400..700&family=Courier+Prime&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&family=Noto+Sans+Bengali:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css?v=14">
 
 <script type="application/ld+json">
 {
@@ -54,14 +53,48 @@
 <body>
 <a class="skip" href="#experiments">Skip to the experiments</a>
 
+<!-- Hand-drawn doodle sprite. Decorative only; every use is aria-hidden. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <filter id="wobble" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7"></feTurbulence>
+      <feDisplacementMap in="SourceGraphic" scale="5"></feDisplacementMap>
+    </filter>
+    <symbol id="d-star" viewBox="0 0 100 100">
+      <path filter="url(#wobble)" d="M50 7 Q55 24 61 37 Q79 36 94 39 Q81 50 68 59 Q73 76 78 92 Q63 82 50 73 Q36 83 22 91 Q27 75 32 59 Q18 49 6 39 Q23 37 39 36 Q44 21 50 7 Z"></path>
+    </symbol>
+    <symbol id="d-burst" viewBox="0 0 100 100">
+      <path filter="url(#wobble)" d="M50 4 L57 32 L80 12 L68 39 L96 38 L71 52 L92 72 L64 64 L66 94 L50 70 L35 94 L36 64 L8 72 L29 52 L4 38 L32 39 L20 12 L43 32 Z"></path>
+    </symbol>
+    <symbol id="d-spark" viewBox="0 0 100 100">
+      <g filter="url(#wobble)"><path d="M18 62 L44 50"></path><path d="M30 86 L52 64"></path><path d="M56 92 L64 70"></path></g>
+    </symbol>
+    <symbol id="d-smile" viewBox="0 0 100 100">
+      <g filter="url(#wobble)">
+        <ellipse cx="50" cy="52" rx="40" ry="44"></ellipse>
+        <circle cx="36" cy="42" r="4.5" style="fill:#121212"></circle>
+        <circle cx="62" cy="40" r="4.5" style="fill:#121212"></circle>
+        <path d="M32 64 Q48 80 68 62" style="fill:none"></path>
+      </g>
+    </symbol>
+    <symbol id="d-squiggle" viewBox="0 0 100 100">
+      <path filter="url(#wobble)" d="M6 60 Q18 30 30 58 T54 58 T78 58 T96 52" style="fill:none"></path>
+    </symbol>
+  </defs>
+</svg>
+
 <header class="topbar">
-  <a class="topbar__mark" href="#top">
-    <svg viewBox="0 0 32 32" width="18" height="18" aria-hidden="true" focusable="false">
-      <rect x="5" y="6" width="4" height="20" class="sw-h"></rect>
-      <rect x="13" y="13" width="4" height="13" class="sw-m"></rect>
-      <rect x="21" y="9" width="4" height="17" class="sw-m"></rect>
+  <a class="topbar__mark" href="#top" aria-label="Rafeed Sultan, back to top">
+    <svg class="badge" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+      <defs><path id="badgeRing" d="M50,50 m-35,0 a35,35 0 1,1 70,0 a35,35 0 1,1 -70,0"></path></defs>
+      <circle class="badge__bg" cx="50" cy="50" r="50"></circle>
+      <g class="badge__spin">
+        <text class="badge__txt"><textPath href="#badgeRing" textLength="216" lengthAdjust="spacing">RAFEED SULTAN · ALIGNED OR LOOKS IT ·</textPath></text>
+      </g>
+      <rect class="badge__bar--h" x="38" y="38" width="6" height="24"></rect>
+      <rect class="badge__bar--m" x="47" y="47" width="6" height="15"></rect>
+      <rect class="badge__bar--m" x="56" y="42" width="6" height="20"></rect>
     </svg>
-    <span>Rafeed Sultan</span>
   </a>
 
   <nav class="topbar__nav" aria-label="Sections">
@@ -74,7 +107,7 @@
   </nav>
 
   <div class="topbar__end">
-    <a class="btn btn--quiet" href="rafeed_sultan_Researcher_CV.pdf" download>CV<span class="vh"> (PDF)</span></a>
+    <a class="btn btn--dark" href="rafeed_sultan_Researcher_CV.pdf" download>CV<span class="vh"> (PDF)</span></a>
     <button class="btn btn--icon" id="themeToggle" type="button" aria-pressed="false" title="Switch theme">
       <svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true" focusable="false">
         <circle cx="8" cy="8" r="3.4" fill="none" stroke="currentColor" stroke-width="1.3"></circle>
@@ -89,15 +122,31 @@
 <main id="top">
 
 <!-- ══════════════════════════════════ THE BENCH ══════════════════════════════════ -->
-<section class="hero" aria-labelledby="hero-h">
+<section class="hero skin-lime" data-ghost="Rafeed Sultan" aria-labelledby="hero-h">
   <div class="hero__grid">
+
+    <figure class="hero__portrait">
+      <div class="duo">
+        <picture>
+          <source type="image/webp" srcset="assets/img/rafeed-440.webp 440w, assets/img/rafeed-880.webp 880w"
+                  sizes="(max-width: 900px) 92vw, 560px">
+          <img src="assets/img/rafeed-880.jpg" width="880" height="1100"
+               alt="Rafeed Mohammad Sultan standing on a rocky coastline near Sydney." decoding="async">
+        </picture>
+        <span class="duo__band" aria-hidden="true"></span>
+      </div>
+      <span class="hero__stamp pill-tw pill-tw--yellow" aria-hidden="true">Master of AI · UTS</span>
+      <svg class="doodle doodle--bob" style="--sz:84px; --rot:-12deg; left:-28px; bottom:56px" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><use href="#d-star"></use></svg>
+      <svg class="doodle doodle--line" style="--sz:54px; --rot:10deg; right:-10px; bottom:-8px" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><use href="#d-spark"></use></svg>
+      <figcaption>Image: Sydney, 2026. Currently on a subclass&nbsp;500 student visa with work rights.</figcaption>
+    </figure>
 
     <div class="hero__lede">
       <p class="eyebrow">Rafeed Mohammad Sultan <span class="sep">/</span> Sydney, NSW</p>
 
       <h1 id="hero-h">
-        A model can look aligned without being aligned.
-        <em>My work is telling the difference.</em>
+        <span class="h1__a">A model can look aligned without being aligned.</span>
+        <em><span>My work is telling the difference.</span></em>
       </h1>
 
       <p class="hero__body">
@@ -120,21 +169,11 @@
       </p>
 
       <p class="hero__links">
-        <a class="btn" href="#experiments">Start with the experiments</a>
+        <a class="btn btn--arrow" href="#experiments">Start with the experiments</a>
         <a class="btn btn--quiet" href="mailto:sultanrafeed@gmail.com">sultanrafeed@gmail.com</a>
         <a class="btn btn--quiet" href="https://github.com/sultanrafeed" rel="me noopener">GitHub</a>
       </p>
     </div>
-
-    <figure class="hero__portrait">
-      <picture>
-        <source type="image/webp" srcset="assets/img/rafeed-440.webp 440w, assets/img/rafeed-880.webp 880w"
-                sizes="(max-width: 900px) 280px, 340px">
-        <img src="assets/img/rafeed-880.jpg" width="880" height="1100"
-             alt="Rafeed Mohammad Sultan standing on a rocky coastline near Sydney." decoding="async">
-      </picture>
-      <figcaption>Sydney, 2026. Currently on a subclass&nbsp;500 student visa with work rights.</figcaption>
-    </figure>
 
   </div>
 
@@ -183,7 +222,7 @@
 </section>
 
 <!-- ══════════════════════════════════ EXPERIMENTS ══════════════════════════════════ -->
-<section id="experiments" class="band" aria-labelledby="exp-h">
+<section id="experiments" class="band skin-ink" data-ghost="Experiments" aria-labelledby="exp-h">
   <div class="band__head">
     <p class="eyebrow">Section 01</p>
     <h2 id="exp-h" class="band__title">Experiments</h2>
@@ -702,7 +741,9 @@
 </section>
 
 <!-- ══════════════════════════════════ SYSTEMS ══════════════════════════════════ -->
-<section id="systems" class="band" aria-labelledby="sys-h">
+<section id="systems" class="band skin-blue" data-ghost="Systems" aria-labelledby="sys-h">
+  <svg class="doodle doodle--bob doodle--hide-sm" style="--sz:110px; --rot:-6deg; right:6%; top:150px" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><use href="#d-star"></use></svg>
+  <svg class="doodle doodle--line doodle--hide-sm" style="--sz:70px; right:15%; top:130px" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><use href="#d-spark"></use></svg>
   <div class="band__head">
     <p class="eyebrow">Section 02</p>
     <h2 id="sys-h" class="band__title">Systems</h2>
@@ -807,7 +848,7 @@
 </section>
 
 <!-- ══════════════════════════════════ EVIDENCE ══════════════════════════════════ -->
-<section id="evidence" class="band" aria-labelledby="ev-h">
+<section id="evidence" class="band skin-paper" data-ghost="Evidence" aria-labelledby="ev-h">
   <div class="band__head">
     <p class="eyebrow">Section 03</p>
     <h2 id="ev-h" class="band__title">Evidence</h2>
@@ -1014,7 +1055,7 @@
 </section>
 
 <!-- ══════════════════════════════════ TRAIL ══════════════════════════════════ -->
-<section id="trail" class="band" aria-labelledby="tr-h">
+<section id="trail" class="band skin-red" data-ghost="Trail" aria-labelledby="tr-h">
   <div class="band__head">
     <p class="eyebrow">Section 04</p>
     <h2 id="tr-h" class="band__title">Trail</h2>
@@ -1172,7 +1213,10 @@
 </section>
 
 <!-- ══════════════════════════════════ NEXT ══════════════════════════════════ -->
-<section id="next" class="band band--next" aria-labelledby="nx-h">
+<section id="next" class="band skin-yellow" data-ghost="Next" aria-labelledby="nx-h">
+  <svg class="doodle doodle--bob doodle--hide-sm" style="--sz:130px; --rot:-10deg; right:6%; top:150px; --d-fill:#CF2E19" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><use href="#d-smile"></use></svg>
+  <svg class="doodle doodle--hide-sm" style="--sz:80px; --rot:18deg; right:19%; top:110px; --d-fill:#fff" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><use href="#d-star"></use></svg>
+  <svg class="doodle doodle--line doodle--hide-sm" style="--sz:110px; right:4%; top:320px" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><use href="#d-squiggle"></use></svg>
   <div class="band__head">
     <p class="eyebrow">Section 05</p>
     <h2 id="nx-h" class="band__title">The next experiment</h2>
@@ -1231,8 +1275,12 @@
 </section>
 
 <!-- ══════════════════════════════════ CONTACT ══════════════════════════════════ -->
-<section id="contact" class="closing" aria-labelledby="ct-h">
+<section id="contact" class="closing skin-ink" aria-labelledby="ct-h">
   <div class="closing__in">
+    <svg class="doodle doodle--bob doodle--hide-sm" style="--sz:150px; --rot:14deg; right:2%; top:-20px" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><use href="#d-burst"></use></svg>
+    <svg class="doodle doodle--hide-sm" style="--sz:90px; --rot:-8deg; right:20%; top:150px; --d-fill:#DCF21E" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><use href="#d-star"></use></svg>
+    <svg class="doodle doodle--line doodle--hide-sm" style="--sz:80px; right:13%; top:60px; --d-fill:#FFE11A" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><use href="#d-spark"></use></svg>
+    <p class="poster" aria-hidden="true"><span>Read it.</span><span>Test it.</span><span>Break it.</span></p>
     <h2 id="ct-h" class="closing__h">
       I am looking for a research home in alignment, evaluation and multilingual NLP.
       <em>If that is your area, I would like to talk.</em>
@@ -1242,6 +1290,7 @@
       page. And if something here does not hold up, I would rather hear it than not:
       most of the useful corrections to this work have arrived that way.
     </p>
+    <a class="wayfind" href="mailto:sultanrafeed@gmail.com">Write <span class="wayfind__arrow" aria-hidden="true"></span> <span class="wayfind__to">sultanrafeed@gmail.com</span></a>
     <ul class="closing__links">
       <li><a href="mailto:sultanrafeed@gmail.com">sultanrafeed@gmail.com</a>
         <button class="copy" id="copyMail" type="button" data-copy="sultanrafeed@gmail.com">copy</button></li>
@@ -1257,7 +1306,10 @@
 </section>
 
 <!-- ══════════════════════════════════ SCORE + NOTE ══════════════════════════════════ -->
-<section id="score" class="band band--score" aria-labelledby="sc-h" data-lazy="note">
+<section id="score" class="band skin-blue" data-ghost="Score it" aria-labelledby="sc-h" data-lazy="note">
+  <svg class="doodle doodle--bob doodle--hide-sm" style="--sz:120px; --rot:8deg; right:5%; top:140px" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><use href="#d-burst"></use></svg>
+  <svg class="doodle doodle--hide-sm" style="--sz:70px; --rot:-14deg; right:17%; top:250px" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><use href="#d-star"></use></svg>
+  <svg class="doodle doodle--line doodle--hide-sm" style="--sz:70px; right:14%; top:120px" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><use href="#d-spark"></use></svg>
   <div class="band__head">
     <p class="eyebrow">Experiment 06</p>
     <h2 id="sc-h" class="band__title">Now score the page</h2>
@@ -1325,7 +1377,7 @@
 
 </main>
 
-<footer class="colophon">
+<footer class="colophon skin-lime" data-ghost="Rafeed Sultan">
   <div class="colophon__in">
     <p class="colophon__conf">
       <span class="dotlive" aria-hidden="true"></span>
@@ -1348,6 +1400,6 @@
 
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
-<script src="assets/js/site.js?v=13" defer></script>
+<script src="assets/js/site.js?v=14" defer></script>
 </body>
 </html>

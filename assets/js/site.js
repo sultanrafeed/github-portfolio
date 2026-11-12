@@ -49,6 +49,27 @@
     });
   })();
 
+  /* ── Top bar: shrink the badge once the page has scrolled ──────────────── */
+  (function bar() {
+    const bar = $('.topbar');
+    if (!bar) return;
+    /* Hide on the way down so the floating pills never sit on top of what you
+       are reading; bring them back the moment you scroll up. Focus inside the
+       bar always shows it, so keyboard users never tab into an invisible nav. */
+    let last = scrollY;
+    const set = () => {
+      const y = scrollY;
+      bar.classList.toggle('is-scrolled', y > 40);
+      if (Math.abs(y - last) > 6) {
+        bar.classList.toggle('is-away', y > last && y > 240 && !bar.contains(document.activeElement));
+        last = y;
+      }
+    };
+    set();
+    addEventListener('scroll', set, { passive: true });
+    bar.addEventListener('focusin', () => bar.classList.remove('is-away'));
+  })();
+
   /* ── Scroll spy ─────────────────────────────────────────────────────────── */
   (function spy() {
     const links = $$('.topbar__nav a');

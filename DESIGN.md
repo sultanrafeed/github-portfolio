@@ -4,6 +4,34 @@ This file is the reasoning behind the site. It exists so the next person to touc
 the code (probably future Rafeed) knows *why* something is the way it is, and
 does not "improve" a deliberate decision by accident.
 
+> **Update, November 2026: visual redesign ("poster wall").** Sections 4's
+> colour and type tables below describe the previous "process plate" look and are
+> kept for history. The content, exhibits, interactions and the human/machine
+> colour semantics are unchanged. What changed:
+>
+> - **Sheets.** Every section is a full-bleed colour block with its own token
+>   set (`.skin-lime`, `.skin-ink`, `.skin-blue`, `.skin-paper`, `.skin-red`,
+>   `.skin-yellow` in `site.css`). Components are written once against tokens,
+>   so `--human` and `--machine` still mean people vs models on every sheet.
+>   Dark mode now only re-themes the neutral paper sheet; the coloured sheets are
+>   the identity and stay put.
+> - **Type.** Archivo (heavy grotesk for headlines, 62% width for stacked poster
+>   caps), Newsreader for anything read at length, JetBrains Mono for every
+>   measurement, Courier Prime inside the hand-drawn pills.
+> - **Editorial devices.** Oversized cropped ghost wordmark per section
+>   (`data-ghost`), hairline rules under each headline line, `+` kickers, a
+>   drop cap, colour-block pull quotes, a rotated "Sources" column beside the
+>   ledger.
+> - **Campaign devices.** Pill navigation and a rotating round badge, duotone
+>   portrait, circle-arrow buttons, black-box serif statements.
+> - **Poster devices.** Stacked condensed caps in the closing, `WRITE ──→`
+>   wayfinding, and inline-SVG doodles (stars, bursts, sparks, a smiley) drawn
+>   with an `feTurbulence` wobble. All doodles are `aria-hidden` and hidden on
+>   small screens.
+> - **Motion budget.** Two ambient motions were added on purpose: the badge
+>   rotates and a few doodles bob. Both stop under `prefers-reduced-motion`.
+>   The top bar hides on scroll down and returns on scroll up (and on focus).
+
 ---
 
 ## 0. What the sources actually said
