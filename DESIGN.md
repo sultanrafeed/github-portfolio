@@ -15,9 +15,10 @@ does not "improve" a deliberate decision by accident.
 >   so `--human` and `--machine` still mean people vs models on every sheet.
 >   Dark mode re-themes every sheet: each colour becomes a deep version of
 >   itself and the original colour moves into the accents and ghost wordmark.
-> - **Portrait.** An untinted sketch-style illustration on a flat sage card
->   (`assets/img/rafeed-sketch-*`), generated from the Sydney photo: background
->   removed, pencil/dodge render, flat tonal shading, ink outlines.
+> - **Portrait.** The Sydney photo, background removed, in natural black and
+>   white with a white sticker edge on a flat sage card
+>   (`assets/img/rafeed-cutout-*`). A pencil-sketch filter was tried and
+>   rejected: it bleached the face and lost the person.
 > - **Type.** Archivo (heavy grotesk for headlines, 62% width for stacked poster
 >   caps), Newsreader for anything read at length, JetBrains Mono for every
 >   measurement, Courier Prime inside the hand-drawn pills.

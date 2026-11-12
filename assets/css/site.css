@@ -363,8 +363,8 @@ a { color: inherit; }
 }
 
 .hero__portrait { margin: 0; position: relative; width: 100%; max-width: 380px; margin-top: var(--s4); justify-self: center; }
-/* The portrait is an illustration (sketch render on a flat sage card), after
-   the editorial "object on a plain ground" image style. No tint, no blend. */
+/* The portrait is a black-and-white cutout with a white sticker edge on a flat
+   sage card, after the editorial "object on a plain ground" image style. */
 .art { aspect-ratio: 1 / 1; overflow: hidden; background: #BCCB7E; }
 .art img { width: 100%; height: 100%; object-fit: cover; }
 .hero__portrait figcaption {
